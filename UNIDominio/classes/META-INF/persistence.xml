@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="pu-unibi" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>edu.universidad.dominio.unibi.TblAutores</class>
+    <class>edu.universidad.dominio.unibi.TblBajas</class>
+    <class>edu.universidad.dominio.unibi.TblCiudades</class>
+    <class>edu.universidad.dominio.unibi.TblCatalogos</class>
+    <class>edu.universidad.dominio.unibi.TblCatalogosItems</class>
+    <class>edu.universidad.dominio.unibi.TblContenidos</class>
+    <class>edu.universidad.dominio.unibi.TblEjemplares</class>
+    <class>edu.universidad.dominio.unibi.TblDevoluciones</class>
+    <class>edu.universidad.dominio.unibi.TblUsuariosTipos</class>
+    <class>edu.universidad.dominio.unibi.TblLibros</class>
+    <class>edu.universidad.dominio.unibi.TblSanciones</class>
+    <class>edu.universidad.dominio.unibi.TblTesis</class>
+    <class>edu.universidad.dominio.unibi.TblPublicaciones</class>
+    <class>edu.universidad.dominio.unibi.TblPrestamosSolicitudesDetalle</class>
+    <class>edu.universidad.dominio.unibi.TblPublicacionesAutores</class>
+    <class>edu.universidad.dominio.unibi.TblPrestamos</class>
+    <class>edu.universidad.dominio.unibi.TblPublicacionesAreas</class>
+    <class>edu.universidad.dominio.unibi.TblPrestamosSolicitudes</class>
+    <class>edu.universidad.dominio.unibi.TblPaises</class>
+    <class>edu.universidad.dominio.unibi.TblPublicacionesCarreras</class>
+    <class>edu.universidad.dominio.unibi.TblPublicacionesIdiomas</class>
+    <class>edu.universidad.dominio.unibi.TblRevistas</class>
+    <class>edu.universidad.dominio.unibi.TblPrestamosDetalle</class>
+    <class>edu.universidad.dominio.unibi.TblUsuarios</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/unidb"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="eclipselink.logging.level" value="FINEST" />
+    </properties>
+  </persistence-unit>
+</persistence>
