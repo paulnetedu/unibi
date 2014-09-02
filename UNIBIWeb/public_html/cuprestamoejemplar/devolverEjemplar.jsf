@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/util.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/css/estilos.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/css/ui-lightness/jquery-ui-1.10.4.custom.min.css" type="text/css" media="screen"/>
+         <script>
+            $(function() {
+            $( "#prestamoEjemplar\\:fechaDevolucion" ).datepicker({ dateFormat: "dd-mm-yy",
+                monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+                dayNamesMin: [ "Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab" ] });
+            $( "#prestamoEjemplar\\:fechaDevolucion" ).datepicker.setDefaults({
+                showOn: "both"
+                });
+            });
+        </script>
+        </h:head>
+        <h:body>
+            <h:form id="prestamoEjemplar">
+            <h:panelGrid>
+            <h:outputText value="DEVOLVER EJEMPLAR" styleClass="unititle3"/>
+            <br/>
+            
+            <h:panelGrid columns="2">
+                <h:outputText value="CÓDIGO: " styleClass="unicampo"/>
+                <h:inputText id="cadenaBusqueda" value="#{beanDevolucionEjemplar.cadenaBusqueda}"/>
+              
+                
+                
+                <h:outputText id="tipo" value="SEGUN:" styleClass="unicampo"/>
+                <h:selectOneRadio id="srtipo" value="#{beanDevolucionEjemplar.tipoBusqueda}">
+                    <f:selectItem itemLabel="Ejemplar" itemValue="0" />
+                    <f:selectItem itemLabel="Prestamo" itemValue="1" />
+                </h:selectOneRadio>
+                <h:outputText/>
+                
+                <h:commandButton action="#{beanDevolucionEjemplar.buscarPrestamo}" value="Buscar" styleClass="unicampo">
+                    <f:ajax execute="prestamoEjemplar" render="panResultados panRespuesta panResultados" />
+                </h:commandButton>
+            </h:panelGrid>
+            
+            <h:panelGrid>
+                <br/>
+                
+            </h:panelGrid>
+            
+            <h:panelGrid id="panResultados">
+            <h:dataTable value="#{beanDevolucionEjemplar.lstDtoResultado}" var="DtoPrestamo" rendered="#{not empty beanDevolucionEjemplar.lstDtoResultado}" border="1" styleClass="unitable">
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="CODIGO PRESTAMO"/>
+                    </f:facet>
+                    <h:outputText value="#{DtoPrestamo.id}"/>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="CODIGO EJEMPLAR"/>
+                    </f:facet>
+                    <h:outputText value="#{DtoPrestamo.idejemplar}"/>
+                </h:column>
+                
+                <h:column>
+                
+                    <f:facet name="header">
+                        <h:outputText value="TITULO"/>
+                    </f:facet>
+                    <h:outputText value="#{DtoPrestamo.titulo}">
+                    </h:outputText>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="FECHA DE DEVOLUCION"/>
+                    </f:facet>
+                    <h:outputText value="#{DtoPrestamo.fechaDevolucion}"> 
+                         <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </h:column>
+                  <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ESTADO FISICO"/>
+                    </f:facet>
+                    <h:outputText value="Bueno" rendered="#{DtoPrestamo.estadoFisico == 0}"/>
+                    <h:outputText value="Regular" rendered="#{DtoPrestamo.estadoFisico == 1}"/>
+                    <h:outputText value="Malo" rendered="#{DtoPrestamo.estadoFisico == 2}"/>
+                </h:column>
+                               
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ESTADO FISICO DEVOLUCION"/>
+                    </f:facet>
+                    <h:selectOneMenu id="estadoDevolver" value="#{DtoPrestamo.estadoDevolucionTa}" style="unicampo">
+                        <f:selectItem itemLabel="Bueno" itemValue="0"/>
+                        <f:selectItem itemLabel="Regular" itemValue="1"/>
+                        <f:selectItem itemLabel="Malo" itemValue="2"/>
+                    </h:selectOneMenu>                    
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">
+                    <h:outputText value="DEVOLVER"/>
+                    </f:facet>
+                     <h:commandButton id="devolverEjemplar" value="Devolver" action="#{beanDevolucionEjemplar.devolverEjemplar(DtoPrestamo.idejemplar, DtoPrestamo.estadoDevolucionTa)}" styleClass="unicampo">
+                      <!-- <f:ajax render=":panResultados"/> -->
+                    </h:commandButton>
+                    
+                      </h:column>
+                
+                
+            </h:dataTable>
+             <h:panelGrid columns="2" rendered="#{not empty beanDevolucionEjemplar.lstDtoResultado}">
+                           
+                <h:commandButton value="Sancionar" styleClass="unicampo">
+                   
+                </h:commandButton>
+            </h:panelGrid>
+            </h:panelGrid>
+           
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+            </h:panelGrid>
+            </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>

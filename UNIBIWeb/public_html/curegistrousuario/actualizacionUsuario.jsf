@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+            <script type="text/javascript"
+                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
+                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+            <script>
+              crearDatePicker('actualizacionPublicacion', 'fechaPublicacion');
+            </script>
+        </h:head>
+        <h:body>
+            <h:form id="actualizacionUsuario">
+                <h:panelGrid>
+                    <h:outputText value="Actualizacion de Usuario" styleClass="unititle3"/>
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="ID" styleClass="unicampo"/>
+                        <h:inputText id="id" value="#{beanActualizacionUsuario.id}" required="true" disabled="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgid" for="id"/>
+                        <h:outputText value="Nombres" styleClass="unicampo"/>
+                        <h:inputText id="nombres" value="#{beanActualizacionUsuario.nombres}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgnombres" for="nombres"/>
+                        <h:outputText value="Apellido Paterno" styleClass="unicampo"/>
+                        <h:inputText id="appaterno" value="#{beanActualizacionUsuario.apellidoPaterno}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgappaterno" for="appaterno"/>
+                        <h:outputText value="Apellido Materno" styleClass="unicampo"/>
+                        <h:inputText id="apmaterno" value="#{beanActualizacionUsuario.apellidoMaterno}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgapmaterno" for="apmaterno"/>
+                        <h:outputText value="Tipo Documento" styleClass="unicampo"/>
+                        <h:selectOneRadio id="tipoDocumento" value="#{beanActualizacionUsuario.tipoDocumento}" label="">
+                            <f:selectItem itemLabel="DNI" itemValue="0"/>
+                            <f:selectItem itemLabel="Pasaporte" itemValue="1"/>
+                        </h:selectOneRadio>
+                        <br/>
+                        <h:outputText value="Nro Documento" styleClass="unicampo"/>
+                        <h:inputText id="nroDocumento" value="#{beanActualizacionUsuario.nroDocumento}" required="true"
+                                     validator="#{beanActualizacionUsuario.verificarDocumento}"/>
+                        <h:message id="msgnroDocumento" for="nroDocumento"/>
+                        <h:outputText value="Email" styleClass="unicampo"/>
+                        <h:inputText id="email" value="#{beanActualizacionUsuario.email}"
+                                     validator="#{beanRegistroUsuario.Correo}"/>
+                        <h:message id="msgemail" for="email"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:commandButton id="btnGuardar" action="#{beanActualizacionUsuario.actualizarUsuario}"
+                                         value="Guardar" styleClass="unicampo">
+                            <f:ajax execute="actualizacionUsuario"
+                                    render="panRespuesta msgnombres msgappaterno msgapmaterno msgnroDocumento msgemail"/>
+                        </h:commandButton>
+                        <h:commandButton id="btnRetornar" value="RETORNAR" action="#{beanActualizacionUsuario.cancelar()}"
+                                         styleClass="unicampo"></h:commandButton>
+                    </h:panelGrid>
+                    <h:panelGrid id="panRespuesta">
+                        <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                            <script>
+                                  mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                            </script>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

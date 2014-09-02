@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        <script>
+            crearDatePicker('actualizacionPublicacion', 'fechaPublicacion');
+        </script> 
+        </h:head>
+        
+        <h:body>
+            <h:form id="nuevaPublicacion">
+            <h:panelGrid>
+            <h:outputText value="Nueva publicación" styleClass="unititle3"/>
+            <br/>
+            <h:panelGrid columns="3">
+                
+                <h:outputText value="Tipo de publicacion:" styleClass="unicampo"/> 
+                <h:selectOneMenu id="tipo" value="#{beanActualizacionPublicacion.tipo}">
+                    <f:selectItem itemLabel="LIBRO" itemValue="0"/>
+                    <f:selectItem itemLabel="REVISTA" itemValue="1"/>
+                    <f:selectItem itemLabel="TESIS" itemValue="2"/>
+                    <f:ajax render="nuevaPublicacion" event="change" listener="#{beanActualizacionPublicacion.cualaparecer}"/>
+                </h:selectOneMenu>
+
+                <h:inputHidden/>      
+                        <h:outputText value="Id" styleClass="unicampo"/>
+                <h:inputText id="id" value="#{beanActualizacionPublicacion.id}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgid" for="id"/>
+                
+                <h:outputText value="Titulo" styleClass="unicampo"/>
+                <h:inputText id="titulo" value="#{beanActualizacionPublicacion.titulo}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgtitulo" for="titulo"/>
+                
+                <h:outputText value="Fecha de publicación" styleClass="unicampo"/>
+                <h:inputText id="fechaPublicacion" value="#{beanActualizacionPublicacion.fechaPublicacion}" requiredMessage="ingrese fecha" validator="#{beanActualizacionPublicacion.validar}"
+                    converterMessage="Formato dd-MM-yy" required="true">
+                    <f:convertDateTime pattern="dd-MM-yy"/>
+                </h:inputText>
+                <h:message id="msgfechaPublicacion" for="fechaPublicacion"/>
+                
+                <h:outputText value="Número de páginas" styleClass="unicampo"/>
+                <h:inputText id="numeroPaginas" value="#{beanActualizacionPublicacion.numeroPaginas}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese numero de pag">
+                    <f:validateLongRange minimum="1" maximum="5000"/>
+                </h:inputText>
+                <h:message id="msgnumeroPaginas" for="numeroPaginas"/>
+                
+                <h:outputText value="Valor Fisico:" styleClass="unicampo"/>
+                <h:inputText id="valorfisico" value="#{beanActualizacionPublicacion.valorfisico}" required="true" requiredMessage="Ingrese Valor fisico">
+                    <f:validateDoubleRange  minimum="0" maximum="1000"/>
+                </h:inputText>
+                <h:message id="msgvalorfisico" for="valorfisico"/>
+                
+                <h:outputText value="Valor Digital:" styleClass="unicampo"/>
+                <h:inputText id="valordigital" value="#{beanActualizacionPublicacion.valordigital}" required="true" requiredMessage="Ingrese Valor digital">
+                    <f:validateDoubleRange  minimum="0" maximum="1000"/>
+                </h:inputText>
+                <h:message id="msgvalordigital" for="valordigital"/>
+                
+                <h:outputText value="Pais:" styleClass="unicampo"/> 
+                <h:selectOneMenu id="pais" value="#{beanActualizacionPublicacion.id_pais}" >
+                    <f:selectItems value="#{beanActualizacionPublicacion.listapais}"/>
+                    <f:ajax render=":nuevaPublicacion:ciudad"/>
+                </h:selectOneMenu>
+                <h:message id="msgpais" for="pais"/>
+                
+                <h:outputText value="Ciudad:" styleClass="unicampo"/> 
+                <h:selectOneMenu id="ciudad" value="#{beanActualizacionPublicacion.id_ciudad}" >
+                    <f:selectItems value="#{beanActualizacionPublicacion.listaciudad}"/>
+                </h:selectOneMenu>
+                <h:message id="msgciudad" for="ciudad"/>
+                </h:panelGrid>
+                
+                <!--AGREGO-->
+                <h:panelGrid id="libros" columns="3" rendered="#{beanActualizacionPublicacion.indlibro}">
+                    <h:outputText value="isbn:" styleClass="unicampo"/>
+                    <h:inputText id="isbn" value="#{beanActualizacionPublicacion.isbn}" required="true" requiredMessage="Valor requerido"/>
+                    <h:message id="msgisbn" for="isbn"/>
+                    
+                    <h:outputText value="volumen:" styleClass="unicampo"/>
+                    <h:inputText id="volumenlibro" value="#{beanActualizacionPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgvolumenlibro" for="volumenlibro"/>
+                
+                    <h:outputText value="tomo:" styleClass="unicampo"/>
+                    <h:inputText id="tomo" value="#{beanActualizacionPublicacion.tomo}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el tomo">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgtomo" for="tomo"/>
+                
+                    <h:outputText value="edicion:" styleClass="unicampo"/>
+                    <h:inputText id="edicion" value="#{beanActualizacionPublicacion.edicion}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la edicion">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgedicion" for="edicion"/>
+                    
+                    <h:outputText value="Editorial:" styleClass="unicampo"/>
+                        <h:selectOneMenu value="#{beanActualizacionPublicacion.editorial_id}">
+                            <f:selectItems value="#{beanActualizacionPublicacion.listaEditorial}"/>
+                        </h:selectOneMenu>
+                        <h:inputHidden/>
+                    </h:panelGrid>
+                
+                <h:panelGrid id="revistas" columns="3" rendered="#{beanActualizacionPublicacion.indrevista}">
+                    <h:outputText value="volumen:" styleClass="unicampo"/>
+                    <h:inputText id="volumenrevista" value="#{beanActualizacionPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgvolumenrevista" for="volumenrevista"/>
+                    
+                    <h:outputText value="numero:" styleClass="unicampo"/>
+                    <h:inputText id="numero" value="#{beanActualizacionPublicacion.numero}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el numero">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgnumero" for="numero"/>
+                </h:panelGrid>
+                <h:panelGrid id="tesis" columns="3" rendered="#{beanActualizacionPublicacion.indtesis}">
+                    <h:outputText value="institucion:" styleClass="unicampo"/>
+                    <h:inputText id="institucion_id" value="#{beanActualizacionPublicacion.institucion_id}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la institucion">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msginstitucion_id" for="institucion_id"/>
+                    
+                    <h:outputText value="Titulo:" styleClass="unicampo"/>                      
+                    <h:selectOneMenu id="titulo_optado" value="#{beanActualizacionPublicacion.titulo_optado}" >
+                        <f:selectItem itemLabel="TITULO PROFESIONAL" itemValue="0"/>
+                        <f:selectItem itemLabel="MAESTRIA" itemValue="1"/>
+                        <f:selectItem itemLabel="DOCTORADO" itemValue="2"/>
+                        <f:selectItem itemLabel="TITULO TECNICO" itemValue="3"/>
+                    </h:selectOneMenu>
+                    <h:message id="msgtitulo_optado" for="titulo_optado"/>
+                </h:panelGrid>
+                
+                <h:commandButton action="#{beanActualizacionPublicacion.actualizar}" value="Guardar" styleClass="unicampo">
+                </h:commandButton>
+                
+                
+
+
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+                
+            </h:panelGrid>
+            
+            </h:panelGrid>
+
+            </h:form>
+        </h:body>
+
+        
+        
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

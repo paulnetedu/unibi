@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+         
+        </h:head>
+        <h:body>
+            <h:form id="nuevoEjemplar">           
+            
+            <h:panelGrid columns="3">
+            
+                <h:outputText value="Id" styleClass="unicampo"/>
+                <h:inputText id="id" value="#{beanNuevoEjemplar.id}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgid" for="id"/>
+                
+                <h:outputText value="Estado Fisico" styleClass="unicampo"/>
+                    <h:selectOneMenu id="estadofisico" value="#{beanNuevoEjemplar.estado_fisico}">
+                        <f:selectItem itemLabel="Bueno" itemValue="0"/>
+                        <f:selectItem itemLabel="Regular" itemValue="1"/>
+                        <f:selectItem itemLabel="Malo" itemValue="2"/>
+                    </h:selectOneMenu>
+                <h:message id="msgestadofisico" for="estadofisico"/>
+                
+                <h:outputText value="Estado Disponible" styleClass="unicampo"/>
+                    <h:selectOneMenu id="estadodisponible" value="#{beanNuevoEjemplar.estado_disponiblilidad}">
+                        <f:selectItem itemLabel="Disponible" itemValue="0"/>
+                        <f:selectItem itemLabel="Prestamo" itemValue="1"/>
+                        <f:selectItem itemLabel="Perdida" itemValue="2"/>
+                        <f:selectItem itemLabel="Mantenimiento" itemValue="3"/>
+                        <f:selectItem itemLabel="Baja" itemValue="4"/>
+                    </h:selectOneMenu>
+                <h:message id="msgestadodisponible" for="estadodisponible"/>
+                
+                <h:outputText value="Valor" styleClass="unicampo"/>
+                <h:inputText id="valor" value="#{beanNuevoEjemplar.valor}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgvalor" for="valor"/>
+                
+                <h:outputText value="Observaciones" styleClass="unicampo"/>
+                <h:inputText id="observaciones" value="#{beanNuevoEjemplar.observaciones}" />
+                <h:inputHidden/>
+                
+                <h:outputText value="Forma" styleClass="unicampo"/>
+                    <h:selectOneMenu id="forma" value="#{beanNuevoEjemplar.forma}">
+                        <f:selectItem itemLabel="Impreso" itemValue="0"/>
+                        <f:selectItem itemLabel="Digital" itemValue="1"/>
+                    </h:selectOneMenu>
+                <h:message id="msgforma" for="forma"/>
+                
+                <h:outputText value="Publicacion id" styleClass="unicampo"/>
+                <h:inputText id="publicacion_id" value="#{beanNuevoEjemplar.publicacion_id}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgpublicacion_id" for="publicacion_id"/>
+                
+                <h:outputText value="Procedencia" styleClass="unicampo"/>
+                <h:selectOneMenu id="procedencia" value="#{beanNuevoEjemplar.procedencia}">
+                    <f:selectItems value="#{beanNuevoEjemplar.listaProcedencia}"/>
+                </h:selectOneMenu>                
+                <h:message id="msgprocedencia" for="procedencia"/>
+                
+                <h:commandButton action="#{beanNuevoEjemplar.agregar}" value="Agregar" styleClass="unicampo">
+                        <f:ajax execute="nuevoEjemplar" render="nuevoEjemplar" />
+                </h:commandButton>
+         
+            
+            </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+

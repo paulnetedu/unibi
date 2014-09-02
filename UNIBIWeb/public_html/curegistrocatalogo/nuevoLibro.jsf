@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        </h:head>
+        <h:body>
+            <h:form id="nuevaPublicacion">
+            <h:panelGrid>
+            <h:outputText value="Nuevo Libro" styleClass="unititle3"/>
+            <br/>               
+                <h:panelGrid id="libros" columns="3">
+                
+                    <h:outputText value="isbn:" styleClass="unicampo"/>
+                    <h:inputText id="isbn" value="#{beanNuevaPublicacion.isbn}" required="true" requiredMessage="Valor requerido"/>
+                    <h:message id="msgisbn" for="isbn"/>
+                    
+                    <h:outputText value="volumen:" styleClass="unicampo"/>
+                    <h:inputText id="volumenlibro" value="#{beanNuevaPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgvolumenlibro" for="volumenlibro"/>
+                
+                    <h:outputText value="tomo:" styleClass="unicampo"/>
+                    <h:inputText id="tomo" value="#{beanNuevaPublicacion.tomo}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el tomo">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgtomo" for="tomo"/>
+                
+                    <h:outputText value="edicion:" styleClass="unicampo"/>
+                    <h:inputText id="edicion" value="#{beanNuevaPublicacion.edicion}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la edicion">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msgedicion" for="edicion"/>
+
+                    <h:outputText value="Editorial:" styleClass="unicampo"/>
+                        <h:selectOneMenu value="#{beanNuevaPublicacion.editorial_id}">
+                            <f:selectItems value="#{beanNuevaPublicacion.listaEditorial}"/>
+                        </h:selectOneMenu>
+                        <h:inputHidden/>
+                        
+                    </h:panelGrid>
+                <h:commandButton action="#{beanNuevaPublicacion.guardar}" value="Guardar" styleClass="unicampo">
+                </h:commandButton>
+                
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+                
+            </h:panelGrid>
+            
+            </h:panelGrid>
+
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

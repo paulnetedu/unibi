@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        <script>
+            crearDatePicker('nuevaPublicacion', 'fechaPublicacion');
+        </script> 
+        </h:head>
+       <h:body>
+            <h:form id="nuevaPublicacion">
+            
+            <h:outputText value="Nueva publicación" styleClass="unititle3"/>  
+            <h:panelGrid columns="2">
+            
+                
+                <h:outputText value="Areas:" styleClass="unicampo"/>
+                        <h:selectOneListbox id="lstAreas" value="#{beanActualizacionPublicacion.area}" >
+                            <f:selectItems value="#{beanActualizacionPublicacion.listaBuscaAreas}"/>
+                        </h:selectOneListbox>
+
+            
+                  <h:outputText value="Autores" styleClass="unicampo"/>    
+                <h:selectOneListbox id="lstAutores" value="#{beanActualizacionPublicacion.autor}" size="10" >
+                    <f:selectItems value="#{beanActualizacionPublicacion.lstBuscaAutores}"/>
+                </h:selectOneListbox>
+                
+                <h:outputText value="Carreras" styleClass="unicampo"/>    
+                <h:selectOneListbox id="lstCarreras" value="#{beanActualizacionPublicacion.carrera}" >
+                    <f:selectItems value="#{beanActualizacionPublicacion.lstBuscaCarreras}"/>
+                </h:selectOneListbox>
+                
+                <h:outputText value="Idiomas" styleClass="unicampo"/>    
+                <h:selectOneListbox id="lstIdiomas" value="#{beanActualizacionPublicacion.idioma}" >
+                    <f:selectItems value="#{beanActualizacionPublicacion.lstBuscaIdiomas}"/>
+                </h:selectOneListbox>
+                    
+            <h:commandButton action="#{beanActualizacionPublicacion.actualizarRelaaciones}" value="Guardar" styleClass="unicampo">
+                </h:commandButton>
+                
+            </h:panelGrid>
+            
+            
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+                
+            </h:panelGrid>
+
+            </h:form>
+        </h:body>
+
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

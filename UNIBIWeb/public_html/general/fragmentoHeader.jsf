@@ -1,0 +1,28 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <style  type="text/css">
+.ui-datepicker {
+    background: #9DC3E6;
+    border: 1px solid #1F4E79;
+    color: #1F4E79;
+ }
+ .ui-datepicker-header {  
+    background: #1F4E79;
+    border: 1px solid #1F4E79;
+    color: #FFFFFF;
+ }
+ .ui-datepicker-calendar .ui-state-hover {  
+    background: #9DC3E6;  
+    border: 1px solid #1F4E79;
+    color: #1F4E79;
+} 
+.ui-datepicker-calendar .ui-state-active {  
+    background: #9DC3E6;  
+    border: 1px solid #1F4E79;
+    color: #1F4E79;
+}
+</style>
+</ui:composition>

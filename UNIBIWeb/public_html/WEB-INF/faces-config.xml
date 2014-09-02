@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<faces-config version="2.1" xmlns="http://java.sun.com/xml/ns/javaee">
+  <navigation-rule>
+    <from-view-id>/index.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>prestarPublicacion</from-outcome>
+      <to-view-id>/cuprestamoejemplar/prestamoEjemplar.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/curegistrocatalogo/busquedaPublicacion.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>IrActualizacionPublicacion</from-outcome>
+      <to-view-id>/curegistrocatalogo/actualizacionPublicacion.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/cuprestamoejemplar/prestamoEjemplar.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>enviardatos</from-outcome>
+      <to-view-id>/cuprestamoejemplar/datosLector.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/curegistrocatalogo/busquedaEjemplares.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>irActualizarEjemplar</from-outcome>
+      <to-view-id>/curegistrocatalogo/actualizarEjemplar.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/curegistrocatalogo/nuevaPublicacion.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>irNuevaPublicacion2</from-outcome>
+      <to-view-id>/curegistrocatalogo/nuevaPublicacion2.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/curegistrocatalogo/actualizacionPublicacion.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>irActualizarPublicacion2</from-outcome>
+      <to-view-id>/curegistrocatalogo/actualizacionPublicacion2.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
+</faces-config>

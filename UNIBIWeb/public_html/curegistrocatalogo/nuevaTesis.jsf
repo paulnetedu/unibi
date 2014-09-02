@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/> 
+        </h:head>
+        <h:body>
+            <h:form id="nuevaTesis">
+            <h:panelGrid>
+            <h:outputText value="Nueva Tesis" styleClass="unititle3"/>
+            <br/>
+                    <h:selectManyCheckbox id="subscriptions" value="#{beanNuevaPublicacion.listAutor}">
+        <f:selectItem id="item1" itemLabel="News" itemValue="1" />
+        <f:selectItem id="item2" itemLabel="Sports" itemValue="2" />
+        <f:selectItem id="item3" itemLabel="Music" itemValue="3" />
+        <f:selectItem id="item4" itemLabel="Java" itemValue="4" />
+        <f:selectItem id="item5" itemLabel="Web" itemValue="5" />
+        <f:ajax event="click" listener="#{beanNuevaPublicacion.agregarlista()}" render="nuevaTesis"/>
+                        </h:selectManyCheckbox>
+                        <h:outputText id="salida" value="salida + #{beanNuevaPublicacion.salida}"/>
+                        
+                <h:panelGrid id="tesis" columns="3">
+                    <h:outputText value="institucion:" styleClass="unicampo"/>
+                    <h:inputText id="institucion_id" value="#{beanNuevaPublicacion.institucion_id}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la institucion">
+                        <f:validateLongRange minimum="0" maximum="5000"/>
+                    </h:inputText>
+                    <h:message id="msginstitucion_id" for="institucion_id"/>
+                    
+                    <h:outputText value="Titulo:" styleClass="unicampo"/>                      
+                    <h:selectOneMenu id="titulo_optado" value="#{beanNuevaPublicacion.titulo_optado}" >
+                        <f:selectItem itemLabel="TITULO PROFESIONAL" itemValue="0"/>
+                        <f:selectItem itemLabel="MAESTRIA" itemValue="1"/>
+                        <f:selectItem itemLabel="DOCTORADO" itemValue="2"/>
+                        <f:selectItem itemLabel="TITULO TECNICO" itemValue="3"/>
+                    </h:selectOneMenu>
+                    <h:message id="msgtitulo_optado" for="titulo_optado"/>
+                </h:panelGrid>
+                <h:commandButton  value="Guardar" styleClass="unicampo">
+                <f:ajax execute="nuevaTesis" render="nuevaTesis"/>
+                </h:commandButton>
+                 </h:panelGrid>
+                
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+                
+            </h:panelGrid>
+            
+           
+
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

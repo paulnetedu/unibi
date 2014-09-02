@@ -1,0 +1,213 @@
+/* color1: 1F4E79    RGB(31,78,121) 
+   color2: 9DC3E6    RGB(157,195,230) 
+*/
+div.ui-datepicker{
+ font-size:8px;
+}
+BODY
+{
+  background-color: White;
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+H1
+{
+  color: #1F4E79;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+H2
+{
+  color: #1F4E79;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+H3
+{
+  color: #1F4E79;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+.unititle1
+{
+  color: #1F4E79;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+.unititle2 
+{
+  color: #1F4E79;
+  font-family:Arial,Helvetica,Geneva,sans-serif;
+  font-size:20pt;
+  font-weight: bolder;
+  text-transform: capitalize;
+}
+
+.unititle3
+{
+  color: #1F4E79;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+.unicampo 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;
+  font-size:12pt;
+  color:#1F4E79
+}
+
+.uninota 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;
+  font-size:12pt;
+}
+
+.unilink:link 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#366090
+}
+.unilink:active 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#366090
+}
+.unilink:visited 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#366090
+}
+.uniimglink:link 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#ffffff;
+}
+.uniimglink:active 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#ffffff;
+}
+.uniimglink:visited 
+{
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt;color:#ffffff;
+}
+.unismalltext {
+  color:#1F4E79;font-family:Arial,Helvetica,Geneva,sans-serif;font-size:8pt
+}
+
+.unicolor 
+{
+  color:#1F4E79
+}
+
+.unicolorerror
+{
+  color:#E5992E
+}
+
+.unith 
+{
+  color: White;
+  background-color: #163764;
+  border-color: #163764;
+}
+
+.unitd
+{
+  color: White;
+  background-color: #163764;
+  border-color: #163764;
+}
+
+.unifield 
+{
+  color: #1F4E79;
+  font-family:Arial,Helvetica,Geneva,sans-serif;font-size:10pt
+}
+
+.uniframe{
+   position:absolute;
+   top:80px;
+   left:250px;
+   width:850px;
+   height:450px;
+   box-shadow: 15px 15px 15px #888888;
+}
+
+.unimainheader{
+   position:absolute;
+   top:0px;
+   left:250px;
+   width:850px;
+   height:290px;
+   border: 1px;
+}
+
+.uniback {
+   background:#fff url(../../img/bubble/bg.png) no-repeat top left;
+   position:absolute;
+   top:0px;
+   left:0px;
+   width:850px;
+   height:450px;
+   opacity:0.4; 
+}
+.ui-datepicker {
+    font: 13pt Arial, sans-serif; 
+   background: #9DC3E6;
+   border: 1px solid #1F4E79;
+   color: #1F4E79;
+ }
+ .ui-datepicker-header {  
+    background: #1F4E79;
+    border: 1px solid #1F4E79;
+    color: #FFFFFF;
+ }
+ .ui-datepicker-calendar .ui-state-hover {  
+    background: #9DC3E6;  
+    border: 1px solid #1F4E79;
+    color: #1F4E79;
+} 
+.ui-datepicker-calendar .ui-state-active {  
+    background: #9DC3E6;  
+    border: 1px solid #1F4E79;
+    color: #1F4E79;
+}
+.unitable{
+        width:100%; 
+        border-collapse:collapse; 
+}
+.unitable thead th{
+	background-color: #1F4E79;
+        color: #FFFFFF;
+        border:#9DC3E6 1px solid;
+}
+.unitable td{ 
+        padding:7px; border:#9DC3E6 1px solid;
+}
+/* provide some minimal visual accomodation for IE8 and below */
+.unitable tr{
+        background: #ffffff;
+}
+/*  Define the background color for all the ODD background rows  */
+.unitable tr:nth-child(odd){ 
+        background: #ffffff;
+}
+/*  Define the background color for all the EVEN background rows  */
+.unitable tr:nth-child(even){
+        background: #b8c5f3;
+}
+.unipancol1{
+    width: 120px;
+}
+.unipancol2{
+    width: 130px;
+}
+.unipancol3{
+    width: 120px;
+}

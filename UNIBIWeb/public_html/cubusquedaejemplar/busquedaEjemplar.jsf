@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+         
+        </h:head>
+        <h:body>
+            <h:form id="busquedaEjemplar">
+            <h:panelGrid>
+            <h:outputText value="Búsqueda de ejemplar" styleClass="unititle3"/>
+            <br/>
+            
+            <h:panelGrid columns="7">
+             <h:outputText value="Texto de búsqueda" styleClass="unicampo"/>
+                <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
+                <h:selectOneMenu value="#{beanBusquedaEjemplar.tipoBusqueda}" >
+                    <f:selectItem itemLabel="Titulo" itemValue="0"/>
+                    <f:selectItem itemLabel="Autor" itemValue="1"/>
+                    <f:selectItem itemLabel="Area" itemValue="2"/>
+                    <f:selectItem itemLabel="Otros" itemValue="3"/>
+                   </h:selectOneMenu>
+                <h:commandButton action="#{beanBusquedaEjemplar.buscarEjemplar}" value="Buscar" styleClass="unicampo">
+                        <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados" />
+                </h:commandButton>               
+            </h:panelGrid>
+            
+            <h:panelGrid id="panResultados">
+            <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="TITULO"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.titulo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="AUTOR"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.autor}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="AREA"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.area}">
+                        <f:convertDateTime pattern="yyyy-MM"/>
+                    </h:outputText>
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="OBSERVACIONES"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}">
+                        <f:convertDateTime pattern="yyyy-MM"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ESTADO"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}">
+                        <f:convertDateTime pattern="yyyy-MM"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="SELECIONAR"/>
+                    </f:facet> 
+                    <h:selectManyCheckbox value="">
+                    <f:selectItem itemValue="1" itemLabel="Add" />
+                    </h:selectManyCheckbox>
+                </h:column>
+            </h:dataTable>
+            </h:panelGrid>
+             <h:panelGrid id="panAgregar">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 1}">
+                 <h:commandButton action="#{beanBusquedaEjemplar.Agregar}" value="Agregar Libros" styleClass="unicampo">
+                        <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados panAgregar" />
+                </h:commandButton>
+                </h:panelGrid>
+            </h:panelGrid>
+            <h:commandButton value="Ver lista de prestamo" action="listaPrestamo" immediate="true"/>
+            
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+            </h:panelGrid>
+            </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

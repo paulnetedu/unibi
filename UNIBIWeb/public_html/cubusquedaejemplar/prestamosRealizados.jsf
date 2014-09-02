@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+            <script type="text/javascript"
+                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
+                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+            <link type="text/css" rel="stylesheet" href="../css/estilos.css"/>
+        </h:head>
+        <h:body>
+            <h:form id="busquedaEjemplar">
+                <h:panelGrid>
+                    <h:outputText value="PRESTAMOS REALIZADOS" styleClass="unicampo"/>
+                    <br/>
+                    <h:panelGrid id="datosUsuario" columns="2">
+                        <h:outputText value="Documento de identidad:" styleClass="unicampo"/>
+                        <h:inputText id="dni" disabled="true" value="#{beanBusquedaEjemplar.nroDocumento}"/>
+                        
+                        <h:outputText value="Apellidos y Nombres:" styleClass="unicampo"/>
+                        <h:inputText id="nombresApellidos" disabled="true" value="#{beanBusquedaEjemplar.nombresApellidos}"
+                                     style="min-width:250pt;"/>
+                    </h:panelGrid>
+                    
+                             
+                    <h:dataTable id="resultados" var="res" styleClass="unitable" rendered="#{! empty  beanBusquedaEjemplar.listaPrestamos}"
+                    value="#{beanBusquedaEjemplar.listaPrestamos}">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Codigo"/>
+                                </f:facet>
+                                <h:outputText value="#{res.codigo}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Titulo"/>
+                                </f:facet>
+                                <h:outputText value="#{res.titulo}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Autor"/>
+                                </f:facet>
+                                <h:outputText value="#{res.autor}"/>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Estado"/>
+                                </f:facet>
+                                <h:outputText value="#{res.estadoEjemplar}"/>
+                            </h:column>
+                            
+                             <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Fecha devolución maxima"/>
+                                </f:facet>
+                                <h:outputText value="#{res.fechaDevolucionMax}"/>
+                            </h:column>
+                    </h:dataTable>
+                        
+                    <h:outputText id="labelVacio" value="A realizado 0 prestamos." rendered="#{empty beanBusquedaEjemplar.listaPrestamos}"/>
+                
+                    <br/>
+                    <h:commandButton value="Volver" styleClass="unicampo" action="listaPrestamo" />
+                </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

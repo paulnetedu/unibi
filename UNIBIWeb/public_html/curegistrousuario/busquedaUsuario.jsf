@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+            <script type="text/javascript"
+                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
+                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        </h:head>
+        <h:body>
+            <h:form id="busquedaUsuario">
+                <h:panelGrid>
+                    <h:outputText value="Búsqueda de Usuario" styleClass="unititle3"/>
+                    <br/>
+                    <h:panelGrid columns="4">
+                        <h:outputText value="Nombre de búsqueda" styleClass="unicampo"/>
+                        <h:inputText id="textoBusqueda" value="#{beanBusquedaUsuario.textoBusqueda}"/>
+                        <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
+                        <h:commandButton action="#{beanBusquedaUsuario.buscarUsuario}" value="Buscar"
+                                         styleClass="unicampo">
+                            <f:ajax execute="busquedaUsuario" render="panRespuesta msgtextoBusqueda panResultados"/>
+                        </h:commandButton>
+                        <h:outputText value="Nombre por :" styleClass="unicampo"/>
+                        <h:selectOneRadio id="tipoBusqueda" value="#{beanBusquedaUsuario.tipoBusqueda}">
+                            <f:selectItem itemLabel="Nro Documento" itemValue="0"/>
+                            <f:selectItem itemLabel="Nombres" itemValue="1"/>
+                        </h:selectOneRadio>
+                    </h:panelGrid>
+                    <h:panelGrid id="panResultados">
+                        <h:dataTable value="#{beanBusquedaUsuario.lstDtoUsuarios}" var="dtoUsuarios"
+                                     rendered="#{not empty beanBusquedaUsuario.lstDtoUsuarios}" border="1"
+                                     styleClass="unitable">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID"/>
+                                </f:facet>
+                                <h:outputText value="#{dtoUsuarios.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombres"/>
+                                </f:facet>
+                                <h:outputText value="#{dtoUsuarios.nombre_completo}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nro Documento"/>
+                                </f:facet>
+                                <h:outputText value="#{dtoUsuarios.numero_documento}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value=""/>
+                                </f:facet>
+                                <h:commandButton value="Actualizar"
+                                                 action="#{beanBusquedaUsuario.irActualizacionUsuario(dtoUsuarios.id)}"
+                                                 styleClass="unicampo"></h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                    </h:panelGrid>
+                    <h:panelGrid id="panRespuesta">
+                        <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                            <script>
+                              mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                            </script>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        </h:head>
+        <h:body>
+            <h:form id="buscarejemplar">
+                   <h:panelGrid id="panEjemplares">
+                    <h:dataTable value="#{beanBusquedaEjemplares.lstDtoEjemplar}" var="dtoEjemplar" border="1" styleClass="unitable">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoEjemplar.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="TITULO"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoEjemplar.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="AUTOR"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoEjemplar.autor}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                            <h:outputText value=""/>
+                             </f:facet>
+                             <h:commandButton id="irActualizacionEjemplar" value="Actualizar" action="#{beanBusquedaEjemplares.irActualizarEjemplar(dtoEjemplar.id)}" styleClass="unicampo">
+                              </h:commandButton>
+                         </h:column> 
+                         
+                        
+                    </h:dataTable>    
+                </h:panelGrid>  
+                 <h:commandButton id="irNuevoEjemplar" value="Nuevo" action="#{beanBusquedaEjemplares.irNuevoEjemplar()}" styleClass="unicampo">
+                 </h:commandButton>
+           
+           </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+

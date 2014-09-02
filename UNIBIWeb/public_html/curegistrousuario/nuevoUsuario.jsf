@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+            <script type="text/javascript"
+                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
+                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        </h:head>
+        <h:body>
+            <h:form id="nuevoUsuario">
+                <h:panelGrid>
+                    <h:outputText value="Nuevo Usuario" styleClass="unititle3"/>
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="Nombres" styleClass="unicampo"/>
+                        <h:inputText id="nombres" value="#{beanRegistroUsuario.nombres}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgnombres" for="nombres"/>
+                        <h:outputText value="Apellido Paterno" styleClass="unicampo"/>
+                        <h:inputText id="appaterno" value="#{beanRegistroUsuario.apellidoPaterno}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgappaterno" for="appaterno"/>
+                        <h:outputText value="Apellido Materno" styleClass="unicampo"/>
+                        <h:inputText id="apmaterno" value="#{beanRegistroUsuario.apellidoMaterno}" required="true"
+                                     requiredMessage="Valor requerido"/>
+                        <h:message id="msgapmaterno" for="apmaterno"/>
+                        <h:outputText value="Tipo Documento" styleClass="unicampo"/>
+                        <h:selectOneRadio id="tipoDocumento" value="#{beanRegistroUsuario.tipoDocumento}"
+                                          label="TipoDocumento">
+                            <f:selectItem itemLabel="DNI" itemValue="0"/>
+                            <f:selectItem itemLabel="Pasaporte" itemValue="1"/>
+                        </h:selectOneRadio>
+                        <br/>
+                        <h:outputText value="Nro Documento" styleClass="unicampo"/>
+                        <h:inputText id="nroDocumento" value="#{beanRegistroUsuario.nroDocumento}"
+                                     validator="#{beanRegistroUsuario.verificarDocumento}"/>
+                        <h:message id="msgnroDocumento" for="nroDocumento"/>
+                        <h:outputText value="Email" styleClass="unicampo"/>
+                        <h:inputText id="email" value="#{beanRegistroUsuario.email}"
+                                     validator="#{beanRegistroUsuario.Correo}"/>
+                        <h:message id="msgemail" for="email"/>
+                    </h:panelGrid>
+                    <h:panelGrid columns="2">
+                        <h:commandButton action="#{beanRegistroUsuario.guardarUsuario}" value="Guardar"
+                                         styleClass="unicampo">
+                            <f:ajax execute="nuevoUsuario" render="
+                                    panRespuesta 
+                                    :resultadoHomonimia:panResultadoHomonia 
+                                    :resultadoHomonimia:tituloHomonimo
+                                    msgnombres 
+                                    msgappaterno                                      
+                                    :resultadoDocumento:panResultadoDocumento
+                                    :resultadoDocumento:tituloDuplicado 
+                                    msgapmaterno 
+                                    msgnroDocumento 
+                                    msgemail 
+                                    nombres 
+                                    appaterno 
+                                    apmaterno 
+                                    tipoDocumento 
+                                    nroDocumento 
+                                    email"/>
+                        </h:commandButton>
+                    </h:panelGrid>
+                    <h:panelGrid id="panRespuesta">
+                        <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                            <script>
+                              mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                            </script>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+             
+            <h:form id="resultadoDocumento">
+                <h:panelGrid id="panResultadoDocumento">
+                    <h:outputText id="tituloDuplicado" value="#{beanRegistroUsuario.tituloDocumento}"
+                                  styleClass="unicampo"/>
+                    <h:dataTable value="#{beanRegistroUsuario.lstDtoDocumento}" var="dtoUsuarios"
+                                 rendered="#{not empty beanRegistroUsuario.lstDtoDocumento}" border="1"
+                                 styleClass="unitable">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoUsuarios.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombres"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoUsuarios.nombre_completo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nro Documento"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoUsuarios.numero_documento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value=""/>
+                            </f:facet>
+                            <h:commandButton value="Actualizar"
+                                             action="#{beanRegistroUsuario.irActualizacion(dtoUsuarios.id)}"
+                                             styleClass="unicampo"></h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
+             
+            <h:form id="resultadoHomonimia">
+                <h:panelGrid id="panResultadoHomonia">
+                    <h:outputText id="tituloHomonimo" value="#{beanRegistroUsuario.tituloHomonimo}"
+                                  styleClass="unicampo"/>
+                    <h:dataTable value="#{beanRegistroUsuario.lstDtoHomonimos}" var="dtoHomonimo"
+                                 rendered="#{not empty beanRegistroUsuario.lstDtoHomonimos}" border="1"
+                                 styleClass="unitable">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoHomonimo.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombres"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoHomonimo.nombre_completo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nro Documento"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoHomonimo.numero_documento}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value=""/>
+                            </f:facet>
+                            <h:commandButton value="Actualizar"
+                                             action="#{beanRegistroUsuario.irActualizacion(dtoHomonimo.id)}"
+                                             styleClass="unicampo"></h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
+
+
+
+
+
+
+
+

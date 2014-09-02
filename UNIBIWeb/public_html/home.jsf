@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <style type="text/css" media="screen">
+                 .shadow {
+                    -webkit-box-shadow: 5px 5px 5px #aaa;
+                    -moz-box-shadow: 5px 5px 5px #aaa;
+                    box-shadow: 5px 5px 5px #aaa;
+                    margin-bottom: 10px;
+                }
+
+                .selected {
+                    font-weight: bold;
+                    font-size:12pt;
+                    color:#1F4E79;
+                }
+                .unselected {
+                    font-weight: bold;
+                    font-size:12pt;
+                    color:#9DC3E6;
+                }
+
+                #slide1_container {
+                    width: 808px;
+                    height: 378px;
+                    overflow: hidden;
+                    /* So the sliding bit doesn't stick out. */
+
+                    margin: 0 auto;
+                }
+
+                #slide1_images {
+                    /* This is the bit that moves. It has 4 images, so 4 * 450 = 1800. You could use javascript
+  to work this out instead by counting images. */
+
+                    width: 3232px;
+                    -webkit-transition: all 1.0s ease-in-out;
+                    -moz-transition: all 1.0s ease-in-out;
+                    -o-transition: all 1.0s ease-in-out;
+                    transition: all 1.0s ease-in-out;
+                }
+
+                #slide1_images img {
+                    padding: 0;
+                    margin: 0;
+                    float: left;
+                    /* All the images are in a row next to each other. */
+                }
+            </style>
+            <script>
+              indiceActual = 0;
+              function mostrarSlide(indice) {
+                    $("#slide1_images").css("transform", "translateX(" + indice *  - incremento + "px)");
+                    $("#slide1_controls span").removeClass("selected");
+                    document.getElementById('slide1_controls').children[0].className = "unselected";
+                    document.getElementById('slide1_controls').children[1].className = "unselected";
+                    document.getElementById('slide1_controls').children[2].className = "unselected";
+                    document.getElementById('slide1_controls').children[3].className = "unselected";
+                    document.getElementById('slide1_controls').children[indice].className = "selected";
+                    indiceActual = indice;
+              }
+              
+              $(document).ready(function () {
+                  incremento = 808;
+                  $('#slide1_controls').on('click', 'span', function () {
+                      mostrarSlide($(this).index());
+                  });
+                  
+              });
+              window.setInterval(function () {
+                      mostrarSlide(indiceActual);
+                      indiceActual = (indiceActual &lt; 3) ? indiceActual + 1 : 0;
+                  }, 4000);
+            </script>
+        </h:head>
+        <h:body>
+            <div id="slide1_container" class="shadow">
+                <div id="slide1_images">
+                    <img src="#{request.contextPath}/faces/img/slide-lectura.png"/>
+                     
+                    <img src="#{request.contextPath}/faces/img/slide-prestamos.png"/>
+                     
+                    <img src="#{request.contextPath}/faces/img/slide-registro.png"/>
+                     
+                    <img src="#{request.contextPath}/faces/img/slide-solicitudes.png"/>
+                </div>
+            </div>
+            <h:panelGrid width="100%" style="text-align:center">
+            <p id="slide1_controls">
+                <span class="selected">Lectura</span>
+                <span class="unselected">| Préstamos</span>
+                <span class="unselected">| Registro</span>
+                <span class="unselected">| Solicitudes</span>
+            </p>
+            </h:panelGrid>
+        </h:body>
+    </html>
+</f:view>

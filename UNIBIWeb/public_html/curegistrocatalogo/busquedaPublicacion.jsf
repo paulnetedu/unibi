@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        
+        </h:head>
+        <h:body>
+            <h:form id="busquedaPublicacion">
+            <h:panelGrid>
+            <h:outputText value="Búsqueda de publicación" styleClass="unititle3"/>
+            <br/>
+            <h:panelGrid columns="4">
+                <h:outputText value="Texto de búsqueda" styleClass="unicampo"/>
+                <h:inputText id="textoBusqueda" value="#{beanBusquedaPublicacion.textoBusqueda}" required="true" requiredMessage="Valor requerido"/>
+                <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
+                <h:commandButton action="#{beanBusquedaPublicacion.buscarPublicaciones}" value="Buscar" styleClass="unicampo">
+                        <f:ajax execute="busquedaPublicacion" render="panRespuesta msgtextoBusqueda panResultados" />
+                </h:commandButton>
+                <h:selectOneRadio value="#{beanBusquedaPublicacion.tipoBusqueda}">
+                    <f:selectItem itemLabel="Por titulo" itemValue="0"/>
+                    <f:selectItem itemLabel="Por autor" itemValue="1"/>
+                </h:selectOneRadio>
+            </h:panelGrid>
+            
+            <h:panelGrid id="panResultados">
+            <h:dataTable value="#{beanBusquedaPublicacion.lstDtoResultado}" var="dtoResultado" rendered="#{not empty beanBusquedaPublicacion.lstDtoResultado}" border="1" styleClass="unitable">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ID"/>
+                    </f:facet>
+                    <h:outputText value="#{dtoResultado.id}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="TITULO"/>
+                    </f:facet>
+                    <h:outputText value="#{dtoResultado.titulo}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="PUBLICADO"/>
+                    </f:facet>
+                    <h:outputText value="#{dtoResultado.fechaPublicacion}">
+                        <f:convertDateTime pattern="yyyy-MM"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value=""/>
+                    </f:facet>
+                    <h:commandButton id="verEjemplares" value="Ver Ejemplares" action="#{beanBusquedaPublicacion.irBuscarEjemplares(dtoResultado.id)}" styleClass="unicampo">
+                     </h:commandButton>
+                    <h:commandButton id="irActualizacionPublicacion" value="Actualizar" action="#{beanBusquedaPublicacion.irActualizacionPublicacion(dtoResultado.id)}" styleClass="unicampo">
+                    </h:commandButton>
+                </h:column>
+            </h:dataTable>
+            </h:panelGrid>
+           
+            <script>
+                adaptarTablaAlternativa('busquedaPublicacion', 'panResultados');
+            </script>    
+            <h:panelGrid id="panRespuesta">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+            </h:panelGrid>
+            </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
+
+
+
+
+
