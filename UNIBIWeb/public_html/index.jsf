@@ -15,7 +15,7 @@
                 <a href="javascript:renderPage('faces/home.jsf')">
                     <img src="img/logo.png" width="180"/>
                 </a>
-                <h:outputText value="Aplicativo Universitario de Biblioteca - Modified" styleClass="unititle2"/>
+                <h:outputText value="Aplicativo Universitario de Biblioteca" styleClass="unititle2"/>
                 </h:panelGrid>
                 
             </div>
