@@ -15,7 +15,7 @@
                 <a href="javascript:renderPage('faces/home.jsf')">
                     <img src="img/logo.png" width="180"/>
                 </a>
-                <h:outputText value="Aplicativo Universitario de Biblioteca - Cloned modificado" styleClass="unititle2"/>
+                <h:outputText value="Aplicativo Universitario de Biblioteca" styleClass="unititle2"/>
                 </h:panelGrid>
                 
             </div>
@@ -32,19 +32,19 @@
                     <h2>Usuarios</h2>
                     <ul>
                         <li><a href="javascript:renderPage('faces/curegistrousuario/nuevoUsuario.jsf')">Nuevo</a></li>
-                        <li><a href="javascript:renderPage('faces/curegistrousuario/busquedaUsuario.jsf')">Actualización</a></li>
+                        <li><a href="javascript:renderPage('faces/curegistrousuario/busquedaUsuario.jsf')">ActualizaciÃ³n</a></li>
                     </ul>
                 </div>
                 <div class="item reportes">
                     <img src="img/bubble/bg_reportes.png" alt="" width="199" height="199" class="circle"/>
                     <a href="#" class="icon"></a>
                     <h2>Reportes</h2>
-                    <ul><li><a href="#">Catálogo</a></li>
+                    <ul><li><a href="#">CatÃ¡logo</a></li>
                         <li><a href="#">Inventario</a></li>
-                        <li><a href="#">Préstamos</a></li>
+                        <li><a href="#">PrÃ©stamos</a></li>
                         <li><a href="#">Devoluciones</a></li>
                         <li><a href="#">Retrasos</a></li>
-                        <li><a href="#">Pérdidas</a></li>
+                        <li><a href="#">PÃ©rdidas</a></li>
                         
                     </ul>
                     
@@ -54,9 +54,9 @@
                     <a href="#" class="icon"></a>
                     <h2>Acciones</h2>
                     <ul>
-                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/prestamoEjemplar.jsf')">Préstamo</a></li>
-                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/devolverEjemplar.jsf')">Devolución Préstamo</a></li>
-                        <li><a href="#">Sanción</a></li>
+                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/prestamoEjemplar.jsf')">PrÃ©stamo</a></li>
+                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/devolverEjemplar.jsf')">DevoluciÃ³n PrÃ©stamo</a></li>
+                        <li><a href="#">SanciÃ³n</a></li>
                         
                     </ul>
                     
@@ -66,7 +66,7 @@
                     <a href="#" class="icon"></a>
                     <h2>Configuracion</h2>
                     <ul>
-                        <li><a href="#">Parámetros</a></li>
+                        <li><a href="#">ParÃ¡metros</a></li>
                     </ul>
                 </div>
                 <div class="item publicaciones">
@@ -75,8 +75,8 @@
                     <h2>Publicaciones</h2>
                     <ul>
                         <li><a href="javascript:renderPage('faces/curegistrocatalogo/nuevaPublicacion.jsf')">Nuevo</a></li>
-                        <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">Búsqueda</a></li>
-                        <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">Actualización</a></li>
+                        <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">BÃºsqueda</a></li>
+                        <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">ActualizaciÃ³n</a></li>
                         <li><a href="#">Mantenimiento</a></li>
                     </ul>
                 </div>
