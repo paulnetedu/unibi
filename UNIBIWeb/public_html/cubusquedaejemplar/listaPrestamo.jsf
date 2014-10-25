@@ -16,7 +16,7 @@
         
         <h:body>
             <h:form>
-                <h2>Solicitud de prestamo</h2>
+                <h2>Solicitud de prestamo modificado</h2>
                 <h:panelGrid columns="3">
                     <h:outputText value="Nro de Documento:" styleClass="unicampo"/>
                     <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}"
