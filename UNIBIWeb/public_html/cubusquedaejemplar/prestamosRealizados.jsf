@@ -17,7 +17,7 @@
         <h:body>
             <h:form id="busquedaEjemplar">
                 <h:panelGrid>
-                    <h:outputText value="Prestamos realizados" styleClass="unicampo"/>
+                    <h:outputText value="Prestamos realizados modificado" styleClass="unicampo"/>
                     <br/>
                     <h:panelGrid id="datosUsuario" columns="2">
                         <h:outputText value="Documento de identidad:" styleClass="unicampo"/>
