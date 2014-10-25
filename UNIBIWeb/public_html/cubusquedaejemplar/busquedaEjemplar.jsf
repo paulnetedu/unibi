@@ -14,7 +14,7 @@
         <h:body>
             <h:form id="busquedaEjemplar">
             <h:panelGrid>
-            <h:outputText value="Búsqueda de ejemplar modificado" styleClass="unititle3"/>
+            <h:outputText value="Búsqueda de ejemplar MODIFICADO" styleClass="unititle3"/>
             <br/>
             
             <h:panelGrid columns="7">
