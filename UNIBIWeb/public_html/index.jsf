@@ -78,7 +78,7 @@
                         <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">Búsqueda</a></li>
                         <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">Actualización</a></li>
                         <li><a href="#">Mantenimiento</a></li>
-                    </ul>
+                    </ul> 
                 </div>
             </div>
         </div>
