@@ -32,7 +32,7 @@
                     <h2>Usuarios</h2>
                     <ul>
                         <li><a href="javascript:renderPage('faces/curegistrousuario/nuevoUsuario.jsf')">Nuevo</a></li>
-                        <li><a href="javascript:renderPage('faces/curegistrousuario/busquedaUsuario.jsf')">ActualizaciÃ³n</a></li>
+                        <li><a href="javascript:renderPage('faces/curegistrousuario/busquedaUsuario.jsf')">Actualización</a></li>
                     </ul>
                 </div>
                 <div class="item reportes">
@@ -54,8 +54,8 @@
                     <a href="#" class="icon"></a>
                     <h2>Acciones</h2>
                     <ul>
-                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/prestamoEjemplar.jsf')">PrÃ©stamo</a></li>
-                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/devolverEjemplar.jsf')">DevoluciÃ³n PrÃ©stamo</a></li>
+                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/prestamoEjemplar.jsf')">Préstamo</a></li>
+                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/devolverEjemplar.jsf')">Devolución Préstamo</a></li>
                         <li><a href="#">Sanción</a></li>
                         
                     </ul>
@@ -64,7 +64,7 @@
                 <div class="item configuracion">
                     <img src="img/bubble/bg_configuracion.png" alt="" width="199" height="199" class="circle"/>
                     <a href="#" class="icon"></a>
-                    <h2>Configuracion</h2>
+                    <h2>Configuración</h2>
                     <ul>
                         <li><a href="#">Parámetros</a></li>
                     </ul>
@@ -75,8 +75,8 @@
                     <h2>Publicaciones</h2>
                     <ul>
                         <li><a href="javascript:renderPage('faces/curegistrocatalogo/nuevaPublicacion.jsf')">Nuevo</a></li>
-                        <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">BÃºsqueda</a></li>
-                        <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">ActualizaciÃ³n</a></li>
+                        <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">Búsqueda</a></li>
+                        <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">Actualización</a></li>
                         <li><a href="#">Mantenimiento</a></li>
                     </ul>
                 </div>
