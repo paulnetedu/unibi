@@ -30,7 +30,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("0")
 @NamedQueries({
     @NamedQuery(name = "TblLibros.consultarPorTitulo", query = "SELECT t FROM TblLibros t WHERE t.titulo LIKE :titulo"),
-    @NamedQuery(name = "TblLibros.consultarPorAutor", query ="SELECT t FROM TblLibros t WHERE t.id in(SELECT t.publicacionId FROM TblPublicacionesAutores t WHERE  t.autorId in (SELECT t.id FROM TblAutores t WHERE t.nombre LIKE :autor))"),
+    //@NamedQuery(name = "TblLibros.consultarPorAutor", query ="SELECT t FROM TblLibros t WHERE t.id in(SELECT t.publicacionId FROM TblPublicacionesAutores t WHERE  t.autorId in (SELECT t.id FROM TblAutores t WHERE t.nombre LIKE :autor))"),
     @NamedQuery(name = "TblLibros.consultarPorIsbn", query = "SELECT t FROM TblLibros t WHERE t.isbn = :isbn"),
     @NamedQuery(name = "TblLibros.consultarPorVolumen", query = "SELECT t FROM TblLibros t WHERE t.volumen = :volumen"),
     @NamedQuery(name = "TblLibros.consultarPorTomo", query = "SELECT t FROM TblLibros t WHERE t.tomo = :tomo"),
