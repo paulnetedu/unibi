@@ -37,18 +37,17 @@
                         <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados" />
                 </h:commandButton>               
             </h:panelGrid>
-            
-            
+                
             <h:panelGrid id="panResultados">
             
             <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">           
-            
+             
                 <h:column>             
-                   <f:facet name="header">
+                   <f:facet name="header" >
                         <h:outputText value="Nº" style="font-size:small;"/> 
                     </f:facet>
-                    
-                     <h:outputText value="#{beanBusquedaEjemplar.count}." style="font-size:small;"/>
+                     
+                     <h:outputText  value="#{beanBusquedaEjemplar.count+1}." style="font-size:small;"/>
                  </h:column> 
                 <h:column>
                     <f:facet name="header">
@@ -103,10 +102,10 @@
                 </h:column>
                 
             </h:dataTable>
-          
-             </h:panelGrid>
+                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.count} registros." style="font-size:small;"/>
            
-             <h:panelGrid id="panAgregar" >
+             </h:panelGrid>
+              <h:panelGrid id="panAgregar" >
                              <h:panelGrid rendered="#{beanNotificacionData.tipo != 1}" columns="2"
                                           style="grid-column-span:8; grid-columns:2 ; grid-rows:1 ; grid-cell:inherit;">
                  <h:commandButton action="#{beanBusquedaEjemplar.Agregar}" value="Agregar Libros" styleClass="unicampo">
