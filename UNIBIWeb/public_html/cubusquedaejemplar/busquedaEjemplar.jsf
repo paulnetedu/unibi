@@ -17,13 +17,13 @@
             <h:panelGrid>
              
             <f:facet name="header">
-            <h:outputText value="BUSQUEDA DE EJEMPLAR" styleClass="unicampo"/>
+            <h:outputText value="BÚSQUEDA DE EJEMPLAR" styleClass="unicampo"/>
             </f:facet>
             
             <br/>
             
             <h:panelGrid columns="7">
-             <h:outputText value="Ejemplar a Buscar: " styleClass="unicampo"/>
+             <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
                 <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
                         <h:outputText value="Buscar por: " styleClass="unicampo" />
                         <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
