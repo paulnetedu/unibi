@@ -46,8 +46,8 @@
                    <f:facet name="header" >
                         <h:outputText value="Nº" style="font-size:small;"/> 
                     </f:facet>
-                     
-                     <h:outputText  value="#{beanBusquedaEjemplar.count}." style="font-size:small;"/>
+                 <h:outputText id="txt_count" value="#{beanBusquedaEjemplar.count}." style="font-size:small;" />
+                    
                  </h:column> 
                 <h:column>
                     <f:facet name="header">
@@ -102,7 +102,7 @@
                 </h:column>
                 
             </h:dataTable>
-                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.count-1} registros." style="font-size:small;" styleClass="unicampo"/>
+                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()} registros." style="font-size:small;" styleClass="unicampo"/>
            
              </h:panelGrid>
               <h:panelGrid id="panAgregar" >
