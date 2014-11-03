@@ -21,7 +21,7 @@
             </f:facet>
             
             <br/>
-            
+             
             <h:panelGrid columns="7">
              <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
                 <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
@@ -37,26 +37,25 @@
                         <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados" />
                 </h:commandButton>               
             </h:panelGrid>
-           
-            <h:panelGrid id="panResultados">
-           
-            <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">
-                
-              
-                 <h:column>
-                
-                   <f:facet name="header">
-                        <h:outputText value="Nº" style="font-size:small;"/>
-                    </f:facet>
             
-                 
-                 </h:column>
-               
+            
+            <h:panelGrid id="panResultados">
+            
+            <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">           
+            
+                <h:column>             
+                   <f:facet name="header">
+                        <h:outputText value="Nº" style="font-size:small;"/> 
+                    </f:facet>
+                    
+                     <h:outputText value="#{beanBusquedaEjemplar.count}." style="font-size:small;"/>
+                 </h:column> 
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="ID" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.id}" style="font-size:small;"/>
+                    <h:outputText value="#{LstDtoBusqueda.id}"
+                                  style="font-size:small;"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
@@ -104,8 +103,8 @@
                 </h:column>
                 
             </h:dataTable>
-             
-            </h:panelGrid>
+          
+             </h:panelGrid>
            
              <h:panelGrid id="panAgregar" >
                              <h:panelGrid rendered="#{beanNotificacionData.tipo != 1}" columns="2"
