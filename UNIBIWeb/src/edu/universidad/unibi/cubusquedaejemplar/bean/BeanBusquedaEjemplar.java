@@ -69,16 +69,24 @@ public class BeanBusquedaEjemplar implements Serializable {
     //   -----------------------------------------------------------------------------------------------------------------
     protected List<dtoBusquedaEjemplar> listaEjemplaresSeleccionados; //esta es la lista donde guardaran los ejemplares que seleccione el usuario.
     private List<dtoAutor> lstDtoAutor;
-    private int count = 0;
-
-    public int getCount() {
-        return count++;  
-
-    }
+    private int count;
 
     public void setCount(int count) {
-        this.count = 0;
+        this.count = count;
     }
+
+    public int getCount() {
+        if (listaEjemplaresSeleccionados.size()==count)
+        { count=0;}
+         else
+        { count++;
+            }
+        return count;
+    }
+
+
+     
+     
 
 
     protected int tipoBusqueda;
