@@ -95,9 +95,7 @@
                     <f:facet name="header">
                         <h:outputText value="SELECIONAR"  style="font-size:small;"/>
                     </f:facet> 
-                    
-                </h:column>
-                
+                </h:column>       
             </h:dataTable>
                  <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()} registros." style="font-size:small;" styleClass="unicampo"/>
            
