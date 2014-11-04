@@ -188,17 +188,13 @@
                      <value n="internalName" v="libraries"/>
                      <value n="targetWithinJar" v="WEB-INF/lib"/>
                      <value n="type" v="3"/>
-                     <list n="unselectedLibraries">
-                        <string v="unidominio-profile"/>
-                     </list>
+                     <list n="unselectedLibraries"/>
                   </hash>
                </list>
             </hash>
             <url n="jarURL" path="deploy/unibi.war"/>
             <hash n="libraryDependencies">
-               <list n="unselectedLibraries">
-                  <string v="unidominio-profile"/>
-               </list>
+               <list n="unselectedLibraries"/>
             </hash>
             <value n="profileClass" v="oracle.jdeveloper.deploy.war.WarProfile"/>
             <value n="profileName" v="unibi"/>
@@ -227,37 +223,13 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.1"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <url n="id" path="../../../../Users/paul/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
+            <url n="id" path="../../../../Users/UAP/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
       <list n="libraryReferences">
          <hash>
-            <value n="id" v="JSP Runtime"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSF 2.1"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="JSTL 1.2"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <url n="id" path="../../../../Users/paul/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
+            <url n="id" path="../../../../Users/UAP/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

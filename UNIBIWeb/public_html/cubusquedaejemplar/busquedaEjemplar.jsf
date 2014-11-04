@@ -11,17 +11,23 @@
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
          
         </h:head>
+     
         <h:body>
             <h:form id="busquedaEjemplar">
             <h:panelGrid>
-            <h:outputText value="Búsqueda de ejemplar modificado" styleClass="unititle3"/>
-            <br/>
+             
+            <f:facet name="header">
+            <h:outputText value="BÚSQUEDA DE EJEMPLAR" styleClass="unicampo"/>
+            </f:facet>
             
+            <br/>
+             
             <h:panelGrid columns="7">
-             <h:outputText value="Texto de búsqueda" styleClass="unicampo"/>
-                <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" required="true" requiredMessage="Valor requerido"/>
-                <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
-                <h:selectOneMenu value="#{beanBusquedaEjemplar.tipoBusqueda}" >
+             <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
+                <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
+                        <h:outputText value="Buscar por: " styleClass="unicampo" />
+                        <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
+                <h:selectOneMenu value="#{beanBusquedaEjemplar.tipoBusqueda}" styleClass="unicampo" >
                     <f:selectItem itemLabel="Titulo" itemValue="0"/>
                     <f:selectItem itemLabel="Autor" itemValue="1"/>
                     <f:selectItem itemLabel="Area" itemValue="2"/>
@@ -30,68 +36,82 @@
                         <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados" />
                 </h:commandButton>               
             </h:panelGrid>
-            
+                
             <h:panelGrid id="panResultados">
-            <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">
+            
+            <h:dataTable value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" var="LstDtoBusqueda" rendered="#{not empty beanBusquedaEjemplar.listaEjemplaresSeleccionados}" border="1" styleClass="unitable">           
+             
+                <h:column>             
+                   <f:facet name="header" >
+                        <h:outputText value="Nº" style="font-size:small;"/> 
+                    </f:facet>
+                 <h:outputText id="txt_count" value="#{beanBusquedaEjemplar.count}." style="font-size:small;" />
+                    
+                 </h:column> 
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID"/>
+                        <h:outputText value="ID" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.id}"/>
+                    <h:outputText value="#{LstDtoBusqueda.id}"
+                                  style="font-size:small;"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="TITULO"/>
+                        <h:outputText value="TITULO" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.titulo}"/>
+                    <h:outputText value="#{LstDtoBusqueda.titulo}" style="font-size:small;"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="AUTOR"/>
+                        <h:outputText value="AUTOR" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.autor}"/>
+                    <h:outputText value="#{LstDtoBusqueda.autor}" style="font-size:small;"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="AREA"/>
+                        <h:outputText value="AREA" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.area}">
+                    <h:outputText value="#{LstDtoBusqueda.area} " style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
                     </h:outputText>
                 </h:column>
                  <h:column>
                     <f:facet name="header">
-                        <h:outputText value="OBSERVACIONES"/>
+                        <h:outputText value="OBSERVACIONES" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}">
+                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}" style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
                     </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ESTADO"/>
+                        <h:outputText value="ESTADO" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}">
+                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}" style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
                     </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="SELECIONAR"/>
+                        <h:outputText value="SELECIONAR"  style="font-size:small;"/>
                     </f:facet> 
                     
                 </h:column>
+                
             </h:dataTable>
-            </h:panelGrid>
-             <h:panelGrid id="panAgregar">
-                <h:panelGrid rendered="#{beanNotificacionData.tipo != 1}">
+                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()} registros." style="font-size:small;" styleClass="unicampo"/>
+           
+             </h:panelGrid>
+              <h:panelGrid id="panAgregar" >
+                             <h:panelGrid rendered="#{beanNotificacionData.tipo != 1}" columns="2"
+                                          style="grid-column-span:8; grid-columns:2 ; grid-rows:1 ; grid-cell:inherit;">
                  <h:commandButton action="#{beanBusquedaEjemplar.Agregar}" value="Agregar Libros" styleClass="unicampo">
                         <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados panAgregar" />
                 </h:commandButton>
-                </h:panelGrid>
+                            <h:commandButton value="Ver lista de prestamo" action="listaPrestamo" styleClass="unicampo" immediate="true">
+            </h:commandButton>
             </h:panelGrid>
-            <h:commandButton value="Ver lista de prestamo" action="listaPrestamo" immediate="true"/>
-            
+                    </h:panelGrid>
             <h:panelGrid id="panRespuesta">
                 <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
                     <script>
@@ -104,24 +124,3 @@
         </h:body>
     </html>
 </f:view>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

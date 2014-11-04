@@ -118,21 +118,13 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <value n="id" v="TopLink"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Oracle XML Parser v2"/>
+            <url n="id" path="../../../../Users/UAP/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
       <list n="libraryReferences">
          <hash>
-            <value n="id" v="TopLink"/>
-            <value n="isJDK" v="false"/>
-         </hash>
-         <hash>
-            <value n="id" v="Oracle XML Parser v2"/>
+            <url n="id" path="../../../../Users/UAP/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
