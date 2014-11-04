@@ -25,7 +25,6 @@
                     <f:selectItem itemLabel="Titulo" itemValue="0"/>
                     <f:selectItem itemLabel="Autor" itemValue="1"/>
                     <f:selectItem itemLabel="Area" itemValue="2"/>
-                    <f:selectItem itemLabel="Otros" itemValue="3"/>
                    </h:selectOneMenu>
                 <h:commandButton action="#{beanBusquedaEjemplar.buscarEjemplar}" value="Buscar" styleClass="unicampo">
                         <f:ajax execute="busquedaEjemplar" render="panRespuesta msgtextoBusqueda panResultados" />
@@ -80,9 +79,7 @@
                     <f:facet name="header">
                         <h:outputText value="SELECIONAR"/>
                     </f:facet> 
-                    <h:selectManyCheckbox value="">
-                    <f:selectItem itemValue="1" itemLabel="Add" />
-                    </h:selectManyCheckbox>
+                    
                 </h:column>
             </h:dataTable>
             </h:panelGrid>
