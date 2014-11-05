@@ -28,7 +28,7 @@
                 <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento()}" disabled="false" value="Buscar" styleClass="unicampo">
                    <f:ajax execute="datosLector" render="datosLector panRespuesta panMensaje1" />
                 </h:commandButton>
-                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="NuevoUsuario" styleClass="unicampo" >                        
+                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" >                        
                 </h:commandButton> 
             </h:panelGrid>
             </h:panelGrid>
