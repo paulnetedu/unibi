@@ -10,8 +10,7 @@
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
         
-        
-        
+                
         </h:head>
         <h:body>
              <h2 style="font-size:19px; font-family:Arial, Helvetica, sans-serif; text-align:center;">SOLICITUD DE PRESTAMO</h2>
