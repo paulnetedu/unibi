@@ -71,7 +71,6 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                 List<TblAutores> lstTbl = query.getResultList();
                 //System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));
                 dtoBusquedaEjemplar dto = null;
-                
                 for (TblAutores p : lstTbl) {
                     dto = new dtoBusquedaEjemplar();                
                     List<TblPublicacionesAutores> lstPubAut = p.getTblPublicacionesAutoresList();
