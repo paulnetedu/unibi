@@ -15,23 +15,27 @@
         </h:head>
         <h:body>
             <h:form id="nuevaPublicacion">
-            <h:panelGrid>
+            <h:panelGrid  width="1400">
             <h:outputText value="Nueva publicación" styleClass="unititle3"/>
             <br/>
             
             <!--menu para todos-->
-            <h:panelGrid columns="3" >
+            
+            <h:panelGrid columns="3">
                 
                 <h:outputText value="Tipo de publicacion:" styleClass="unicampo"/> 
-                <h:selectOneMenu id="tipo" value="#{beanNuevaPublicacion.tipo}">
+                <h:panelGroup>
+                <h:selectOneMenu id="tipo" value="#{beanNuevaPublicacion.tipo}"> 
                     <f:selectItem itemLabel="LIBRO" itemValue="0"/>
                     <f:selectItem itemLabel="REVISTA" itemValue="1"/>
                     <f:selectItem itemLabel="TESIS" itemValue="2"/>
                     <f:ajax render="nuevaPublicacion" event="change" listener="#{beanNuevaPublicacion.cualaparecer}"/>
                 </h:selectOneMenu>
-
-                <h:inputHidden/>      
-                        <h:outputText value="Id:" styleClass="unicampo"/>
+                <h:outputText value="" style="right;padding-right:130px;"/>
+                </h:panelGroup>
+                <h:outputText value="" styleClass="unicampo"/> 
+                
+                <h:outputText value="Id:" styleClass="unicampo"/>
                 <h:inputText id="id" value="#{beanNuevaPublicacion.id}" required="true" requiredMessage="Valor requerido"/>
                 <h:message id="msgid" for="id"/>
                 
@@ -82,81 +86,106 @@
                 
                 <!--AGREGO-->
                 <!--menu + libros-->
-                <h:panelGrid id="libros" columns="3" rendered="#{beanNuevaPublicacion.indlibro}" width="1430">
-                    <h:outputText value="ISBN:    " styleClass="unicampo" />
-                    <h:inputText id="isbn" value="#{beanNuevaPublicacion.isbn}" required="true" requiredMessage="Valor requerido"/>
-                    <h:message id="msgisbn" for="isbn"/>
-                    
-                    <h:outputText value="Volumen:" styleClass="unicampo"/>
-                    <h:inputText id="volumenlibro" value="#{beanNuevaPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
-                        <f:validateLongRange minimum="0" maximum="5000"/>
-                    </h:inputText>
-                    <h:message id="msgvolumenlibro" for="volumenlibro"/>
+            <h:panelGrid id="libros" columns="2" rendered="#{beanNuevaPublicacion.indlibro}">
                 
-                    <h:outputText value="Tomo:" styleClass="unicampo"/>
-                    <h:inputText id="tomo" value="#{beanNuevaPublicacion.tomo}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el tomo">
-                        <f:validateLongRange minimum="0" maximum="5000"/>
-                    </h:inputText>
-                    <h:message id="msgtomo" for="tomo"/>
+                <h:outputText value="ISBN:" styleClass="unicampo" style="padding-right:114px;"/>
+                <h:panelGroup>
+                <h:inputText id="isbn" value="#{beanNuevaPublicacion.isbn}" required="true" requiredMessage="Valor requerido"/>
+                <h:outputText id="Espacio" value=" " style="padding-right:45px;"/>
+                <h:message id="msgisbn" for="isbn"/>
+                </h:panelGroup>
                 
-                    <h:outputText value="Edicion:" styleClass="unicampo"/>
-                    <h:inputText id="edicion" value="#{beanNuevaPublicacion.edicion}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la edicion">
+                
+                <h:outputText value="Volumen:" styleClass="unicampo"/>
+                <h:panelGroup>
+                <h:inputText id="volumenlibro" value="#{beanNuevaPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
+                    <f:validateLongRange minimum="0" maximum="5000"/>
+                </h:inputText>
+                <h:outputText id="Espacio2" value=" " style="padding-right:45px;"/>
+                <h:message id="msgvolumenlibro" for="volumenlibro"/>
+                </h:panelGroup>
+                
+                
+                <h:outputText value="Tomo:" styleClass="unicampo"/>
+                <h:panelGroup>
+                <h:inputText id="tomo" value="#{beanNuevaPublicacion.tomo}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el tomo">
+                    <f:validateLongRange minimum="0" maximum="5000"/>
+                </h:inputText>
+                <h:outputText id="Espacio3" value=" " style="padding-right:45px;"/>
+                <h:message id="msgtomo" for="tomo"/>
+                </h:panelGroup>
+                
+                
+                <h:outputText value="Edicion:" styleClass="unicampo"/>
+                <h:panelGroup>
+                <h:inputText id="edicion" value="#{beanNuevaPublicacion.edicion}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la edicion">
                         <f:validateLongRange minimum="0" maximum="5000"/>
-                    </h:inputText>
-                    <h:message id="msgedicion" for="edicion"/>
+                </h:inputText>
+                <h:outputText id="Espacio4" value=" " style="padding-right:45px;"/>
+                <h:message id="msgedicion" for="edicion"/>
+                </h:panelGroup>
                         
-                    <h:outputText value="Editorial:" styleClass="unicampo"/>
-                        <h:selectOneMenu value="#{beanNuevaPublicacion.editorial_id}">
-                            <f:selectItems value="#{beanNuevaPublicacion.listaEditorial}"/>
-                        </h:selectOneMenu>
-                        <h:inputHidden/>
-                    </h:panelGrid>                    
+                <h:outputText value="Editorial:" styleClass="unicampo"/>
+                    <h:selectOneMenu value="#{beanNuevaPublicacion.editorial_id}" style="width:400px">
+                        <f:selectItems value="#{beanNuevaPublicacion.listaEditorial}"/>
+                        <f:selectItem/>
+                    </h:selectOneMenu>
+            
+                </h:panelGrid>                    
                      <!--fin menu + libros-->
                      
                      
                      <!-- menu + revistas-->
                 
-                <h:panelGrid id="revistas" columns="3" rendered="#{beanNuevaPublicacion.indrevista}" width="500">
-                    <h:outputText value="Volumen:" styleClass="unicampo"/>
+                <h:panelGrid id="revistas" columns="3" rendered="#{beanNuevaPublicacion.indrevista}">
+        
+                    <h:outputText value="Volumen:" styleClass="unicampo" style="padding-right:87px;"/>
+                    <h:panelGroup>
                     <h:inputText id="volumenrevista" value="#{beanNuevaPublicacion.volumen}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el volumen">
                         <f:validateLongRange minimum="0" maximum="5000"/>
                     </h:inputText>
-                    <h:message id="msgvolumenrevista" for="volumenrevista"/>
+                    <h:outputText value="" styleClass="unicampo" style="padding-right:48px;"/>
+                    </h:panelGroup>
+                    <h:message id="msgvolumenrevista" for="volumenrevista" style="text-align:right;padding-right:80px;"/>
                     
                     <h:outputText value="Numero:" styleClass="unicampo"/>
                     <h:inputText id="numero" value="#{beanNuevaPublicacion.numero}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese el numero">
                         <f:validateLongRange minimum="0" maximum="5000"/>
                     </h:inputText>
                     <h:message id="msgnumero" for="numero"/>
+                    
                 </h:panelGrid>
                    <!--fin menu + revistas-->
                 
                 
                    <!--menu + tesis-->
-                <h:panelGrid id="tesis" columns="3" rendered="#{beanNuevaPublicacion.indtesis}" width="520">
-                    <h:outputText value="Institucion:" styleClass="unicampo"/>
+                <h:panelGrid id="tesis" columns="3" rendered="#{beanNuevaPublicacion.indtesis}" >
+                
+                    <h:outputText value="Institucion:" styleClass="unicampo" style="padding-right:79px;"/>
+                    <h:panelGroup>
                     <h:inputText id="institucion_id" value="#{beanNuevaPublicacion.institucion_id}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la institucion">
                         <f:validateLongRange minimum="0" maximum="5000"/>
                     </h:inputText>
+                    <h:outputText id="espaciotesis" value=" " style="padding-right:44px;"/>
+                    </h:panelGroup>
                     <h:message id="msginstitucion_id" for="institucion_id"/>
                     
                     <h:outputText value="Titulo:" styleClass="unicampo"/>                      
-                    <h:selectOneMenu id="titulo_optado" value="#{beanNuevaPublicacion.titulo_optado}" >
+                    <h:selectOneMenu id="titulo_optado" value="#{beanNuevaPublicacion.titulo_optado}">
                         <f:selectItem itemLabel="TITULO PROFESIONAL" itemValue="0"/>
                         <f:selectItem itemLabel="MAESTRIA" itemValue="1"/>
                         <f:selectItem itemLabel="DOCTORADO" itemValue="2"/>
                         <f:selectItem itemLabel="TITULO TECNICO" itemValue="3"/>
                     </h:selectOneMenu>
                     <h:message id="msgtitulo_optado" for="titulo_optado"/>
+                    
                 </h:panelGrid>
                    <!--fin menu + tesis-->
                   <!--fin AGREGO-->
-                   
-                   
+               
                 <h:commandButton action="#{beanNuevaPublicacion.guardar}" value="Guardar" styleClass="unicampo">
                 </h:commandButton>
-                
-                
+                        
 
 
             <h:panelGrid id="panRespuesta">
