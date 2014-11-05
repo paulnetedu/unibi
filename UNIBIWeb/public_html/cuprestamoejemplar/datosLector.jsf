@@ -10,11 +10,10 @@
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
         
-        
-        
+                
         </h:head>
         <h:body>
-            
+             <h2 style="font-size:19px; font-family:Arial, Helvetica, sans-serif; text-align:center;">SOLICITUD DE PRESTAMO.</h2>
             <h:form id="datosLector" >
             <h:panelGrid >
             <h:outputText value="Datos del Lector" styleClass="unititle3"/>
@@ -29,7 +28,7 @@
                 <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento()}" disabled="false" value="Buscar" styleClass="unicampo">
                    <f:ajax execute="datosLector" render="datosLector panRespuesta panMensaje1" />
                 </h:commandButton>
-                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="NuevoUsuario" styleClass="unicampo" >                        
+                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" >                        
                 </h:commandButton> 
             </h:panelGrid>
             </h:panelGrid>
