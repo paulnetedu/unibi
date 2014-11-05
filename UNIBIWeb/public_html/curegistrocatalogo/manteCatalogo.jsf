@@ -1,59 +1,68 @@
 <?xml version='1.0' encoding='windows-1252'?>
 <!DOCTYPE html>
-<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets">
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:ui="http://java.sun.com/jsf/facelets">
     <html xmlns="http://www.w3.org/1999/xhtml">
         <h:head>
-        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
-        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
-        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
-        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
-        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
-        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
-         
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+            <script type="text/javascript"
+                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
+                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
         </h:head>
         <h:body>
             <h:form id="manteCatalogo">
-            <h:panelGrid id="seleccion">
-                <h:selectOneRadio value="#{beanManteCatalogo.selec}">
-                    <f:selectItem itemLabel="Areas" itemValue="1"/>
-                    <f:selectItem itemLabel="Carreras profecionales" itemValue="2"/>
-                    <f:selectItem itemLabel="Editoriales" itemValue="3"/>
-                    <f:selectItem itemLabel="Instituciones" itemValue="4"/>
-                    <f:selectItem itemLabel="Idiomas" itemValue="5"/>
-                    <f:selectItem itemLabel="Tipos de Usuario" itemValue="6"/>
-                    <f:selectItem itemLabel="Procedencia" itemValue="7"/>
-                </h:selectOneRadio>
-                
-                <h:commandButton id="buscar" value="Buscar" action="#{beanManteCatalogo.listarCatalogo}">
-                <f:ajax execute="manteCatalogo" render="tblLista"/>
-                </h:commandButton>
+                <h:panelGrid id="seleccion">
+                    <h:selectOneRadio value="#{beanManteCatalogo.selec}">
+                        <f:selectItem itemLabel="Areas" itemValue="1"/>
+                        <f:selectItem itemLabel="Carreras profecionales" itemValue="2"/>
+                        <f:selectItem itemLabel="Editoriales" itemValue="3"/>
+                        <f:selectItem itemLabel="Instituciones" itemValue="4"/>
+                        <f:selectItem itemLabel="Idiomas" itemValue="5"/>
+                        <f:selectItem itemLabel="Tipos de Usuario" itemValue="6"/>
+                        <f:selectItem itemLabel="Procedencia" itemValue="7"/>
+                    </h:selectOneRadio>
+                    <h:commandButton id="buscar" value="Buscar" action="#{beanManteCatalogo.listarCatalogo}">
+                        <f:ajax execute="manteCatalogo" render="tblLista"/>
+                    </h:commandButton>
                 </h:panelGrid>
-                
                 <h:panelGrid id="tblLista">
-                <h:dataTable id="lista" value="#{beanManteCatalogo.lstCatalogo}" var="dtoCatalogo" rendered="#{not empty beanManteCatalogo.lstCatalogo}" border="1" styleClass="unitable">
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="ID"/>
-                    </f:facet>
-                    <h:outputText value="#{dtoCatalogo.id}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
-                        <h:outputText value="Descripcion"/>
-                    </f:facet>
-                    <h:outputText value="#{dtoCatalogo.descripcion}"/>
-                </h:column>
-            </h:dataTable>
+                    <h:dataTable id="lista" value="#{beanManteCatalogo.lstCatalogo}" var="dtoCatalogo"
+                                 rendered="#{not empty beanManteCatalogo.lstCatalogo}" border="1" styleClass="unitable">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="ID"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoCatalogo.id}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descripcion"/>
+                            </f:facet>
+                            <h:outputText value="#{dtoCatalogo.descripcion}"/>
+                        </h:column>
+                    </h:dataTable>
                 </h:panelGrid>
-                
                 <h:panelGrid id="tblIngresar" columns="2">
-                <h:outputText value="Codigo"/>
-                <h:inputText id="codigo" value="#{beanManteCatalogo.id}" />
-                <h:outputText value="descripcion"/>
-                <h:inputText id="descripcion" value="#{beanManteCatalogo.descripcion}" />
-                <h:commandButton id="agregar" value="Agregar" action="#{beanManteCatalogo.agregar}">
-                <f:ajax execute="manteCatalogo" render="tblLista"/>
-                </h:commandButton>
+                    <h:outputText value="Codigo"/>
+                    <h:inputText id="codigo" value="#{beanManteCatalogo.id}"/>
+                    <h:outputText value="descripcion"/>
+                    <h:inputText id="descripcion" value="#{beanManteCatalogo.descripcion}"/>
+                    <h:commandButton id="agregar" value="Agregar" action="#{beanManteCatalogo.agregar}">
+                        <f:ajax execute="manteCatalogo" render="tblLista panRespuesta"/>
+                    </h:commandButton>
+                  <!--  SE HA AGREGADO EL PANEL DONDE MOSTRAR EL MENSAJE-->
+                    <h:panelGrid id="panRespuesta">
+                        <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                            <script>
+                              mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                            </script>
+                        </h:panelGrid>
+                    </h:panelGrid>  
+                    <!--  SE HA AGREGADO EL PANEL DONDE MOSTRAR EL MENSAJE-->
                 </h:panelGrid>
                 
             </h:form>

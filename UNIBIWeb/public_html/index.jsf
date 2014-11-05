@@ -15,7 +15,7 @@
                 <a href="javascript:renderPage('faces/home.jsf')">
                     <img src="img/logo.png" width="180"/>
                 </a>
-                <h:outputText value=" Aplicativo Universitario de Biblioteca" styleClass="unititle2"/>
+                <h:outputText value="UDCS Aplicativo Universitario de Biblioteca" styleClass="unititle2"/>
                 </h:panelGrid>
                 
             </div>
@@ -75,6 +75,7 @@
                     <h2>Publicaciones</h2>
                     <ul>
                         <li><a href="javascript:renderPage('faces/curegistrocatalogo/nuevaPublicacion.jsf')">Nuevo</a></li>
+                        <li><a href="javascript:renderPage('faces/curegistrocatalogo/manteCatalogo.jsf')">Catalogo</a></li>
                         <li><a href="javascript:renderPage('faces/cubusquedaejemplar/busquedaEjemplar.jsf')">Búsqueda</a></li>
                         <li><a href="javascript:renderPage('faces/curegistrocatalogo/busquedaPublicacion.jsf')">Actualización</a></li>
                         <li><a href="#">Mantenimiento</a></li>
