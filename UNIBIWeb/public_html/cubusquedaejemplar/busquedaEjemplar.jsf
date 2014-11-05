@@ -96,7 +96,7 @@
                     </f:facet> 
                 </h:column>       
             </h:dataTable>
-                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()} registros." style="font-size:small;" styleClass="unicampo"/>
+                 <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()} Coincidencias" style="font-size:small;" styleClass="unicampo"/>
            
              </h:panelGrid>
               <h:panelGrid id="panAgregar" >
