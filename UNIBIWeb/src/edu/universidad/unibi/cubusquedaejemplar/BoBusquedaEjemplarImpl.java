@@ -64,38 +64,41 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
     
     public List<dtoBusquedaEjemplar> consultarEjemplarPorAutor(String nombre){
                List<dtoBusquedaEjemplar> lstDto = new ArrayList<dtoBusquedaEjemplar>();
-                   Query query = em.createNamedQuery("TblAutores.consultarPorNombre");
+                   Query query = em.createNamedQuery("TblAutores.consultarPorNombreautor");
                 String cadenaBusqueda = "%" + nombre.toUpperCase() + "%";
-                System.out.println("cadenaBusqueda=" + cadenaBusqueda);
+                //System.out.println("cadenaBusqueda=" + cadenaBusqueda);
                 query.setParameter("nombre", cadenaBusqueda);
                 List<TblAutores> lstTbl = query.getResultList();
-                System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));
+                //System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));
                 dtoBusquedaEjemplar dto = null;
                 
                 for (TblAutores p : lstTbl) {
-                    dto = new dtoBusquedaEjemplar();
-                    dto.setAutor(p.getNombre());
-                lstDto.add(dto);
+                    dto = new dtoBusquedaEjemplar();                
+                    List<TblPublicacionesAutores> lstPubAut = p.getTblPublicacionesAutoresList();
+                    for (TblPublicacionesAutores pa : lstPubAut) {
+                        TblPublicaciones a = pa.getPublicacionId();
+                        dto.setAutor(p.getNombre());
+                        dto.setId(a.getId());
+                        dto.setTitulo(a.getTitulo()); 
+                        lstDto.add(dto);
+                    }         
                 }
-                
-            return lstDto;
-        }
+                return lstDto;
+          }
     
     public List<dtoBusquedaEjemplar> consultarEjemplarPorTitulo(String titulo){
                 List<dtoBusquedaEjemplar> lstDto = new ArrayList<dtoBusquedaEjemplar>();
                 Query query = em.createNamedQuery("TblLibros.consultarPorTitulo");
                 String cadenaBusqueda = "%" + titulo.toUpperCase() + "%";
-                System.out.println("cadenaBusqueda=" + cadenaBusqueda);
+                //System.out.println("cadenaBusqueda=" + cadenaBusqueda);
                 query.setParameter("titulo", cadenaBusqueda);
                 List<TblPublicaciones> lstTbl = query.getResultList();
-                System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));
-                dtoBusquedaEjemplar dto = null;
+                //System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));
+                
                 for (TblPublicaciones p : lstTbl) {
-                    System.out.println("p.getTitulo=" + p.getFechaPublicacion());
-                    dto = new dtoBusquedaEjemplar();
+                    dtoBusquedaEjemplar dto = new dtoBusquedaEjemplar();
                     dto.setId(p.getId());
-                    dto.setTitulo(p.getTitulo());
-                                
+                    dto.setTitulo(p.getTitulo());                  
                     List<TblPublicacionesAutores> lstPubAut = p.getTblPublicacionesAutoresList();
                     String autores = "";
                     for (TblPublicacionesAutores pa : lstPubAut) {
@@ -113,10 +116,8 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                     for(TblEjemplares pe : lstPubPre){
                         estado += pe.getEstadoFisico() + ", ";
                     }
-                    
                     dto.setArea(carreras);
                     dto.setAutor(autores);
-                   
                     lstDto.add(dto);
                 }
                 return lstDto;
