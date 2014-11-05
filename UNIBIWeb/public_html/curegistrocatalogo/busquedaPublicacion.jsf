@@ -61,9 +61,10 @@
                     </h:commandButton>
                 </h:column>
             </h:dataTable>
+            <h:outputText value="Se encontraron #{beanBusquedaPublicacion.lstDtoResultado.size()} Coincidencias." style="font-size:small;" styleClass="unicampo"/>
             </h:panelGrid>
-           
-            <script>
+                    
+                    <script>
                 adaptarTablaAlternativa('busquedaPublicacion', 'panResultados');
             </script>    
             <h:panelGrid id="panRespuesta">
