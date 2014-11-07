@@ -107,7 +107,7 @@ public class BeanBusquedaEjemplar implements Serializable {
         } else if (tipoBusqueda == 1) {
             buscarEjemplarPorAutor();
         }
-        count=0;
+        count=0; 
          /*else
                 if(tipoBusqueda == 2){
                 buscarEjemplarPorArea();
