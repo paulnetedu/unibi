@@ -14,13 +14,16 @@
         
         </h:head>
         <h:body>
-            
+         <!-- <f:ajax render=":panResultados"/> -->
+           <!-- <center><h2 style="font-size:16px; font-family:Arial, Helvetica, sans-serif">SOLICITUD DE PRESTAMO</h2></center>-->
+           <h2 style="font-size:19px; font-family:Arial, Helvetica, sans-serif; text-align:center;">*SOLICITUD DE PRESTAMO*</h2>
             <h:form id="datosLector" >
-            <h:panelGrid >
-            <h:outputText value="Datos del Lector" styleClass="unititle3"/>
-            <br/>
+            <h:panelGrid style="text-align:left;">
+                     
+                    <h:outputText value="Datos del Lector" styleClass="unititle3" style="text-align:left;"/> 
+                   
             <h:panelGrid columns="5">
-                <h:outputText value="NroDocumento" styleClass="unicampo"/>
+                <h:outputText value="Nro. de Documento (DNI)" styleClass="unicampo"/>
                 <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
                     <f:validateLength maximum="8" minimum="8"/>
                     <f:validateRegex pattern="[0-9]+"/>
@@ -29,10 +32,11 @@
                 <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento()}" disabled="false" value="Buscar" styleClass="unicampo">
                    <f:ajax execute="datosLector" render="datosLector panRespuesta panMensaje1" />
                 </h:commandButton>
-                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="NuevoUsuario" styleClass="unicampo" >                        
+                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" >                        
                 </h:commandButton> 
             </h:panelGrid>
-            </h:panelGrid>
+                    
+                </h:panelGrid>
             <h:panelGrid id="panMensaje">
                 <h:panelGrid rendered="#{beanNotificacionData.tipo == 2}">
                     <script>
@@ -49,19 +53,19 @@
             </h:panelGrid>
             <h:panelGrid id="pgCampos" columns="3">                
                 
-                <h:outputText value="Nombres" styleClass="unicampo"/>
+                <h:outputText value="Nombres:" styleClass="unicampo"/>
                 <h:inputText id="nombres" value="#{beanDatosUsuario.nombres}" disabled="true" style="background-color:Scrollbar;" />
                 <h:outputText />
                 
-                <h:outputText value="Apellidos" styleClass="unicampo"/>
+                <h:outputText value="Apellidos:" styleClass="unicampo"/>
                 <h:inputText id="apellidoPaterno"  value="#{beanDatosUsuario.apellidoPaterno} #{beanDatosUsuario.apellidoMaterno} " disabled="true" style="background-color:Scrollbar;"/>
                 <h:outputText/>
                 
-                <h:outputText value="Estado" styleClass="unicampo"/>
+                <h:outputText value="Estado:" styleClass="unicampo"/>
                 <h:inputText id="estado" value="#{beanDatosUsuario.estado}" disabled="true" style="background-color:Scrollbar;"/>
                 <h:outputText /> 
             </h:panelGrid>
-                        
+            <br/>
             <h:panelGrid id="pgCampos2" columns="4">
                 <h:outputText value="N° Libros Prestados" styleClass="unicampo"/>
                 <h:inputText id="nroLibro" value="#{beanDatosUsuario.nroLibrosPrestados}" disabled="true" size="2" style="background-color:Scrollbar;"/>

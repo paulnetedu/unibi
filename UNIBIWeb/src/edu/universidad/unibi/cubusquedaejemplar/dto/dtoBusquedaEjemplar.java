@@ -1,6 +1,8 @@
 package edu.universidad.unibi.cubusquedaejemplar.dto;
 
-public class dtoBusquedaEjemplar {
+import java.io.Serializable;
+
+public class dtoBusquedaEjemplar implements Serializable{
     public dtoBusquedaEjemplar(String codigo, String titulo, String autor, String area, String estadoFisico, String disponibilidad, String fechaDevolucion) {
         super();
         
