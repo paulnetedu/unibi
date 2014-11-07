@@ -78,10 +78,12 @@ public class BeanBusquedaEjemplar implements Serializable {
     public int getCount() {
         row=listaEjemplaresSeleccionados.size();
         if (row == count)
-        { row=0;}
+        { row=0;
+        count=1;
+          }
          else
         { count++;
-            }
+          }
          return count;
     }
     protected int tipoBusqueda;
@@ -108,6 +110,7 @@ public class BeanBusquedaEjemplar implements Serializable {
             buscarEjemplarPorAutor();
         }
         count=0; 
+       
          /*else
                 if(tipoBusqueda == 2){
                 buscarEjemplarPorArea();
