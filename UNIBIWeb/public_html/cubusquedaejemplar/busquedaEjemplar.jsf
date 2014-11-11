@@ -50,7 +50,7 @@
                  </h:column> 
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID" style="font-size:small;"/>
+                        <h:outputText value="CÓDIGO" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.id}" style="font-size:small;"/>
                 </h:column>
