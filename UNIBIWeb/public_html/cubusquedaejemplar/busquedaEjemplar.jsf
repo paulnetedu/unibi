@@ -55,7 +55,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="TITULO" style="font-size:small;"/>
+                        <h:outputText value="TÍTULO" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.titulo}" style="font-size:small;"/>
                 </h:column>
@@ -67,7 +67,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="AREA" style="font-size:small;"/>
+                        <h:outputText value="ÁREA" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.area} " style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
@@ -91,7 +91,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="SELECIONAR"  style="font-size:small;"/>
+                        <h:outputText value="SELECCIONAR"  style="font-size:small;"/>
                     </f:facet> 
                     <h:selectBooleanCheckbox value="#{LstDtoBusqueda.seleccionado}" style="font-size:small;"/>
                 </h:column>       
