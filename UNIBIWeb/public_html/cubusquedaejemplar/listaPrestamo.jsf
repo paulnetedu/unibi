@@ -5,11 +5,9 @@
         <h:head>
         <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
             <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
-            <script type="text/javascript"
-                    src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+            <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
             <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
-            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css"
-                  type="text/css" media="screen"/>
+            <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
             <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
             <link type="text/css" rel="stylesheet" href="../css/estilos.css"/>
         </h:head>
@@ -45,48 +43,47 @@
                 <h:dataTable id="tabla" border="1" var="p" value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" styleClass="unitable">
                        <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Codigo"/>
+                                <h:outputText value="CÓDIGO" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.codigo}"/>
+                            <h:outputText value="#{p.codigo}" style="font-size:small;"/>
                        </h:column>
                        <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Titulo"/>
+                                <h:outputText value="TÍTULO" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.titulo}"/>
+                            <h:outputText value="#{p.titulo}" style="font-size:small;"/>
                        </h:column>
                        <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Autor"/>
+                                <h:outputText value="AUTOR" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.autor}"/>
+                            <h:outputText value="#{p.autor}" style="font-size:small;"/>
                        </h:column>
                        <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Area"/>
+                                <h:outputText value="AREA" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.area}"/>
+                            <h:outputText value="#{p.area}" style="font-size:small;"/>
                        </h:column>
                        <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Estado Fisico"/>
+                                <h:outputText value="ESTADO FÍSICO" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.estadoFisico}"/>
+                            <h:outputText value="#{p.estadoFisico}" style="font-size:small;"/>
                        </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="Seleccionar"/>
+                                <h:outputText value="SELECCIONAR" style="font-size:small;"/>
                             </f:facet>
-                            
-                            <h:selectBooleanCheckbox value="#{p.seleccionado}"/>
+                            <h:selectBooleanCheckbox value="#{p.seleccionado}" style="font-size:small;"/>
                     </h:column>
                 </h:dataTable>
                 <h:panelGrid columns="3">
-                    <h:commandButton value="Adicionar mas ejemplares" immediate="true" action="busquedaEjemplar"/>
-                    <h:commandButton value="Quitar seleccionados" action="#{beanBusquedaEjemplar.QuitarSeleccionados}">
+                    <h:commandButton value="Adicionar mas ejemplares" immediate="true" styleClass="unicampo" action="busquedaEjemplar"/>
+                    <h:commandButton value="Quitar seleccionados" styleClass="unicampo" action="#{beanBusquedaEjemplar.QuitarSeleccionados}">
                         <f:ajax execute="panelResultados" render="panelResultados"/>
                     </h:commandButton>
-                    <h:commandButton value="Enviar solicitud prestamo">
+                    <h:commandButton value="Enviar solicitud prestamo" styleClass="unicampo">
                     </h:commandButton>
                 </h:panelGrid>
             </h:panelGrid>
