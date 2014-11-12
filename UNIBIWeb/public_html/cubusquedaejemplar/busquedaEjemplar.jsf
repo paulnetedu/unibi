@@ -85,7 +85,7 @@
                     <f:facet name="header">
                         <h:outputText value="ESTADO" style="font-size:small;"/>
                     </f:facet>
-                    <h:outputText value="#{LstDtoBusqueda.estadoFisico}" style="font-size:small;">
+                    <h:outputText value="#{LstDtoBusqueda.disponibilidad}" style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
                     </h:outputText>
                 </h:column>
