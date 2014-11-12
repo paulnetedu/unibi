@@ -18,9 +18,9 @@
       <property
          name="wildcard">false</property>
       <property
-         name="y">76.74121</property>
+         name="y">34.04004</property>
       <property
-         name="x">382.0</property>
+         name="x">315.0</property>
       <property
          name="jspName">/cu_prestar_publicacion/prestarPublicacion.jsf</property>
    </Page>
@@ -29,9 +29,9 @@
       <property
          name="wildcard">false</property>
       <property
-         name="y">145.64941</property>
+         name="y">105.94824</property>
       <property
-         name="x">-251.0</property>
+         name="x">-277.0</property>
       <property
          name="jspName">/cu_presta_publicacion/prestarPublicacion.jsf</property>
    </Page>
@@ -73,9 +73,9 @@
       <property
          name="wildcard">false</property>
       <property
-         name="y">71.649414</property>
+         name="y">-15.051758</property>
       <property
-         name="x">-168.0</property>
+         name="x">-185.0</property>
       <property
          name="jspName">/cu_prestamo_ejemplar/prestamoEjemplarPublicacion.jsf</property>
    </Page>
@@ -84,9 +84,9 @@
       <property
          name="wildcard">false</property>
       <property
-         name="y">270.6494</property>
+         name="y">314.94824</property>
       <property
-         name="x">-7.0</property>
+         name="x">-94.0</property>
       <property
          name="jspName">/cu_prestamo_ejemplar/prestamoEjemplar.jsf</property>
    </Page>
@@ -95,9 +95,9 @@
       <property
          name="wildcard">false</property>
       <property
-         name="y">192.64941</property>
+         name="y">190.94824</property>
       <property
-         name="x">-109.0</property>
+         name="x">-192.0</property>
       <property
          name="jspName">/cuprestamo_ejemplar/prestamoEjemplar.jsf</property>
    </Page>
@@ -122,7 +122,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B50,112.00009,141.81993,215.07294,201.0562,T62</property>
+         name="sdm:polyPoints">B50,112.00003,140.82484,214.07779,203.22087,T60</property>
    </NavigationCase>
    <Page
       id="Page20">
@@ -156,7 +156,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">R50,22.854103,446.7988,242.03749,398.39648,L50</property>
+         name="sdm:polyPoints">R50,21.859005,446.79883,243.03258,398.0459,L50</property>
    </NavigationCase>
    <Page
       id="Page23">
@@ -175,7 +175,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">T38,200.92722,208.72597,19.999987,90.57285,B50</property>
+         name="sdm:polyPoints">T40,201.92224,209.72105,19.999977,89.57777,B50</property>
    </NavigationCase>
    <Page
       id="Page25">
@@ -209,7 +209,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B50,-397.39255,301.61877,-398.40915,344.77185,T50</property>
+         name="sdm:polyPoints">B50,-397.3926,300.62366,-398.40915,345.76697,T50</property>
    </NavigationCase>
    <Page
       id="Page28">
@@ -243,7 +243,7 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B50,-546.72943,-44.082413,-547.3926,37.823624,T50</property>
+         name="sdm:polyPoints">B50,-546.72943,-45.077507,-547.3926,38.818726,T50</property>
    </NavigationCase>
    <Page
       id="Page31">
@@ -266,6 +266,40 @@
       <property
          name="description">Navigation Case</property>
       <property
-         name="sdm:polyPoints">B50,286.61035,455.61877,282.9473,534.8236,T50</property>
+         name="sdm:polyPoints">B50,286.61032,454.62366,282.9473,535.8187,T50</property>
+   </NavigationCase>
+   <Page
+      id="Page33">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="y">179.0459</property>
+      <property
+         name="x">-726.05273</property>
+      <property
+         name="jspName">/cubusquedaejemplar/busquedaEjemplar.jsf</property>
+   </Page>
+   <Page
+      id="Page34">
+      <property
+         name="wildcard">false</property>
+      <property
+         name="y">364.0459</property>
+      <property
+         name="x">-605.74023</property>
+      <property
+         name="jspName">/cubusquedaejemplar/listaPrestamo.jsf</property>
+   </Page>
+   <NavigationCase
+      islink="true"
+      id="NavigationCase35"
+      from="Page34"
+      to="Page33">
+      <property
+         name="fromOutcome">irBusquedaEjemplar</property>
+      <property
+         name="description">Navigation Case</property>
+      <property
+         name="sdm:polyPoints">T50,-605.74023,307.11755,-726.05273,235.27309,B50</property>
    </NavigationCase>
 </SDM>
