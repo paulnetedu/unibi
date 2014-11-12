@@ -42,4 +42,11 @@
       <to-view-id>/curegistrocatalogo/actualizacionPublicacion2.jsf</to-view-id>
     </navigation-case>
   </navigation-rule>
+  <navigation-rule>
+    <from-view-id>/cubusquedaejemplar/listaPrestamo.jsf</from-view-id>
+    <navigation-case>
+      <from-outcome>irBusquedaEjemplar</from-outcome>
+      <to-view-id>/cubusquedaejemplar/busquedaEjemplar.jsf</to-view-id>
+    </navigation-case>
+  </navigation-rule>
 </faces-config>

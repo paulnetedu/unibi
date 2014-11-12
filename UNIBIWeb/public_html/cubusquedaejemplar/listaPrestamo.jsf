@@ -13,7 +13,7 @@
         </h:head>
         <h:body>
             <h:form>
-                <h2>Solicitud de prestamo modificado</h2>
+                <h2>Solicitud de prestamo</h2>
                 <h:panelGrid columns="3">
                     <h:outputText value="Nro de Documento:" styleClass="unicampo"/>
                     <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}"
@@ -44,7 +44,7 @@
                             <f:facet name="header">
                                 <h:outputText value="CÓDIGO" style="font-size:small;"/>
                             </f:facet>
-                            <h:outputText value="#{p.codigo}" style="font-size:small;"/>
+                            <h:outputText value="#{p.id}" style="font-size:small;"/>
                        </h:column>
                        <h:column>
                             <f:facet name="header">
@@ -74,11 +74,11 @@
                             <f:facet name="header">
                                 <h:outputText value="SELECCIONAR" style="font-size:small;"/>
                             </f:facet>
-                            <h:selectBooleanCheckbox value="#{p.seleccionado}" style="font-size:small;"/>
+                            <h:selectBooleanCheckbox  value="#{p.seleccionado}" style="font-size:small;"/>
                     </h:column>
                 </h:dataTable>
                 <h:panelGrid columns="3">
-                    <h:commandButton value="Adicionar mas ejemplares" immediate="true" styleClass="unicampo" action="busquedaEjemplar"/>
+                    <h:commandButton value="Adicionar mas ejemplares" action="busquedaEjemplar" styleClass="unicampo" immediate="true"/>
                     <h:commandButton value="Quitar seleccionados" styleClass="unicampo" action="#{beanBusquedaEjemplar.QuitarSeleccionados}">
                         <f:ajax execute="panelResultados" render="panelResultados"/>
                     </h:commandButton>
