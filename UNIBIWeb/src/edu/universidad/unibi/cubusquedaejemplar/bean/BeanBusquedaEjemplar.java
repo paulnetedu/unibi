@@ -108,24 +108,19 @@ public class BeanBusquedaEjemplar implements Serializable {
             buscarEjemplarPorTitulo();
         } else if (tipoBusqueda == 1) {
             buscarEjemplarPorAutor();
-        }
-        count=0; 
-       
-         /*else
-                if(tipoBusqueda == 2){
+        } else if(tipoBusqueda == 2){
                 buscarEjemplarPorArea();
-            }
-            else
-                if(tipoBusqueda == 3){
-                buscarEjemplarPorOtro();
-            }*/
-
+        }
+         count=0; 
     }
 
     public void setlstDtoBusqueda(List<dtoBusquedaEjemplar> lstDtoBusqueda) {
         this.listaEjemplaresSeleccionados = lstDtoBusqueda;
     }
 
+    public void buscarEjemplarPorArea(){
+        listaEjemplaresSeleccionados = bo.consultarEjemplarPorArea(textoBusqueda);
+    }
     public void buscarEjemplarPorTitulo() {
         listaEjemplaresSeleccionados = bo.consultarEjemplarPorTitulo(textoBusqueda);
     }

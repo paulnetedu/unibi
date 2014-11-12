@@ -10,6 +10,7 @@ public interface BoBusquedaEjemplar {
     
     public dtoUsuario getUsuarioDto(String nroDocumento);
     public List<dtoEjemplaresPrestados> getlistaEjemplaresPrestados();
+    public List<dtoBusquedaEjemplar> consultarEjemplarPorArea(String titulo);
     public List<dtoBusquedaEjemplar> consultarEjemplarPorTitulo(String titulo);
     public List<dtoBusquedaEjemplar> consultarEjemplarPorAutor(String nombre);
 }
