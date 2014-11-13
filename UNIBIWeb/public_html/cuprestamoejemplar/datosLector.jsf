@@ -9,34 +9,34 @@
         <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
         <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
-        
-        
-        
         </h:head>
+        
         <h:body>
+        <h:form id="datosLector" >
+        <h:panelGrid >
          <!-- <f:ajax render=":panResultados"/> -->
-           <!-- <center><h2 style="font-size:16px; font-family:Arial, Helvetica, sans-serif">SOLICITUD DE PRESTAMO</h2></center>-->
-           <h2 style="font-size:19px; font-family:Arial, Helvetica, sans-serif; text-align:center;">*SOLICITUD DE PRESTAMO*</h2>
-            <h:form id="datosLector" >
+           <f:facet name="header">
+            <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>
+            </f:facet>  
+            <br/>
             <h:panelGrid style="text-align:left;">
-                     
-                    <h:outputText value="Datos del Lector" styleClass="unititle3" style="text-align:left;"/> 
-                   
-            <h:panelGrid columns="5">
-                <h:outputText value="Nro. de Documento (DNI)" styleClass="unicampo"/>
-                <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
+            <f:facet name="header">
+            <h:outputText value="DATOS DEL LECTOR" styleClass="unicampo"/>
+            </f:facet> 
+            <h:panelGrid  columns="5">
+             <h:outputText value="Nro. de Documento (DNI)" styleClass="unicampo"/>
+                <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
                     <f:validateLength maximum="8" minimum="8"/>
                     <f:validateRegex pattern="[0-9]+"/>
                 </h:inputText>
                 <h:message id="msgnroDocumento" for="nroDocumento"/>
-                <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento()}" disabled="false" value="Buscar" styleClass="unicampo">
+                <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento}" disabled="false" value="Buscar" styleClass="unicampo">
                    <f:ajax execute="datosLector" render="datosLector panRespuesta panMensaje1" />
                 </h:commandButton>
                 <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" >                        
                 </h:commandButton> 
             </h:panelGrid>
-                    
-                </h:panelGrid>
+        </h:panelGrid>
             <h:panelGrid id="panMensaje">
                 <h:panelGrid rendered="#{beanNotificacionData.tipo == 2}">
                     <script>
@@ -78,7 +78,7 @@
                 <h:dataTable value="#{beanDatosUsuario.idEjemplares}" var="dtoEjemplar" rendered="#{not empty beanDatosUsuario.idEjemplares}" border="1" styleClass="unitable">
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ID"/>
+                        <h:outputText value="CÓDIGO DE EJEMPLAR"/>
                     </f:facet>
                     <h:outputText value="#{dtoEjemplar.id}"/>
                 </h:column>
@@ -106,7 +106,7 @@
             </h:commandButton>
             </h:panelGrid>
 
-         
+         </h:panelGrid>
             </h:form>
         </h:body>
     </html>
