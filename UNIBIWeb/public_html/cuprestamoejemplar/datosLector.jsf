@@ -14,7 +14,7 @@
         <h:body>
         <h:form id="datosLector" >
         <h:panelGrid >
-         <!-- <f:ajax render=":panResultados"/> -->
+        
            <f:facet name="header">
             <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>
             </f:facet>  
