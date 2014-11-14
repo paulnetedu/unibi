@@ -16,14 +16,14 @@
         <h:panelGrid >
         
            <f:facet name="header">
-            <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>
+          <!--  <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>-->
             </f:facet>  
-            <br/>
+          <!--  <br/>-->
             <h:panelGrid style="text-align:left;">
             <f:facet name="header">
-            <h:outputText value="DATOS DEL LECTOR" styleClass="unicampo"/>
+            <h:outputText value="DATOS DEL LECTOR" styleClass="unicampo" style="text-align:center;"/>
             </f:facet> 
-            <h:panelGrid  columns="5">
+            <h:panelGrid  columns="5" style="text-align:center;">
              <h:outputText value="Nro. de Documento (DNI)" styleClass="unicampo"/>
                 <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
                     <f:validateLength maximum="8" minimum="8"/>
@@ -51,7 +51,7 @@
                     </script>
                 </h:panelGrid>
             </h:panelGrid>
-            <h:panelGrid id="pgCampos" columns="3">                
+            <h:panelGrid id="pgCampos" columns="3" style="text-align:center;">                
                 
                 <h:outputText value="Nombres:" styleClass="unicampo"/>
                 <h:inputText id="nombres" value="#{beanDatosUsuario.nombres}" disabled="true" style="background-color:Scrollbar;" />
@@ -66,7 +66,7 @@
                 <h:outputText /> 
             </h:panelGrid>
             <br/>
-            <h:panelGrid id="pgCampos2" columns="4">
+            <h:panelGrid id="pgCampos2" columns="4" style="text-align:center;">
                 <h:outputText value="N° Libros Prestados" styleClass="unicampo"/>
                 <h:inputText id="nroLibro" value="#{beanDatosUsuario.nroLibrosPrestados}" disabled="true" size="2" style="background-color:Scrollbar;"/>
                 <h:outputText value="N° Maximo de Libros" styleClass="unicampo"/>
