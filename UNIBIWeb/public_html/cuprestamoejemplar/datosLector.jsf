@@ -15,9 +15,9 @@
         <h:form id="datosLector" >
         <h:panelGrid >
         
-           <f:facet name="header">
+         <!--  <f:facet name="header">-->
           <!--  <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>-->
-            </f:facet>  
+           <!-- </f:facet>  -->
           <!--  <br/>-->
             <h:panelGrid style="text-align:left;">
             <f:facet name="header">
