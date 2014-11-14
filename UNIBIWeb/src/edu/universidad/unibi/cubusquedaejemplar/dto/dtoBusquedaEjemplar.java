@@ -25,7 +25,17 @@ public class dtoBusquedaEjemplar implements Serializable{
     protected String estadoFisico;
     protected String disponibilidad;
     protected String fechaDevolucion;
-    protected Boolean seleccionado=false;
+    protected Boolean disponible = false;
+    protected Boolean seleccionado = false;
+
+    public void setDisponible(Boolean disponible) {
+        this.disponible = disponible;
+    }
+
+    public Boolean getDisponible() {
+        return disponible;
+    }
+   
 
     public void setId(String Id) {
            this.Id = Id;

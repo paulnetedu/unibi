@@ -75,10 +75,19 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         dto.setEstadoFisico("Bueno");    
                     else
                         dto.setEstadoFisico("Malo");
-                    if (pe.getEstadoDisponibilidad()==0)
+                    if (pe.getEstadoDisponibilidad()==0){
                         dto.setDisponibilidad("Disponible");
-                    else
+                        dto.setDisponible(false);
+                    }
+                    else{
                         dto.setDisponibilidad("No disponible");
+                        dto.setDisponible(true);
+                    }
+                    //Fecha de devolución.
+                    List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                    for(TblPrestamosDetalle pde : pd ){
+                        dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                    }
                     dto.setAutor(autores);
                     lstDto.add(dto);
                 }  
@@ -133,10 +142,19 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setEstadoFisico("Bueno");    
                         else
                             dto.setEstadoFisico("Malo");
-                        if (pe.getEstadoDisponibilidad()==0)
+                        if (pe.getEstadoDisponibilidad()==0){
                             dto.setDisponibilidad("Disponible");
-                        else
+                            dto.setDisponible(false);
+                        }
+                        else{
                             dto.setDisponibilidad("No disponible");
+                            dto.setDisponible(true);
+                        }
+                        //Fecha de devolución.
+                        List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                        for(TblPrestamosDetalle pde : pd ){
+                            dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                        }
                         dto.setAutor(p.getNombre());
                         dto.setArea(carreras);
                         lstDto.add(dto);
@@ -179,12 +197,21 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setEstadoFisico("Bueno");    
                         else
                             dto.setEstadoFisico("Malo");
-                        if (pe.getEstadoDisponibilidad()==0)
+                        if (pe.getEstadoDisponibilidad()==0){
                             dto.setDisponibilidad("Disponible");
-                        else
+                            dto.setDisponible(false);
+                        }
+                        else{
                             dto.setDisponibilidad("No disponible");
+                            dto.setDisponible(true);
+                        }
                         dto.setArea(carreras);
                         dto.setAutor(autores);
+                        //Fecha de devolución.
+                        List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                        for(TblPrestamosDetalle pde : pd ){
+                            dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                        }
                         lstDto.add(dto);
                     }                 
                 }
@@ -214,7 +241,6 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         Query query = em.createNamedQuery("TblUsuarios.consultarPorNumeroDocumento");
         query.setParameter("numeroDocumento",dni);
         List<TblUsuarios> busqueda = query.getResultList();
-        
         //EXCEPTION: edu.universidad.dominio.unibi.TblUsuarios cannot be cast to edu.universidad.dominio.unibi.TblUsuarios
         //Evento: al realizar run por segunda vez a la pagina.
         //Solucion; cerrar UNIBI e IntegratedWebLogicServer y volver a iniciar
@@ -271,8 +297,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
     }
 
     //---- fin lista prestamo ----------------------------------------------------------------------
-    
-    
+     
     
     //---- codigo para la vista PRESTAMOS REALIZADOS -----------------------------------------------
      public List<dtoEjemplaresPrestados> getlistaEjemplaresPrestados() {

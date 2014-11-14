@@ -17,10 +17,8 @@
              
             <f:facet name="header">
             <h:outputText value="BÚSQUEDA DE EJEMPLAR" styleClass="unicampo"/>
-            </f:facet>
-            
+            </f:facet> 
             <br/>
-             
             <h:panelGrid columns="7">
              <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
                 <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
@@ -92,8 +90,11 @@
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="SELECCIONAR"  style="font-size:small;"/>
-                    </f:facet> 
-                    <h:selectBooleanCheckbox value="#{LstDtoBusqueda.seleccionado}" style="font-size:small;"/>
+                    </f:facet>
+                    <h:selectBooleanCheckbox  disabled="#{LstDtoBusqueda.disponible}" value="#{LstDtoBusqueda.seleccionado}"
+                                             style="font-size:small; alignment-adjust:central;"/>  
+                    <h:outputText value="#{LstDtoBusqueda.fechaDevolucion}"
+                                  style="font-size:small;"/>
                 </h:column>       
             </h:dataTable>
                  <h:outputText value="Se encontraron #{beanBusquedaEjemplar.listaEjemplaresSeleccionados.size()}  Coincidencias" style="font-size:small;" styleClass="unicampo"/>

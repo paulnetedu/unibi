@@ -68,10 +68,19 @@ public class BeanBusquedaEjemplar implements Serializable {
     //---- codigo para la vista BUSQUEDA EJEMPLAR ------------------------------------------------------------------------
     //   -----------------------------------------------------------------------------------------------------------------
     protected List<dtoBusquedaEjemplar> listaEjemplaresSeleccionados; //esta es la lista donde guardaran los ejemplares que seleccione el usuario.
+    protected List<dtoBusquedaEjemplar> listaEjemplaresPrestar = new ArrayList<dtoBusquedaEjemplar>();//Lista de ejemplares para prestar.
     private List<dtoAutor> lstDtoAutor;
     private int count;
     private int row;
  
+    public void setListaEjemplaresPrestar(List<dtoBusquedaEjemplar> listaEjemplaresPrestar) {
+        this.listaEjemplaresPrestar = listaEjemplaresPrestar;
+    }
+
+    public List<dtoBusquedaEjemplar> getListaEjemplaresPrestar() {
+        return listaEjemplaresPrestar;
+    } 
+    
     public void setCount(int count) {
         this.count = count;
     }
@@ -138,10 +147,26 @@ public class BeanBusquedaEjemplar implements Serializable {
         return textoBusqueda;
     }
 
-
     //   ---- codigo para la vista LISTA PRESTAMO ------------------------------------------------------------------------
     //   -----------------------------------------------------------------------------------------------------------------
     //accesos
+    public void Agregar(){
+        List<dtoBusquedaEjemplar> resultado = new ArrayList<dtoBusquedaEjemplar>();
+
+        for (dtoBusquedaEjemplar ejemplar : this.listaEjemplaresSeleccionados) {
+            if (ejemplar.getSeleccionado() == true) {
+                resultado.add(ejemplar);
+                listaEjemplaresPrestar.add(ejemplar);
+            }
+        }
+        
+        for (dtoBusquedaEjemplar ejemplar : resultado) {
+            this.listaEjemplaresSeleccionados.remove(ejemplar);
+            System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresSeleccionados.size());
+        }
+        
+    }
+    
     public void setNroDocumento(String nroDocumento) {
         this.nroDocumento = nroDocumento;
     }
@@ -182,7 +207,7 @@ public class BeanBusquedaEjemplar implements Serializable {
 
     public void NroDocumentoValueChanged(ValueChangeEvent vce) {
         String newValue = vce.getNewValue().toString();
-
+        
         dtoUsuario usuario = bo.getUsuarioDto(newValue);
         this.apellidosNombres = usuario.getApellidosNombres();
         this.estado = usuario.getEstado();
@@ -198,15 +223,15 @@ public class BeanBusquedaEjemplar implements Serializable {
     public String QuitarSeleccionados() {
         List<dtoBusquedaEjemplar> resultado = new ArrayList<dtoBusquedaEjemplar>();
 
-        for (dtoBusquedaEjemplar ejemplar : this.listaEjemplaresSeleccionados) {
+        for (dtoBusquedaEjemplar ejemplar : this.listaEjemplaresPrestar) {
             if (ejemplar.getSeleccionado() == true) {
                 resultado.add(ejemplar);
             }
         }
 
         for (dtoBusquedaEjemplar ejemplar : resultado) {
-            this.listaEjemplaresSeleccionados.remove(ejemplar);
-            System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresSeleccionados.size());
+            this.listaEjemplaresPrestar.remove(ejemplar);
+            System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresPrestar.size());
         }
 
         return "listaPrestamo";
@@ -220,4 +245,5 @@ public class BeanBusquedaEjemplar implements Serializable {
     }
 
     protected transient List<dtoEjemplaresPrestados> listaPrestamos;
+
 }

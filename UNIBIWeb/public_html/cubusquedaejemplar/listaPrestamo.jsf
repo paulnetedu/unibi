@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
     <html xmlns="http://www.w3.org/1999/xhtml">
-    
         <h:head>
         <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
             <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
@@ -16,19 +15,17 @@
             <h:form>
                 <h2 style="text-align:center;">SOLICITUD DE PRESTAMO</h2>
                 <br/>
+                
                 <h:panelGrid columns="3">
                     <h:outputText value="Nro. de Documento(DNI):" styleClass="unicampo"/>
-                    <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}"
-                    value="#{beanBusquedaEjemplar.nroDocumento}">
-                        <f:ajax execute="txtNroDocumentoUsuario" render="txtApellidosNombresUsuario estadoUsuario btnVerPrestamo"/>
+                    <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}" value="#{beanBusquedaEjemplar.nroDocumento}">
+                            <f:ajax execute="txtNroDocumentoUsuario" render="txtApellidosNombresUsuario estadoUsuario btnVerPrestamo"/>
                     </h:inputText>
                     <h:message for="txtNroDocumentoUsuario"/>
-                    
                     <h:outputText value="Apellidos y Nombres:" styleClass="unicampo"/>
                     <h:inputText id="txtApellidosNombresUsuario" value="#{beanBusquedaEjemplar.nombresApellidos}" style="min-width:250pt;"/>
                     <h:message for="txtApellidosNombresUsuario"/>
                 </h:panelGrid>
-                
                 <h:outputText value="Estado: " styleClass="unicampo"/>
                 <h:outputText id="estadoUsuario" value="#{beanBusquedaEjemplar.estado}"/>
                 <br/>
@@ -38,11 +35,11 @@
                 </h:panelGrid>
                 <br/>
             </h:form>
-            
+            <h:form >
             <!--<h3 style="text-align:center;">Ejemplares a  Solicitar: </h3>-->
-              <h2 style="text-align:center;">EJEMPLARES A SOLICITAR</h2>
+            <h2 style="text-align:center;">EJEMPLARES A SOLICITAR</h2>
             <h:panelGrid id="panelResultados">
-                <h:dataTable id="tabla" border="1" var="p" value="#{beanBusquedaEjemplar.listaEjemplaresSeleccionados}" styleClass="unitable">
+                <h:dataTable id="tabla" border="1" var="p" value="#{beanBusquedaEjemplar.listaEjemplaresPrestar}"  styleClass="unitable">
                        <h:column>
                             <f:facet name="header">
                                 <h:outputText value="CÓDIGO" style="font-size:small;"/>
@@ -77,7 +74,8 @@
                             <f:facet name="header">
                                 <h:outputText value="SELECCIONAR" style="font-size:small;"/>
                             </f:facet>
-                            <h:selectBooleanCheckbox  value="#{p.seleccionado}" style="font-size:small;"/>
+                            <h:selectBooleanCheckbox  value="#{p.seleccionado}"
+                                                     style="font-size:small; alignment-adjust:central;"/>
                     </h:column>
                 </h:dataTable>
                 <h:panelGrid columns="3">
@@ -89,19 +87,7 @@
                     </h:commandButton>
                 </h:panelGrid>
             </h:panelGrid>
+            </h:form>
          </h:body>
     </html>
 </f:view>
-
-
-
-
-
-
-
-
-
-
-
-
-

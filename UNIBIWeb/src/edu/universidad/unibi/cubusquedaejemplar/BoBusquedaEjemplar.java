@@ -13,4 +13,5 @@ public interface BoBusquedaEjemplar {
     public List<dtoBusquedaEjemplar> consultarEjemplarPorArea(String titulo);
     public List<dtoBusquedaEjemplar> consultarEjemplarPorTitulo(String titulo);
     public List<dtoBusquedaEjemplar> consultarEjemplarPorAutor(String nombre);
+    
 }
