@@ -22,8 +22,8 @@
             <h:panelGrid columns="8">
              <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
                 <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
-                        <h:outputText value="Buscar por: " styleClass="unicampo" />
                         <h:message id="msgtextoBusqueda" for="textoBusqueda" style="color:Red;"/>
+                         <h:outputText value="Buscar por: " styleClass="unicampo" />
                 <h:selectOneMenu value="#{beanBusquedaEjemplar.tipoBusqueda}" styleClass="unicampo" >
                     <f:selectItem itemLabel="Titulo" itemValue="0"/>
                     <f:selectItem itemLabel="Autor" itemValue="1"/>
