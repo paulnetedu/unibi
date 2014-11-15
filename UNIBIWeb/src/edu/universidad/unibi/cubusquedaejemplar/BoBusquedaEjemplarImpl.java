@@ -130,8 +130,17 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                     String carreras="";
                     for(TblPublicacionesCarreras par : lstPubCa){
                         TblCatalogosItems ar = par.getCarreraId();
-                        carreras += ar.getDescripcion() + ", ";
+                        carreras = ar.getDescripcion();
                     }
+                    //areas
+                
+                    List<TblPublicacionesAreas> lstareas = pa.getPublicacionId().getTblPublicacionesAreasList();
+                     String areas1="";
+                    for (TblPublicacionesAreas ar : lstareas) {
+                        TblCatalogosItems a =ar.getAreaId(); 
+                         areas1 = a.getDescripcion();
+                        dto.setArea1(areas1);
+                        }
                     //Ejemplares.
                     List<TblEjemplares> lstPubPre = pa.getPublicacionId().getTblEjemplaresList();
                     for(TblEjemplares pe : lstPubPre){
@@ -178,15 +187,16 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                     String autores = "";
                     for (TblPublicacionesAutores pa : lstPubAut) {
                         TblAutores a = pa.getAutorId();
-                        autores += a.getNombre() + ", " ;
+                        autores = a.getNombre();
                     }
                     //Carrera.
                     List<TblPublicacionesCarreras> lstPubCa=p.getTblPublicacionesCarrerasList();
                     String carreras="";
                     for(TblPublicacionesCarreras par : lstPubCa){
                         TblCatalogosItems ar = par.getCarreraId();
-                        carreras += ar.getDescripcion() + ", ";
+                        carreras = ar.getDescripcion();
                     }
+                   
                     //Ejemplares
                     List<TblEjemplares> lstPubPre = p.getTblEjemplaresList();
                     for(TblEjemplares pe : lstPubPre){
@@ -207,6 +217,14 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         }
                         dto.setArea(carreras);
                         dto.setAutor(autores);
+                        //areas
+                        List<TblPublicacionesAreas> lstareas = p.getTblPublicacionesAreasList();
+                         String areas1="";
+                        for (TblPublicacionesAreas ar : lstareas) {
+                            TblCatalogosItems a =ar.getAreaId(); 
+                             areas1 = a.getDescripcion();
+                            dto.setArea1(areas1);
+                            }
                         //Fecha de devolución.
                         List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
                         for(TblPrestamosDetalle pde : pd ){
