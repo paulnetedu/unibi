@@ -19,11 +19,11 @@
             <h:outputText value="BÚSQUEDA DE EJEMPLAR" styleClass="unicampo"/>
             </f:facet> 
             <br/>
-            <h:panelGrid columns="7">
+            <h:panelGrid columns="8">
              <h:outputText value="Ejemplar a Búscar: " styleClass="unicampo"/>
                 <h:inputText id="textoBusqueda" value="#{beanBusquedaEjemplar.textoBusqueda}" styleClass="unicampo" required="true" requiredMessage="Valor requerido"/>
                         <h:outputText value="Buscar por: " styleClass="unicampo" />
-                        <h:message id="msgtextoBusqueda" for="textoBusqueda"/>
+                        <h:message id="msgtextoBusqueda" for="textoBusqueda" style="color:Red;"/>
                 <h:selectOneMenu value="#{beanBusquedaEjemplar.tipoBusqueda}" styleClass="unicampo" >
                     <f:selectItem itemLabel="Titulo" itemValue="0"/>
                     <f:selectItem itemLabel="Autor" itemValue="1"/>
@@ -65,7 +65,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="ÁREA" style="font-size:small;"/>
+                        <h:outputText value="CARRERA" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.area} " style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
@@ -73,7 +73,7 @@
                 </h:column>
                  <h:column>
                     <f:facet name="header">
-                        <h:outputText value="OBSERVACIONES" style="font-size:small;"/>
+                        <h:outputText value="OBS" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.estadoFisico}" style="font-size:small;">
                         <f:convertDateTime pattern="yyyy-MM"/>
@@ -84,10 +84,18 @@
                         <h:outputText value="ESTADO" style="font-size:small;"/>
                     </f:facet>
                     <h:outputText value="#{LstDtoBusqueda.disponibilidad}" style="font-size:small;">
-                        <f:convertDateTime pattern="yyyy-MM"/>
+                         
                     </h:outputText>
                 </h:column>
                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="ÁREA" style="font-size:small;"/>
+                    </f:facet>
+                    <h:outputText value="#{LstDtoBusqueda.area1}" style="font-size:small;">
+                     </h:outputText>
+                </h:column>
+                <h:column>
+                
                     <f:facet name="header">
                         <h:outputText value="SELECCIONAR"  style="font-size:small;"/>
                     </f:facet>
