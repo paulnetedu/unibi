@@ -6,6 +6,8 @@ import edu.universidad.dominio.unibi.TblCatalogosItems;
 import edu.universidad.dominio.unibi.TblEjemplares;
 import edu.universidad.dominio.unibi.TblPrestamos;
 import edu.universidad.dominio.unibi.TblPrestamosDetalle;
+import edu.universidad.dominio.unibi.TblPrestamosSolicitudes;
+import edu.universidad.dominio.unibi.TblPrestamosSolicitudesDetalle;
 import edu.universidad.dominio.unibi.TblPublicaciones;
 import edu.universidad.dominio.unibi.TblPublicacionesAreas;
 import edu.universidad.dominio.unibi.TblPublicacionesAutores;
@@ -25,6 +27,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 
@@ -77,11 +81,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         dto.setEstadoFisico("Malo");
                     if (pe.getEstadoDisponibilidad()==0){
                         dto.setDisponibilidad("Disponible");
-                        dto.setDisponible(false);
+                        dto.setDisponible(true);
                     }
                     else{
                         dto.setDisponibilidad("No disponible");
-                        dto.setDisponible(true);
+                        dto.setDisponible(false);
                     }
                     //Fecha de devolución.
                     List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
@@ -126,21 +130,19 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                 List<TblPublicacionesAutores> lstPubAut = p.getTblPublicacionesAutoresList();
                 for (TblPublicacionesAutores pa : lstPubAut) {
                     //Carrera.
-                    List<TblPublicacionesCarreras> lstPubCa=pa.getPublicacionId().getTblPublicacionesCarrerasList();
+                    /*List<TblPublicacionesCarreras> lstPubCa=pa.getPublicacionId().getTblPublicacionesCarrerasList();
                     String carreras="";
                     for(TblPublicacionesCarreras par : lstPubCa){
                         TblCatalogosItems ar = par.getCarreraId();
                         carreras = ar.getDescripcion();
-                    }
-                    //areas
-                
+                    }*/
+                    //Área.
                     List<TblPublicacionesAreas> lstareas = pa.getPublicacionId().getTblPublicacionesAreasList();
-                     String areas1="";
+                    String areas="";
                     for (TblPublicacionesAreas ar : lstareas) {
                         TblCatalogosItems a =ar.getAreaId(); 
-                         areas1 = a.getDescripcion();
-                        dto.setArea1(areas1);
-                        }
+                        areas = a.getDescripcion();
+                    }
                     //Ejemplares.
                     List<TblEjemplares> lstPubPre = pa.getPublicacionId().getTblEjemplaresList();
                     for(TblEjemplares pe : lstPubPre){
@@ -153,11 +155,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setEstadoFisico("Malo");
                         if (pe.getEstadoDisponibilidad()==0){
                             dto.setDisponibilidad("Disponible");
-                            dto.setDisponible(false);
+                            dto.setDisponible(true);
                         }
                         else{
                             dto.setDisponibilidad("No disponible");
-                            dto.setDisponible(true);
+                            dto.setDisponible(false);
                         }
                         //Fecha de devolución.
                         List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
@@ -165,7 +167,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
                         }
                         dto.setAutor(p.getNombre());
-                        dto.setArea(carreras);
+                        dto.setArea(areas);
                         lstDto.add(dto);
                     }    
                 }         
@@ -190,12 +192,12 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         autores = a.getNombre();
                     }
                     //Carrera.
-                    List<TblPublicacionesCarreras> lstPubCa=p.getTblPublicacionesCarrerasList();
+                    /*List<TblPublicacionesCarreras> lstPubCa=p.getTblPublicacionesCarrerasList();
                     String carreras="";
                     for(TblPublicacionesCarreras par : lstPubCa){
                         TblCatalogosItems ar = par.getCarreraId();
                         carreras = ar.getDescripcion();
-                    }
+                    }*/
                    
                     //Ejemplares
                     List<TblEjemplares> lstPubPre = p.getTblEjemplaresList();
@@ -209,27 +211,26 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setEstadoFisico("Malo");
                         if (pe.getEstadoDisponibilidad()==0){
                             dto.setDisponibilidad("Disponible");
-                            dto.setDisponible(false);
+                            dto.setDisponible(true);
                         }
                         else{
                             dto.setDisponibilidad("No disponible");
-                            dto.setDisponible(true);
+                            dto.setDisponible(false);
                         }
-                        dto.setArea(carreras);
-                        dto.setAutor(autores);
-                        //areas
+                        //Área.
                         List<TblPublicacionesAreas> lstareas = p.getTblPublicacionesAreasList();
-                         String areas1="";
+                        String areas="";
                         for (TblPublicacionesAreas ar : lstareas) {
                             TblCatalogosItems a =ar.getAreaId(); 
-                             areas1 = a.getDescripcion();
-                            dto.setArea1(areas1);
-                            }
+                            areas = a.getDescripcion();
+                        }
                         //Fecha de devolución.
                         List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
                         for(TblPrestamosDetalle pde : pd ){
                             dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
                         }
+                        dto.setArea(areas);
+                        dto.setAutor(autores);
                         lstDto.add(dto);
                     }                 
                 }
@@ -376,6 +377,20 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         
         return listaDtoEjemplaresPrestados;
     }
+    
+     public void guardarSolitudPrestamo(List<dtoBusquedaEjemplar> idEjemplares, int idUsuario){
+         List<dtoBusquedaEjemplar> lstEjemplares = idEjemplares;
+         EntityTransaction tx = em.getTransaction();
+         tx.begin();
+         TblUsuarios usuario = em.find(TblUsuarios.class, idUsuario);
+         TblPrestamosSolicitudes solicitud = new TblPrestamosSolicitudes();
+         Date fechaSolicitud=new Date();
+         solicitud.setUsuarioId(usuario);
+         solicitud.setFechaSolicitud(fechaSolicitud);
+         em.persist(solicitud);
+         tx.commit();   
+     }
+         
     
         
     //---- fin prestamos realizados ----------------------------------------------------------------

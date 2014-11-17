@@ -31,7 +31,7 @@
                 <br/>
                 <h:panelGrid id="btnVerPrestamo">
                     <h:commandButton id="btnVerPrestamosRealizados" value="Ver prestamos realizados" 
-                    rendered="#{beanBusquedaEjemplar.tienePrestamosActivos}" action="#{beanBusquedaEjemplar.VerPrestamosRealizados}"/>
+                    rendered="#{beanBusquedaEjemplar.tienePrestamosActivos}" action="#{beanBusquedaEjemplar.VerPrestamosRealizados}" styleClass="unicampo"/>
                 </h:panelGrid>
                 <br/>
             </h:form>
@@ -84,10 +84,21 @@
                         <f:ajax execute="panelResultados" render="panelResultados"/>
                     </h:commandButton>
                     <h:commandButton value="Enviar solicitud prestamo" styleClass="unicampo">
+                        <f:ajax execute="" render="panMensaje"/>
                     </h:commandButton>
+                </h:panelGrid>
+                <h:panelGrid>
+                    <h:outputText value="En su solicitud no debe seleccionar más de 2 ejemplares." styleClass="unicampo"/>               
+                </h:panelGrid>
+                <h:panelGrid id="panMensaje">
+                    <h:panelGrid rendered="#{beanNotificacionData.tipo != 0}">
+                        <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                        </script>
+                    </h:panelGrid>
                 </h:panelGrid>
             </h:panelGrid>
             </h:form>
-         </h:body>
+        </h:body>
     </html>
 </f:view>

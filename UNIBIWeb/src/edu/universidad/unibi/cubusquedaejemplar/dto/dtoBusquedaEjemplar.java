@@ -18,7 +18,6 @@ public class dtoBusquedaEjemplar implements Serializable{
      {}
 
     protected String Id;
-    protected String area1;
     protected String codigo;
     protected String titulo;
     protected String autor;
@@ -26,16 +25,9 @@ public class dtoBusquedaEjemplar implements Serializable{
     protected String estadoFisico;
     protected String disponibilidad;
     protected String fechaDevolucion;
-    protected Boolean disponible = false;
+    protected Boolean disponible = true;
     protected Boolean seleccionado = false;
        
-    public void setArea1(String area1) {
-        this.area1 = area1;
-    }
-
-    public String getArea1() {
-        return area1;
-    } 
 
     public void setDisponible(Boolean disponible) {
         this.disponible = disponible;

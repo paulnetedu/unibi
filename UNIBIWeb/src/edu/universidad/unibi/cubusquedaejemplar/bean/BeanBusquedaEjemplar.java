@@ -152,11 +152,13 @@ public class BeanBusquedaEjemplar implements Serializable {
     //accesos
     public void Agregar(){
         List<dtoBusquedaEjemplar> resultado = new ArrayList<dtoBusquedaEjemplar>();
+        int ejemplarAdd = 0;
 
         for (dtoBusquedaEjemplar ejemplar : this.listaEjemplaresSeleccionados) {
             if (ejemplar.getSeleccionado() == true) {
                 resultado.add(ejemplar);
                 listaEjemplaresPrestar.add(ejemplar);
+                ejemplarAdd++;
             }
         }
         
@@ -164,7 +166,13 @@ public class BeanBusquedaEjemplar implements Serializable {
             this.listaEjemplaresSeleccionados.remove(ejemplar);
             System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresSeleccionados.size());
         }
-        
+        BeanNotificacionData.show(2,"Se añadieron " + ejemplarAdd + " ejemplares.");
+        count=0; 
+    }
+    
+    public void guardarSolicitudPrestamo(){
+        bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
+        BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
     }
     
     public void setNroDocumento(String nroDocumento) {
@@ -204,6 +212,15 @@ public class BeanBusquedaEjemplar implements Serializable {
     protected String apellidosNombres;
     protected String estado;
     protected Boolean tienePrestamosActivos;
+    protected int idUsuario;
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
 
     public void NroDocumentoValueChanged(ValueChangeEvent vce) {
         String newValue = vce.getNewValue().toString();
@@ -233,7 +250,7 @@ public class BeanBusquedaEjemplar implements Serializable {
             this.listaEjemplaresPrestar.remove(ejemplar);
             System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresPrestar.size());
         }
-
+        count=0; 
         return "listaPrestamo";
     }
 
