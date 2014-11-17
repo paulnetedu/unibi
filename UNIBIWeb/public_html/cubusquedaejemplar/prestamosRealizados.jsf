@@ -33,35 +33,35 @@
                     value="#{beanBusquedaEjemplar.listaPrestamos}">
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Codigo" style="font-size:small;"/>
+                                    <h:outputText value="CÓDIGO" style="font-size:small;"/>
                                 </f:facet>
                                 <h:outputText value="#{res.codigo}" style="font-size:small;"/>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Titulo" style="font-size:small;"/>
+                                    <h:outputText value="TÍTULO" style="font-size:small;"/>
                                 </f:facet>
                                 <h:outputText value="#{res.titulo}" style="font-size:small;"/>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Autor" style="font-size:small;"/>
+                                    <h:outputText value="AUTOR" style="font-size:small;"/>
                                 </f:facet>
                                 <h:outputText value="#{res.autor}" style="font-size:small;"/>
                             </h:column>
                             
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Estado" style="font-size:small;"/>
+                                    <h:outputText value="ESTADO" style="font-size:small;"/>
                                 </f:facet>
                                 <h:outputText value="#{res.estadoEjemplar}" style="font-size:small;"/>
                             </h:column>
                             
                              <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Fecha devolución maxima" style="font-size:small;"/>
+                                    <h:outputText value="FECHA DEVOLUCIÓN MÁXIMA" style="font-size:small;"/>
                                 </f:facet>
                                 <h:outputText value="#{res.fechaDevolucionMax}" style="font-size:small;"/>
                             </h:column>
