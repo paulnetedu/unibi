@@ -83,8 +83,8 @@
                     <h:commandButton value="Quitar seleccionados" styleClass="unicampo" action="#{beanBusquedaEjemplar.QuitarSeleccionados}">
                         <f:ajax execute="panelResultados" render="panelResultados"/>
                     </h:commandButton>
-                    <h:commandButton value="Enviar solicitud prestamo" styleClass="unicampo">
-                        <f:ajax execute="" render="panMensaje"/>
+                    <h:commandButton value="Enviar solicitud prestamo" action="#{beanBusquedaEjemplar.guardarSolicitudPrestamo}" styleClass="unicampo">
+                        <f:ajax execute="panelResultados " render="panelResultados panMensaje"/>
                     </h:commandButton>
                 </h:panelGrid>
                 <h:panelGrid>

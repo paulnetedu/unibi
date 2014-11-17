@@ -8,11 +8,20 @@ public class dtoUsuario {
         this.estado=estado;
         this.tienePrestamosActivos=tienePrestamosActivos;
     }
-    
+    protected int id;
     protected String nroDocumento;
     protected String apellidosNombres;
     protected String estado;
     protected Boolean tienePrestamosActivos=false;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
 
     public void setTienePrestamosActivos(Boolean tienePrestamosActivos) {
         this.tienePrestamosActivos = tienePrestamosActivos;

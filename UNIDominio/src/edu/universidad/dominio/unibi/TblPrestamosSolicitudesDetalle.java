@@ -61,7 +61,7 @@ public class TblPrestamosSolicitudesDetalle implements Serializable {
         return prestamosSolicitudesId;
     }
 
-    public void setPrestamosSolicitudesId(TblPrestamosSolicitudes prestamosSolicitudedId) {
+    public void setPrestamosSolicitudesId(TblPrestamosSolicitudes prestamosSolicitudesId) {
         this.prestamosSolicitudesId = prestamosSolicitudesId;
     }
 

@@ -18,6 +18,7 @@ import edu.universidad.unibi.cubusquedaejemplar.dto.dtoBusquedaEjemplar;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoArea;
 import edu.universidad.unibi.cubusquedaejemplar.dto.dtoEjemplaresPrestados;
 import edu.universidad.unibi.cubusquedaejemplar.dto.dtoUsuario;
+import edu.universidad.unibi.cuprestamoejemplar.dto.DtoEjemplar;
 import edu.universidad.unibi.util.Bo;
 
 import java.text.DateFormat;
@@ -250,7 +251,9 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         if (usuario!=null){
             Boolean tienePrestamosActivos=false;
             if (getEstadoPrestamosActivos()!=""){tienePrestamosActivos=true;}
-            return new dtoUsuario(nroDocumento, getApellidosNombresUsuario(),getEstadoUsuario(),tienePrestamosActivos);     
+            dtoUsuario user = new dtoUsuario (nroDocumento, getApellidosNombresUsuario(),getEstadoUsuario(),tienePrestamosActivos);
+            user.setId(usuario.getId());
+            return user;     
         }else{
             return new dtoUsuario(nroDocumento,null,"Sin registrarse",false);
         }
@@ -379,6 +382,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
     }
     
      public void guardarSolitudPrestamo(List<dtoBusquedaEjemplar> idEjemplares, int idUsuario){
+         //Insert solicitud.
          List<dtoBusquedaEjemplar> lstEjemplares = idEjemplares;
          EntityTransaction tx = em.getTransaction();
          tx.begin();
@@ -388,7 +392,24 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
          solicitud.setUsuarioId(usuario);
          solicitud.setFechaSolicitud(fechaSolicitud);
          em.persist(solicitud);
-         tx.commit();   
+         tx.commit();
+         //Buscar última solicitud.
+         Query query = em.createNamedQuery("TblPrestamosSolicitudes.consultarSolicitudes");
+         List<TblPrestamosSolicitudes> lstSolicitudes = query.getResultList();
+         TblPrestamosSolicitudes pSolicitud = new TblPrestamosSolicitudes();
+         for(TblPrestamosSolicitudes p:lstSolicitudes)
+             pSolicitud.setId(p.getId());
+         
+         for(dtoBusquedaEjemplar s: lstEjemplares){
+             EntityTransaction tx2 = em.getTransaction();
+             tx2.begin();
+             TblPrestamosSolicitudesDetalle detalleSolicitud = new TblPrestamosSolicitudesDetalle();
+             TblEjemplares ejemplar = em.find(TblEjemplares.class, s.getId());
+             detalleSolicitud.setPrestamosSolicitudesId(pSolicitud);
+             detalleSolicitud.setEjemplarId(ejemplar);
+             em.persist(detalleSolicitud);
+             tx2.commit();
+         }
      }
          
     

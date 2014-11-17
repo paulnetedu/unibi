@@ -33,6 +33,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tbl_prestamos_solicitudes", catalog = "unidb", schema = "sch_unibi")
 @SequenceGenerator(sequenceName="seq_prestamos_solicitudes", name = "seq_prestamos_solicitudes", catalog ="unidb", schema = "sch_unibi",allocationSize=1)
 @NamedQueries({
+    @NamedQuery(name = "TblPrestamosSolicitudes.consultarSolicitudes", query = "SELECT t FROM TblPrestamosSolicitudes t"),
     @NamedQuery(name = "TblPrestamosSolicitudes.consultarPorFechaSolicitud", query = "SELECT t FROM TblPrestamosSolicitudes t WHERE t.fechaSolicitud = :fechaSolicitud")})
 public class TblPrestamosSolicitudes implements Serializable {
     private static final long serialVersionUID = 1L;

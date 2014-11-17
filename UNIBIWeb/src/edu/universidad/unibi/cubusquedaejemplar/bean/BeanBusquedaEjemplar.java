@@ -170,9 +170,47 @@ public class BeanBusquedaEjemplar implements Serializable {
         count=0; 
     }
     
+    public int seleccionPrestamo(){
+        int num = 0;
+        for (dtoBusquedaEjemplar lst :listaEjemplaresPrestar){
+            if(lst.getSeleccionado()==true){
+                num++;
+            }
+        }
+        return num;        
+    }
+    
+    public void seleccionadoParaPrestamo(){
+        List<dtoBusquedaEjemplar> resultado = new ArrayList<dtoBusquedaEjemplar>();
+
+        for (dtoBusquedaEjemplar ejemplar : this.listaEjemplaresPrestar) {
+            if (ejemplar.getSeleccionado() == false) {
+                resultado.add(ejemplar);
+            }
+        }
+
+        for (dtoBusquedaEjemplar ejemplar : resultado) {
+            this.listaEjemplaresPrestar.remove(ejemplar);
+            System.out.println("lista ejemplares seleccionados size=" + this.listaEjemplaresPrestar.size());
+        }
+    }
+    
     public void guardarSolicitudPrestamo(){
-        bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
-        BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
+        
+        if (idUsuario == 0){
+            BeanNotificacionData.show(2, "Debe ingresar sus datos de usuario.");
+        }else{
+            if(seleccionPrestamo() == 0){
+                BeanNotificacionData.show(2, "Debe seleccionar como mínimo un ejemplar.");
+            }else if(seleccionPrestamo() > 2){
+                    BeanNotificacionData.show(2, "No puede seleccionar más de dos ejemplares.");
+                }
+                else{
+                seleccionadoParaPrestamo();
+                bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
+                BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
+            }    
+        }
     }
     
     public void setNroDocumento(String nroDocumento) {
@@ -226,6 +264,7 @@ public class BeanBusquedaEjemplar implements Serializable {
         String newValue = vce.getNewValue().toString();
         
         dtoUsuario usuario = bo.getUsuarioDto(newValue);
+        this.idUsuario = usuario.getId();
         this.apellidosNombres = usuario.getApellidosNombres();
         this.estado = usuario.getEstado();
         this.tienePrestamosActivos = usuario.getTienePrestamosActivos();
