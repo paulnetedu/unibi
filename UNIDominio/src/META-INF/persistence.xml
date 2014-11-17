@@ -27,8 +27,8 @@
     <class>edu.universidad.dominio.unibi.TblPrestamosDetalle</class>
     <class>edu.universidad.dominio.unibi.TblUsuarios</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/unidb"/>
-      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.10.3.9:5432/unidb"/>
+      <property name="javax.persistence.jdbc.password" value="uapaqp"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="eclipselink.logging.level" value="FINEST" />

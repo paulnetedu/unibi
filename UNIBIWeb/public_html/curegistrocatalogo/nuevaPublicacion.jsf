@@ -36,7 +36,10 @@
                 <h:outputText value="" styleClass="unicampo"/> 
                 
                 <h:outputText value="Id:" styleClass="unicampo"/>
-                <h:inputText id="id" value="#{beanNuevaPublicacion.id}" required="true" requiredMessage="Valor requerido"/>
+                <h:inputText id="id" value="#{beanNuevaPublicacion.id}" required="true" requiredMessage="Valor requerido" validator="#{beanNuevaPublicacion.validar1}">
+                 
+                </h:inputText>
+
                 <h:message id="msgid" for="id"/>
                 
                 <h:outputText value="Titulo:" styleClass="unicampo"/>
@@ -161,7 +164,13 @@
                    <!--menu + tesis-->
                 <h:panelGrid id="tesis" columns="3" rendered="#{beanNuevaPublicacion.indtesis}" >
                 
-                    <h:outputText value="Institucion:" styleClass="unicampo" style="padding-right:79px;"/>
+                     <h:outputText value="Institucion:" styleClass="unicampo" style="padding-right:79px;"/>
+                    <h:selectOneMenu value="#{beanNuevaPublicacion.institucion_id}" style="width:400px">
+                        <f:selectItems value="#{beanNuevaPublicacion.listinstitucion}"/>
+                        <f:selectItem/>
+                    </h:selectOneMenu>
+
+                    
                     <h:panelGroup>
                     <h:inputText id="institucion_id" value="#{beanNuevaPublicacion.institucion_id}" validatorMessage="Error en el rango" required="true" requiredMessage="ingrese la institucion">
                         <f:validateLongRange minimum="0" maximum="5000"/>

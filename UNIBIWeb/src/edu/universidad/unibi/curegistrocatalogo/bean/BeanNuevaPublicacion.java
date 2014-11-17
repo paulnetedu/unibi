@@ -20,6 +20,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.annotation.PreDestroy;
 
 import javax.faces.application.FacesMessage;
@@ -624,7 +627,40 @@ public class BeanNuevaPublicacion implements Serializable {
             }
     }
 
-   
+        public void validar1(FacesContext context, UIComponent component, Object value) 
+                    throws ValidatorException {
+                
+                String valor = (String)value;       
+                Pattern mask =  Pattern.compile("[0-9]{1,8}");
+    
+                 Matcher matcher = mask.matcher( valor);
+    
+                 if(!matcher.matches()){
+    
+                    throw new ValidatorException(new FacesMessage("error solo numero y como maximo 8"));         
+                 }else{
+                     throw new ValidatorException(new FacesMessage("ok"));         
+                 
+                 }
+                
+            }
+ 
+    public List<SelectItem> getlistinstitucion() {
+            System.out.println("getCiudad");
+            List<SelectItem> lstSi = new LinkedList<SelectItem>();
+            List<DtoCatalogo> lstDto = bo.consultarCatalogo(4);
+            
+            for (DtoCatalogo dto : lstDto) {
+                SelectItem si = new SelectItem();        
+                si.setLabel(dto.getDescripcion());
+                si.setValue(dto.getId());
+                lstSi.add(si);
+            }
+            return lstSi;
+        }
+
+
+      
 }
 
 
