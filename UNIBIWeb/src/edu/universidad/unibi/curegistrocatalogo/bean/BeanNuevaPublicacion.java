@@ -638,11 +638,7 @@ public class BeanNuevaPublicacion implements Serializable {
                  if(!matcher.matches()){
     
                     throw new ValidatorException(new FacesMessage("error solo numero y como maximo 8"));         
-                 }else{
-                     throw new ValidatorException(new FacesMessage("ok"));         
-                 
-                 }
-                
+                 }                
             }
  
     public List<SelectItem> getlistinstitucion() {
