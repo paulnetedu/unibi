@@ -16,7 +16,7 @@
         <h:panelGrid >
         
          <!--  <f:facet name="header">-->
-          <!--  <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>-->
+          <!--  <h:outputText value="SOLICITUD DE PRESTAMO  " styleClass="unicampo"/>-->
            <!-- </f:facet>  -->
           <!--  <br/>-->
             <h:panelGrid style="text-align:left;">
@@ -67,9 +67,9 @@
             </h:panelGrid>
             <br/>
             <h:panelGrid id="pgCampos2" columns="4" style="text-align:center;">
-                <h:outputText value="N° Libros Prestados" styleClass="unicampo"/>
+                <h:outputText value="NÂ° Libros Prestados" styleClass="unicampo"/>
                 <h:inputText id="nroLibro" value="#{beanDatosUsuario.nroLibrosPrestados}" disabled="true" size="2" style="background-color:Scrollbar;"/>
-                <h:outputText value="N° Maximo de Libros" styleClass="unicampo"/>
+                <h:outputText value="NÂ° Maximo de Libros" styleClass="unicampo"/>
                 <h:inputText id="maximoLibro" value="#{beanDatosUsuario.nroMaxLibros}" disabled="true" size="2" style="background-color:Scrollbar;"/>            
             </h:panelGrid>
             <br/>    
@@ -78,7 +78,7 @@
                 <h:dataTable value="#{beanDatosUsuario.idEjemplares}" var="dtoEjemplar" rendered="#{not empty beanDatosUsuario.idEjemplares}" border="1" styleClass="unitable">
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="CÓDIGO DE EJEMPLAR"/>
+                        <h:outputText value="CÃ“DIGO DE EJEMPLAR"/>
                     </f:facet>
                     <h:outputText value="#{dtoEjemplar.id}"/>
                 </h:column>
