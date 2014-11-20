@@ -24,7 +24,7 @@
             <h:outputText value="DATOS DEL LECTOR   " styleClass="unicampo" style="text-align:center;"/>
             </f:facet> 
             <h:panelGrid  columns="5" style="text-align:center;">
-             <h:outputText value="Nro. de Documento (DNI)" styleClass="unicampo"/>
+             <h:outputText value="Nro. de (DNI)" styleClass="unicampo"/>
                 <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
                     <f:validateLength maximum="8" minimum="8"/>
                     <f:validateRegex pattern="[0-9]+"/>
