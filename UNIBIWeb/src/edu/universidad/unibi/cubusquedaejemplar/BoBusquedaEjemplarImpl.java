@@ -251,11 +251,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         if (usuario!=null){
             Boolean tienePrestamosActivos=false;
             if (getEstadoPrestamosActivos()!=""){tienePrestamosActivos=true;}
-            dtoUsuario user = new dtoUsuario (nroDocumento, getApellidosNombresUsuario(),getEstadoUsuario(),tienePrestamosActivos);
+            dtoUsuario user = new dtoUsuario (nroDocumento, getApellidosNombresUsuario(),"",getEstadoUsuario(),tienePrestamosActivos);
             user.setId(usuario.getId());
             return user;     
         }else{
-            return new dtoUsuario(nroDocumento,null,"Sin registrarse",false);
+            return new dtoUsuario(nroDocumento,null,null,"Sin registrarse",false);
         }
     }
         
