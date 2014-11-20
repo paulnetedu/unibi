@@ -8,11 +8,13 @@ import edu.universidad.unibi.cuprestamoejemplar.dto.DtoEjemplar;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoLector;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoSancion;
 import edu.universidad.unibi.util.bean.BeanNotificacionData;
+import edu.universidad.unibi.cubusquedaejemplar.dto.dtoUsuario;
 import edu.universidad.unibi.curegistrocatalogo.BoRegistroCatalogo;
 import edu.universidad.unibi.curegistrocatalogo.BoRegistroCatalogoImpl;
 import edu.universidad.unibi.curegistrocatalogo.bean.BeanActualizacionPublicacion;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoResultado;
 
+import edu.universidad.unibi.curegistrousuario.bean.BeanRegistroUsuario;
 import edu.universidad.unibi.util.Bo;
 
 import edu.universidad.unibi.util.JsfUtil;
@@ -38,6 +40,7 @@ public class BeanDatosAlumno implements Serializable {
     private int id;
     private String numeroDocumento;
     private String nombres;
+    private boolean presactivos;
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String estado;
@@ -90,43 +93,26 @@ public class BeanDatosAlumno implements Serializable {
         if(fechaFin.getDate()>=fechaPrestamo.getDate())
         {
             estado="Sancionado";
-        }
-        
-        
+        }  
     }
+
+    //-------------------------------------------------------------
     public void buscarUsuarioPorDocumento()
-    {
-        
-        lstDtoLector=bo.consultarUsuarioPorNumeroDocumento2(numeroDocumento);
-        if (lstDtoLector==null)
-            BeanNotificacionData.show(3, "No Existe el Usuario");
-        
-        lstDtoSancion=new ArrayList<DtoSancion>();
-        
-        for (DtoLector p : lstDtoLector) {
-            
-            id=(p.getId());
-            nombres=p.getNombres();
-            apellidoMaterno=p.getApellidoMaterno();
-            apellidoPaterno=p.getApellidoPaterno();
-            }
-        
-        lstDtoSancion=bo.consultarSancionesPorDocumento(id);
-        
-        
-        for (DtoSancion s : lstDtoSancion) {
-
-            estado = s.getId()+"";
-            validar(s.getFechaFin());
-        }
-      
-        
-        Date fechaPrestamo=new Date();
-        
-        fechaDevolucion.setDate(fechaPrestamo.getDate()+parametro.getMaxDiasPrestamo());
-       
+    {             
+               dtoUsuario usuario =bo.getUsuarioDto(numeroDocumento);
+              nombres=usuario.getApellidosNombres();
+              if (usuario.getEstado()=="Sin Registrarse")
+                {presactivos=false;
+                 apellidoPaterno="";
+               apellidoMaterno="";
+                  estado=usuario.getEstado(); }
+               else{presactivos=true;
+                 this.apellidoPaterno=usuario.getEstado();
+        this.apellidoMaterno=usuario.getApellidos();
+                   }
+          
     }
-
+//-------------------------------------
 
     public void setId(int id) {
         this.id = id;
@@ -134,6 +120,13 @@ public class BeanDatosAlumno implements Serializable {
 
     public int getId() {
         return id;
+    }
+    public void setPresactivos(boolean presactivos) {
+        this.presactivos = presactivos;
+    }
+
+    public boolean isPresactivos() {
+        return presactivos;
     }
 
     public void setLstDtoLector(List<DtoLector> lstDtoLector) {
