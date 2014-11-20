@@ -15,6 +15,7 @@ import edu.universidad.dominio.unibi.TblRevistas;
 import edu.universidad.dominio.unibi.TblSanciones;
 import edu.universidad.dominio.unibi.TblTesis;
 import edu.universidad.dominio.unibi.TblUsuarios;
+import edu.universidad.unibi.cubusquedaejemplar.dto.dtoUsuario;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoEjemplar;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoLector;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoPrestamo;
@@ -127,7 +128,89 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
 
     
     }
-    
+    //------------------------------------------aqui
+          protected TblUsuarios usuario; //usuario para la vista listaPrestamos y PrestamosRealizados
+        
+        public  dtoUsuario getUsuarioDto(String nroDocumento){
+            usuario= getUsuarioTbl(nroDocumento);
+            
+            if (usuario!=null){
+                Boolean tienePrestamosActivos=false;
+                if (getEstadoPrestamosActivos()!=""){tienePrestamosActivos=true;}
+                return new dtoUsuario(nroDocumento, ApellidosNombresUsuario(),ApellidosUsuario(),getEstadoUsuario(),tienePrestamosActivos);    
+            }else{
+                return new dtoUsuario(nroDocumento,null,null,"Sin Registrarse",false);
+            }
+        }
+            
+        private TblUsuarios getUsuarioTbl(String dni) {
+            Query query = em.createNamedQuery("TblUsuarios.consultarPorNumeroDocumento");
+            query.setParameter("numeroDocumento",dni);
+            List<TblUsuarios> busqueda = query.getResultList();
+            //EXCEPTION: edu.universidad.dominio.unibi.TblUsuarios cannot be cast to edu.universidad.dominio.unibi.TblUsuarios
+            //Evento: al realizar run por segunda vez a la pagina.
+            //Solucion; cerrar UNIBI e IntegratedWebLogicServer y volver a iniciar
+            if (busqueda.size()>0){
+                TblUsuarios usuario= busqueda.get(0);
+                System.out.println("se encontro al usuario="+usuario.getNumeroDocumento());
+                return usuario;
+            }else{
+                return null;
+            }
+        }
+        private String ApellidosNombresUsuario( ){
+               return usuario.getNombres();
+                  //usuario.getApellidoPaterno()+" "+usuario.getApellidoMaterno();
+                
+        }
+         
+        private String ApellidosUsuario(){
+               //return usuario.getNombres();
+                 return usuario.getApellidoPaterno()+" "+usuario.getApellidoMaterno();      
+        }
+        private String getEstadoUsuario(){
+            String estado;
+            estado=getEstadoAmonestado();
+           if (estado==""){estado=getEstadoPrestamosActivos();}
+            if (estado==""){estado="Apto";}
+          
+            return estado;
+        }
+        private String getEstadoAmonestado() {
+            String estado="";
+            if (usuario!=null){
+                TblSanciones sancionMasLarga=null;
+                List<TblSanciones> sanciones=usuario.getTblSancionesList();
+                
+                //revisar las sanciones
+                for (TblSanciones sancion:sanciones){
+                    if (sancionMasLarga==null){sancionMasLarga=sancion;}
+                    if (sancionMasLarga.getFechaFin().before(sancion.getFechaFin())){sancionMasLarga=sancion;}
+                }
+                
+                //elaborar mensaje de amonestacion
+               // if (sancionMasLarga!=null){return "Esta sancionado hasta "+ getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+", Motivo:"+sancionMasLarga.getMotivo();}
+               if (sancionMasLarga!=null){return "Sancionado";}
+            }
+            
+            return estado;
+        }
+        private String getEstadoPrestamosActivos(){
+            String estado="";
+            int nroEjemplares=0;
+            
+            if (usuario!=null){
+                List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
+                for (TblPrestamos prestamo:prestamos){
+                    nroEjemplares+=prestamo.getTblPrestamosDetalleList().size();        
+                }
+            }
+            
+            if (nroEjemplares>0){return "Tiene ("+String.valueOf(nroEjemplares)+") ejemplares prestados a la fecha.";}
+            
+            return estado;
+        }
+        //------------------------------------------------
    public void guardarDevolucion(int iddetalle, Date fechaDev, int idBibliotecario, int estadoFisico, int dias) {
         //JOptionPane.showMessageDialog(null, iddetalle+ fechaDev.toString() + idBibliotecario + estadoFisico + dias); 
         EntityTransaction tx = em.getTransaction();
