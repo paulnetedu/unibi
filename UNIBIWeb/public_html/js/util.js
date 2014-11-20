@@ -56,3 +56,14 @@ function adaptarTablaAlternativa(idform, idcontrol) {
       }
     );
 }
+function validarNumero(numero) 
+              {
+                  if (!/^([0-9])*$/.test(numero)) {
+                    
+                      alert("El valor '" + numero + "' no es un numero");
+                      nombre=document.getElementById("formulario:txtNroDocumentoUsuario");
+                      nombre.value='';
+                      return false;
+                  }
+                  return true;
+              } 
