@@ -1,27 +1,34 @@
 package edu.universidad.unibi.cubusquedaejemplar.dto;
 
 public class dtoUsuario {
-    public dtoUsuario(String nroDocumento, String nombresApellidos, String estado, Boolean tienePrestamosActivos) {
+    public dtoUsuario(String nroDocumento, String nombresApellidos,String apellidos, String estado, Boolean tienePrestamosActivos) {
         super();
         this.nroDocumento=nroDocumento;
         this.apellidosNombres=nombresApellidos;
         this.estado=estado;
+        this.apellidos=apellidos;
         this.tienePrestamosActivos=tienePrestamosActivos;
     }
     protected int id;
     protected String nroDocumento;
     protected String apellidosNombres;
     protected String estado;
-    protected Boolean tienePrestamosActivos=false;
-
+    protected String apellidos;
     public void setId(int id) {
-        this.id = id;
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public int getId() {
-        return id;
+    public String getApellidos() {
+        return apellidos;
     }
-
+    protected Boolean tienePrestamosActivos=false;
 
     public void setTienePrestamosActivos(Boolean tienePrestamosActivos) {
         this.tienePrestamosActivos = tienePrestamosActivos;
@@ -56,3 +63,4 @@ public class dtoUsuario {
 
     
 }
+
