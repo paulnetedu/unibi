@@ -16,25 +16,25 @@
         <h:panelGrid >
         
          <!--  <f:facet name="header">-->
-          <!--  <h:outputText value="SOLICITUD DE PRESTAMO  " styleClass="unicampo"/>-->
+          <!--  <h:outputText value="SOLICITUD DE PRESTAMO" styleClass="unicampo"/>-->
            <!-- </f:facet>  -->
           <!--  <br/>-->
             <h:panelGrid style="text-align:left;">
             <f:facet name="header">
-            <h:outputText value="DATOS DEL LECTOR   " styleClass="unicampo" style="text-align:center;"/>
+            <h:outputText value="  DATOS DEL LECTOR  " styleClass="unicampo"/>
             </f:facet> 
             <h:panelGrid  columns="5" style="text-align:center;">
-             <h:outputText value="Nro. de (DNI)" styleClass="unicampo"/>
-                <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto">
+             <h:outputText value="Nro (DNI)" styleClass="unicampo"/>
+                <h:inputText id="nroDocumento" value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto"
+                             style="line-height:normal; text-height:auto;">
                     <f:validateLength maximum="8" minimum="8"/>
                     <f:validateRegex pattern="[0-9]+"/>
                 </h:inputText>
-                <h:message id="msgnroDocumento" for="nroDocumento"/>
+                <h:message id="msgnroDocumento" for="nroDocumento"   style="color:Red;"/>
                 <h:commandButton id="buscar" action="#{beanDatosUsuario.buscarUsuarioPorDocumento}" disabled="false" value="Buscar" styleClass="unicampo">
                    <f:ajax execute="datosLector" render="datosLector panRespuesta panMensaje1" />
                 </h:commandButton>
-                <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" >                        
-                </h:commandButton> 
+                
             </h:panelGrid>
         </h:panelGrid>
             <h:panelGrid id="panMensaje">
@@ -52,24 +52,28 @@
                 </h:panelGrid>
             </h:panelGrid>
             <h:panelGrid id="pgCampos" columns="3" style="text-align:center;">                
-                
-                <h:outputText value="Nombres:" styleClass="unicampo"/>
-                <h:inputText id="nombres" value="#{beanDatosUsuario.nombres}" disabled="true" style="background-color:Scrollbar;" />
-                <h:outputText />
-                
-                <h:outputText value="Apellidos:" styleClass="unicampo"/>
-                <h:inputText id="apellidoPaterno"  value="#{beanDatosUsuario.apellidoPaterno} #{beanDatosUsuario.apellidoMaterno} " disabled="true" style="background-color:Scrollbar;"/>
-                <h:outputText/>
-                
-                <h:outputText value="Estado:" styleClass="unicampo"/>
-                <h:inputText id="estado" value="#{beanDatosUsuario.estado}" disabled="true" style="background-color:Scrollbar;"/>
-                <h:outputText /> 
+                   <h:outputText value="DNI Lector :" styleClass="unicampo" style="font-size:small;"/>
+                  <h:inputText value="#{beanDatosUsuario.numeroDocumento}" styleClass="unicampo"   disabled="true" style="font-size:small;"/>
+                  <h:outputText />
+                <h:outputText value="Nombres   : " styleClass="unicampo" style="font-size:small;"/>
+                  <h:inputText value="#{beanDatosUsuario.nombres}"   disabled="true" styleClass="unicampo" style="font-size:small;"/>
+                   <h:outputText />
+                   <h:outputText value="Apellidos   :" styleClass="unicampo" style="font-size:small;"/>
+                  <h:inputText value="#{beanDatosUsuario.apellidoMaterno}" styleClass="unicampo"   disabled="true" style="font-size:small;"/>
+                   <h:outputText />
+                   <h:outputText value="Estato    :" styleClass="unicampo" style="font-size:small;"/>
+                  <h:inputText value="#{beanDatosUsuario.apellidoPaterno}"  styleClass="unicampo"   disabled="true" style="font-size:small;"/>
+                   <h:outputText />
+                 <h:outputText   value="#{beanDatosUsuario.estado}" rendered="#{beanDatosUsuario.presactivos==false}"  styleClass="unicampo"
+                               style="font-size:small; color:Red;"/>
+                 <h:commandButton id="nuevoUsuario" action="nuevoUsuario.jsf" value="Nuevo Usuario" styleClass="unicampo" rendered="#{beanDatosUsuario.presactivos==false}">                        
+                </h:commandButton> 
             </h:panelGrid>
             <br/>
             <h:panelGrid id="pgCampos2" columns="4" style="text-align:center;">
-                <h:outputText value="NÂ° Libros Prestados" styleClass="unicampo"/>
+                <h:outputText value="N° Libros Prestados" styleClass="unicampo"/>
                 <h:inputText id="nroLibro" value="#{beanDatosUsuario.nroLibrosPrestados}" disabled="true" size="2" style="background-color:Scrollbar;"/>
-                <h:outputText value="NÂ° Maximo de Libros" styleClass="unicampo"/>
+                <h:outputText value="N° Maximo de Libros" styleClass="unicampo"/>
                 <h:inputText id="maximoLibro" value="#{beanDatosUsuario.nroMaxLibros}" disabled="true" size="2" style="background-color:Scrollbar;"/>            
             </h:panelGrid>
             <br/>    
@@ -78,7 +82,7 @@
                 <h:dataTable value="#{beanDatosUsuario.idEjemplares}" var="dtoEjemplar" rendered="#{not empty beanDatosUsuario.idEjemplares}" border="1" styleClass="unitable">
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="CÃ“DIGO DE EJEMPLAR"/>
+                        <h:outputText value="CÓDIGO DE EJEMPLAR"/>
                     </f:facet>
                     <h:outputText value="#{dtoEjemplar.id}"/>
                 </h:column>
@@ -111,9 +115,6 @@
         </h:body>
     </html>
 </f:view>
-
-
-
 
 
 
