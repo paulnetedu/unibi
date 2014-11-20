@@ -12,13 +12,13 @@
             <link type="text/css" rel="stylesheet" href="../css/estilos.css"/>
         </h:head>
         <h:body>
-            <h:form>
+            <h:form id="formulario">
                 <h2 style="text-align:center;">SOLICITUD DE PRESTAMO</h2>
                 <br/>
                 
                 <h:panelGrid columns="3">
                     <h:outputText value="Nro. de Documento(DNI):" styleClass="unicampo"/>
-                    <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}" value="#{beanBusquedaEjemplar.nroDocumento}">
+                    <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}"  onkeypress="validarNumero(value)" title="Mínimo 8 caracteres"   maxlength="12"  value="#{beanBusquedaEjemplar.nroDocumento}">
                             <f:ajax execute="txtNroDocumentoUsuario" render="txtApellidosNombresUsuario estadoUsuario btnVerPrestamo"/>
                     </h:inputText>
                     <h:message for="txtNroDocumentoUsuario"/>
