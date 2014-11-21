@@ -87,11 +87,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                     else{
                         dto.setDisponibilidad("No disponible");
                         dto.setDisponible(false);
-                    }
-                    //Fecha de devolución.
-                    List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
-                    for(TblPrestamosDetalle pde : pd ){
-                        dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                        //Fecha de devolución.
+                        List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                        for(TblPrestamosDetalle pde : pd ){
+                            dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                        }
                     }
                     dto.setAutor(autores);
                     lstDto.add(dto);
@@ -161,11 +161,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         else{
                             dto.setDisponibilidad("No disponible");
                             dto.setDisponible(false);
-                        }
-                        //Fecha de devolución.
-                        List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
-                        for(TblPrestamosDetalle pde : pd ){
-                            dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                            //Fecha de devolución.
+                            List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                            for(TblPrestamosDetalle pde : pd ){
+                                dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                            }
                         }
                         dto.setAutor(p.getNombre());
                         dto.setArea(areas);
@@ -217,6 +217,11 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         else{
                             dto.setDisponibilidad("No disponible");
                             dto.setDisponible(false);
+                            //Fecha de devolución.
+                            List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
+                            for(TblPrestamosDetalle pde : pd ){
+                                dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
+                            }
                         }
                         //Área.
                         List<TblPublicacionesAreas> lstareas = p.getTblPublicacionesAreasList();
@@ -224,11 +229,6 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         for (TblPublicacionesAreas ar : lstareas) {
                             TblCatalogosItems a =ar.getAreaId(); 
                             areas = a.getDescripcion();
-                        }
-                        //Fecha de devolución.
-                        List<TblPrestamosDetalle> pd =  pe.getTblPrestamosDetalleList();
-                        for(TblPrestamosDetalle pde : pd ){
-                            dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
                         }
                         dto.setArea(areas);
                         dto.setAutor(autores);
