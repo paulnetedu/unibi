@@ -4,6 +4,7 @@ import edu.universidad.dominio.unibi.TblAutores;
 import edu.universidad.dominio.unibi.TblCatalogos;
 import edu.universidad.dominio.unibi.TblCatalogosItems;
 import edu.universidad.dominio.unibi.TblEjemplares;
+import edu.universidad.dominio.unibi.TblLibros;
 import edu.universidad.dominio.unibi.TblPrestamos;
 import edu.universidad.dominio.unibi.TblPrestamosDetalle;
 import edu.universidad.dominio.unibi.TblPrestamosSolicitudes;
@@ -69,9 +70,12 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                     TblAutores a = paut.getAutorId();
                     autores += a.getNombre() + ", ";
                 }
+                int volumen=0;
                 //Ejemplares.
                 List<TblEjemplares> lstPubPre=pa.getPublicacionId().getTblEjemplaresList();
                 for(TblEjemplares pe : lstPubPre){
+                    TblLibros vol = (TblLibros) pe.getPublicacionId();
+                    volumen=vol.getVolumen(); 
                     dto = new dtoBusquedaEjemplar(); 
                     dto.setId(pe.getId());                   
                     dto.setTitulo(pe.getPublicacionId().getTitulo());
@@ -93,6 +97,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             dto.setFechaDevolucion("Devolución: " +  getStringFromDate(pde.getPrestamoId().getFechaDevolucionMax(),"dd-MM-yyyy"));
                         }
                     }
+                    dto.setVolumenLibro(Integer.toString(volumen));
                     dto.setAutor(autores);
                     lstDto.add(dto);
                 }  
@@ -144,9 +149,12 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                         TblCatalogosItems a =ar.getAreaId(); 
                         areas = a.getDescripcion();
                     }
+                    int volumen=0;
                     //Ejemplares.
                     List<TblEjemplares> lstPubPre = pa.getPublicacionId().getTblEjemplaresList();
                     for(TblEjemplares pe : lstPubPre){
+                        TblLibros vol = (TblLibros) pe.getPublicacionId();
+                        volumen=vol.getVolumen(); 
                         dto = new dtoBusquedaEjemplar(); 
                         dto.setId(pe.getId());
                         dto.setTitulo(pe.getPublicacionId().getTitulo());
@@ -168,6 +176,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             }
                         }
                         dto.setAutor(p.getNombre());
+                        dto.setVolumenLibro(Integer.toString(volumen));
                         dto.setArea(areas);
                         lstDto.add(dto);
                     }    
@@ -175,37 +184,50 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
             }
             return lstDto;
     }
-    
+   
+     
     public List<dtoBusquedaEjemplar> consultarEjemplarPorTitulo(String titulo){
                 List<dtoBusquedaEjemplar> lstDto = new ArrayList<dtoBusquedaEjemplar>();
                 Query query = em.createNamedQuery("TblLibros.consultarPorTitulo");
                 String cadenaBusqueda = "%" + titulo.toUpperCase() + "%";
                 //System.out.println("cadenaBusqueda=" + cadenaBusqueda);
                 query.setParameter("titulo", cadenaBusqueda);
+                int volumen=0;
                 List<TblPublicaciones> lstTbl = query.getResultList();
-                //System.out.println("lstTbl = " + ((lstTbl == null) ? -1 : lstTbl.size()));     
-                for (TblPublicaciones p : lstTbl) {
+          //  
+          
+            // volu=lb.getVolumen();
+                for (TblPublicaciones p : lstTbl)
+                {/* TblLibros lv  =p.getTblLibro();
+                    v=lv.getVolumen();*/
                     //Autor.
+                 
+                    
+            
                     List<TblPublicacionesAutores> lstPubAut = p.getTblPublicacionesAutoresList();
                     String autores = "";
                     for (TblPublicacionesAutores pa : lstPubAut) {
                         TblAutores a = pa.getAutorId();
                         autores = a.getNombre();
                     }
+                    
                     //Carrera.
-                    /*List<TblPublicacionesCarreras> lstPubCa=p.getTblPublicacionesCarrerasList();
+                    List<TblPublicacionesCarreras> lstPubCa=p.getTblPublicacionesCarrerasList();
                     String carreras="";
                     for(TblPublicacionesCarreras par : lstPubCa){
                         TblCatalogosItems ar = par.getCarreraId();
                         carreras = ar.getDescripcion();
-                    }*/
+                    } 
+                   //
                    
                     //Ejemplares
                     List<TblEjemplares> lstPubPre = p.getTblEjemplaresList();
                     for(TblEjemplares pe : lstPubPre){
+                        TblLibros vol = (TblLibros) pe.getPublicacionId();
+                        volumen=vol.getVolumen();  
                         dtoBusquedaEjemplar dto = new dtoBusquedaEjemplar();
                         dto.setId(pe.getId());
-                        dto.setTitulo(pe.getPublicacionId().getTitulo());
+                        dto.setTitulo(pe.getPublicacionId().getTitulo() );
                         if(pe.getEstadoFisico()==0)
                             dto.setEstadoFisico("Bueno");    
                         else
@@ -231,6 +253,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                             areas = a.getDescripcion();
                         }
                         dto.setArea(areas);
+                        dto.setVolumenLibro(Integer.toString(volumen));
                         dto.setAutor(autores);
                         lstDto.add(dto);
                     }                 
