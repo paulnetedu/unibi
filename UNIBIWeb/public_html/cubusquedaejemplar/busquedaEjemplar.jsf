@@ -86,6 +86,13 @@
                     <h:outputText value="#{LstDtoBusqueda.disponibilidad}" style="font-size:small;">      
                     </h:outputText>
                 </h:column>
+                     <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VOLUMEN" style="font-size:small;"/>
+                    </f:facet>
+                    <h:outputText value=" Vol. #{LstDtoBusqueda.volumenLibro}" style="font-size:small;">      
+                    </h:outputText>
+                </h:column>
                 <h:column>
                 
                     <f:facet name="header">
