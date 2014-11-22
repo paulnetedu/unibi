@@ -71,7 +71,14 @@
                         <f:convertDateTime pattern="yyyy"/>
                     </h:outputText>
                 </h:column>
-                
+                 <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VOLUMEN"/>
+                    </f:facet>
+                    <h:outputText value=" Vol. #{dtoEjemplar.volumenLibro}">
+                        <f:convertDateTime pattern="yyyy"/>
+                    </h:outputText>
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value=""/>
