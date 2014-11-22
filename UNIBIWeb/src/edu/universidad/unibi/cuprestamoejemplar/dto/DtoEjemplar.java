@@ -7,7 +7,9 @@ import java.util.Date;
 public class DtoEjemplar implements Serializable {
     
     private String id;
-    
+    private String volumenLibro;
+
+ 
     private String titulo;
     
     private String autores;
@@ -82,5 +84,12 @@ public void setEstadoFisico(int estadoFisico) {
 
     public Date getFechaDevolucion() {
         return fechaDevolucion;
+    }
+    public void setVolumenLibro(String volumenLibro) {
+        this.volumenLibro = volumenLibro;
+    }
+
+    public String getVolumenLibro() {
+        return volumenLibro;
     }
 }
