@@ -3,7 +3,7 @@ package edu.universidad.unibi.cubusquedaejemplar.dto;
 import java.io.Serializable;
 
 public class dtoBusquedaEjemplar implements Serializable{
-    public dtoBusquedaEjemplar(String codigo, String titulo, String autor, String area, String estadoFisico, String disponibilidad, String fechaDevolucion) {
+    public dtoBusquedaEjemplar(String volumenLibro, String codigo, String titulo, String autor, String area, String estadoFisico, String disponibilidad, String fechaDevolucion) {
         super();
         
         this.codigo=codigo;
@@ -13,6 +13,7 @@ public class dtoBusquedaEjemplar implements Serializable{
         this.estadoFisico=estadoFisico;
         this.disponibilidad=disponibilidad;
         this.fechaDevolucion=fechaDevolucion;
+        this.volumenLibro=volumenLibro;
     }
     public dtoBusquedaEjemplar()
      {}
@@ -22,6 +23,8 @@ public class dtoBusquedaEjemplar implements Serializable{
     protected String titulo;
     protected String autor;
     protected String area;
+      protected String  volumenLibro;
+
     protected String estadoFisico;
     protected String disponibilidad;
     protected String fechaDevolucion;
@@ -42,6 +45,13 @@ public class dtoBusquedaEjemplar implements Serializable{
            this.Id = Id;
     }
 
+    public void setVolumenLibro(String volumenLibro) {
+        this.volumenLibro = volumenLibro;
+    }
+
+    public String getVolumenLibro() {
+        return volumenLibro;
+    }
      public String getId() {
            return Id;
     }
