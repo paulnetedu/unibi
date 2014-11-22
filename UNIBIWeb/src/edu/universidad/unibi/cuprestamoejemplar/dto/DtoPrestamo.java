@@ -15,7 +15,9 @@ public class DtoPrestamo implements Serializable{
        private int estado_detalle_prestamo;
         private int estadoPrestamo;
         private int idDetalle;
-        private int estadoDevolucionTa;
+    private String volumenLibro;
+
+    private int estadoDevolucionTa;
 
     public void setEstadoDevolucionTa(int estadoDevolucionTa) {
         this.estadoDevolucionTa = estadoDevolucionTa;
@@ -97,7 +99,14 @@ public class DtoPrestamo implements Serializable{
         return fechaDevolucion;
     }
 
-    
+
+    public void setVolumenLibro(String volumenLibro) {
+        this.volumenLibro = volumenLibro;
+    }
+
+    public String getVolumenLibro() {
+        return volumenLibro;
+    }
 
  
 }
