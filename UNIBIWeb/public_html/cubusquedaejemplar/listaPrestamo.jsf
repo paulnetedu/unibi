@@ -72,6 +72,12 @@
                        </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="VOLUMEN" style="font-size:small;"/>
+                            </f:facet>
+                            <h:outputText value=" Vol. #{p.volumenLibro}" style="font-size:small;"/>
+                       </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="SELECCIONAR" style="font-size:small;"/>
                             </f:facet>
                             <h:selectBooleanCheckbox  value="#{p.seleccionado}"
