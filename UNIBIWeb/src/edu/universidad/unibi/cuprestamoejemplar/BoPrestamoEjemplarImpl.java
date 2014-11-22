@@ -42,14 +42,18 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
     public List<DtoPrestamo> consultarPrestamoporCodigoPrestamo(int codigo){
             List<DtoPrestamo> lstDto = new ArrayList<DtoPrestamo>();
             TblPrestamos prestamo = em.find(TblPrestamos.class, codigo);
+            int volumen=0;
               List<TblPrestamosDetalle> lstPrestamoDet = prestamo.getTblPrestamosDetalleList();   
               for (TblPrestamosDetalle pd : lstPrestamoDet) {
                  
                       DtoPrestamo dto = new DtoPrestamo();
                       TblEjemplares ejemplar = pd.getEjemplarId();
+                  TblLibros vol = (TblLibros) ejemplar.getPublicacionId();
+                  volumen=vol.getVolumen(); 
                       TblPublicaciones publicacion = ejemplar.getPublicacionId();   
                 if (pd.getEstado() == 0) {  //pendiente =0
                       dto.setId(prestamo.getId());
+                      dto.setVolumenLibro(Integer.toString(volumen));
                       dto.setIdejemplar(ejemplar.getId());
                       dto.setTitulo(publicacion.getTitulo());
                       dto.setFechaDevolucion(prestamo.getFechaDevolucionMax());
@@ -68,19 +72,24 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
     
     }
     public List<DtoEjemplar> consultarEjemplarPorTitulo(String titulo) {
-       
-     
         ////////////////////////////////////
+ 
         List<DtoEjemplar> lstDto = new ArrayList<DtoEjemplar>();
         Query query = em.createNamedQuery("TblEjemplares.consultarPorTitulo");
         query.setParameter("titulo", "%" + titulo + "%");
+        int volumen=0;
         List<TblEjemplares> lstEntidad = query.getResultList();
         for (TblEjemplares ejemplar : lstEntidad) {
+        
+            TblLibros vol = (TblLibros) ejemplar.getPublicacionId();
+            volumen=vol.getVolumen(); 
             DtoEjemplar dto = new DtoEjemplar();
+            dto.setVolumenLibro(Integer.toString(volumen));
             dto.setEstadoDisponibilidad(ejemplar.getEstadoDisponibilidad());
             dto.setFechaPublicacion(ejemplar.getPublicacionId().getFechaPublicacion());
             dto.setId(ejemplar.getId());
             dto.setTitulo(ejemplar.getPublicacionId().getTitulo());
+            
             if (ejemplar.getEstadoDisponibilidad() == 1) { // prestado
                 Query queryPrestamo = em.createNamedQuery("TblPrestamosDetalle.consultarUltimoPorEjemplarEstado");
                 queryPrestamo.setParameter("ejemplarId", ejemplar.getId());
@@ -108,9 +117,14 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
         List<TblPrestamosDetalle> lstEntidad = query.getResultList();
         for (TblPrestamosDetalle detalle : lstEntidad) {
             DtoPrestamo dto = new DtoPrestamo();
+            int volumen=0;
             TblEjemplares ejemplar = detalle.getEjemplarId();
             TblPublicaciones publicacion = ejemplar.getPublicacionId();
+            TblLibros vol = (TblLibros) ejemplar.getPublicacionId();
+            volumen=vol.getVolumen(); 
             TblPrestamos prestamo = detalle.getPrestamoId();
+           
+            dto.setVolumenLibro(Integer.toString(volumen));
             dto.setId(prestamo.getId());
             dto.setIdejemplar(ejemplar.getId());
             dto.setTitulo(publicacion.getTitulo());
