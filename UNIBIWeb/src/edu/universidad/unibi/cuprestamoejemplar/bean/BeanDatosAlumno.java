@@ -97,20 +97,29 @@ public class BeanDatosAlumno implements Serializable {
     }
 
     //-------------------------------------------------------------
-    public void buscarUsuarioPorDocumento()
-    {             
-               dtoUsuario usuario =bo.getUsuarioDto(numeroDocumento);
-              nombres=usuario.getApellidosNombres();
-              if (usuario.getEstado()=="Sin Registrarse")
-                {presactivos=false;
-                 apellidoPaterno="";
-               apellidoMaterno="";
-                  estado=usuario.getEstado(); }
-               else{presactivos=true;
-                 this.apellidoPaterno=usuario.getEstado();
-        this.apellidoMaterno=usuario.getApellidos();
-                   }
-          
+    public void buscarUsuarioPorDocumento(){
+        dtoUsuario usuario =bo.getUsuarioDto(numeroDocumento);
+        nombres=usuario.getApellidosNombres();
+        if (usuario.getEstado()=="Sin Registrarse"){
+            presactivos=false;
+            apellidoPaterno="";
+            apellidoMaterno="";
+            estado=usuario.getEstado();
+            }
+        else{
+            presactivos=true;
+            this.id = usuario.getId();
+            this.apellidoPaterno=usuario.getEstado();
+            this.apellidoMaterno=usuario.getApellidos();
+            }
+    }
+    
+    public boolean verEstado(){
+        if (this.estado == "Sin Registrarse" ){
+            return false;
+        }else{
+            return true;    
+        }  
     }
 //-------------------------------------
 

@@ -150,8 +150,12 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
             
             if (usuario!=null){
                 Boolean tienePrestamosActivos=false;
-                if (getEstadoPrestamosActivos()!=""){tienePrestamosActivos=true;}
-                return new dtoUsuario(nroDocumento, ApellidosNombresUsuario(),ApellidosUsuario(),getEstadoUsuario(),tienePrestamosActivos);    
+                if (getEstadoPrestamosActivos()!=""){
+                    tienePrestamosActivos=true;
+                    }
+                dtoUsuario user = new dtoUsuario(nroDocumento, ApellidosNombresUsuario(),ApellidosUsuario(),getEstadoUsuario(),tienePrestamosActivos);
+                user.setId(usuario.getId());
+                return user;
             }else{
                 return new dtoUsuario(nroDocumento,null,null,"Sin Registrarse",false);
             }
