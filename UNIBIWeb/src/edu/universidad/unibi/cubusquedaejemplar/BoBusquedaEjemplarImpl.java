@@ -278,6 +278,7 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
                 }
             dtoUsuario user = new dtoUsuario (nroDocumento, getApellidosNombresUsuario(),"",getEstadoUsuario(),tienePrestamosActivos);
             user.setId(usuario.getId());
+            user.setCantPrestamosActivos(getCantPrestamosActivos());
             return user;     
         }else{
             return new dtoUsuario(nroDocumento,null,null,"Sin registrarse - realizar registro.",false);
@@ -329,7 +330,8 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
             }
             //elaborar mensaje de amonestacion
             if (sancionMasLarga != null){
-                return "Esta amonestado hasta "+getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+"/n motivo:"+sancionMasLarga.getMotivo();
+                return "Amonestado";
+                //return "Esta amonestado hasta "+getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+"/n motivo:"+sancionMasLarga.getMotivo();
                 }
         }
         
@@ -340,8 +342,14 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         int nroEjemplares=0;
         if (usuario!=null){
             List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
-            for (TblPrestamos prestamo:prestamos){
-                nroEjemplares += prestamo.getTblPrestamosDetalleList().size();        
+            List<TblPrestamosDetalle> detallesPrestamo = new ArrayList<TblPrestamosDetalle>();
+            for (TblPrestamos prestamo : prestamos){
+                detallesPrestamo = prestamo.getTblPrestamosDetalleList();
+                for(TblPrestamosDetalle prestamoDetalles : detallesPrestamo){
+                    if(prestamoDetalles.getEstado() == 0){
+                        nroEjemplares ++;        
+                    }
+                }
             }
         }  
         if (nroEjemplares>0){
@@ -349,64 +357,82 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
             }
         return estado;
     }
+    
+    private int getCantPrestamosActivos(){
+        int nroEjemplares=0;
+            if (usuario!=null){
+                List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
+                List<TblPrestamosDetalle> detallesPrestamo = new ArrayList<TblPrestamosDetalle>();
+                for (TblPrestamos prestamo : prestamos){
+                    detallesPrestamo = prestamo.getTblPrestamosDetalleList();
+                    for(TblPrestamosDetalle prestamoDetalles : detallesPrestamo){
+                        if(prestamoDetalles.getEstado() == 0){
+                            nroEjemplares ++;        
+                        }
+                    }
+                }
+            }  
+        return nroEjemplares;
+    }
 
     //---- fin lista prestamo ----------------------------------------------------------------------
      
     
     //---- codigo para la vista PRESTAMOS REALIZADOS -----------------------------------------------
      public List<dtoEjemplaresPrestados> getlistaEjemplaresPrestados() {
-        List<dtoEjemplaresPrestados> listaDtoEjemplaresPrestados=new ArrayList<dtoEjemplaresPrestados>();
+        List<dtoEjemplaresPrestados> listaDtoEjemplaresPrestados = new ArrayList<dtoEjemplaresPrestados>();
         
-        List<TblPrestamos> prestamosRealizados=usuario.getTblPrestamosList();
-        List<TblPrestamosDetalle> detallesPrestamo=new ArrayList<TblPrestamosDetalle>();
-        List<TblEjemplares> ejemplaresPrestados=new ArrayList<TblEjemplares>();
+        List<TblPrestamos> prestamosRealizados = usuario.getTblPrestamosList();
+        List<TblPrestamosDetalle> detallesPrestamo = new ArrayList<TblPrestamosDetalle>();
+        List<TblEjemplares> ejemplaresPrestados = new ArrayList<TblEjemplares>();
         
         
-        for (TblPrestamos prestamo:prestamosRealizados){
+        for (TblPrestamos prestamo : prestamosRealizados){
             System.out.println("examinando prestamo id:"+prestamo.getId());
-            detallesPrestamo=prestamo.getTblPrestamosDetalleList();
+            detallesPrestamo = prestamo.getTblPrestamosDetalleList();
             
-            for(TblPrestamosDetalle prestamoDetalles:detallesPrestamo){
-                TblEjemplares ejemplar=prestamoDetalles.getEjemplarId();
-                TblPublicaciones publicacion =ejemplar.getPublicacionId();
+            for(TblPrestamosDetalle prestamoDetalles : detallesPrestamo){
                 
-                //nullPointerException
-                String autores = "";
-                String titulo="";
-                if (publicacion!=null) {
-                    //obtener lista de autores
-                    List<TblPublicacionesAutores> listaAutores = publicacion.getTblPublicacionesAutoresList();
-                    for (int k=0;k<=listaAutores.size()-1;k++){
-                        if (k>0){autores+=",";}
-                        autores+=listaAutores.get(k).getAutorId().getNombre();
+                if(prestamoDetalles.getEstado() == 0){
+                    TblEjemplares ejemplar = prestamoDetalles.getEjemplarId();
+                    TblPublicaciones publicacion = ejemplar.getPublicacionId();
+                    
+                    //nullPointerException
+                    String autores = "";
+                    String titulo="";
+                    if (publicacion!=null) {
+                        //obtener lista de autores
+                        List<TblPublicacionesAutores> listaAutores = publicacion.getTblPublicacionesAutoresList();
+                        for (int k=0;k<=listaAutores.size()-1;k++){
+                            if (k>0){autores+=",";}
+                            autores+=listaAutores.get(k).getAutorId().getNombre();
+                        }
+                        //obtener el titulo
+                        titulo=publicacion.getTitulo();
+                    }
+                    else {
+                        System.out.println("la publicacion del ejemplar esta vacia e="+ejemplar.getId());
                     }
                     
-                    //obtener el titulo
-                    titulo=publicacion.getTitulo();
-                }
-                else {
-                    System.out.println("la publicacion del ejemplar esta vacia e="+ejemplar.getId());
-                }
-                
-                String estadoFisico="";
-                switch(ejemplar.getEstadoFisico()) {
-                case 0:
-                    estadoFisico="Bueno";
-                    break;
-                case 1:
-                    estadoFisico="Regular";
-                    break;
-                case 3:
-                    estadoFisico="Malo";
-                    break;
-                }
+                    String estadoFisico="";
+                    switch(ejemplar.getEstadoFisico()) {
+                    case 0:
+                        estadoFisico="Bueno";
+                        break;
+                    case 1:
+                        estadoFisico="Regular";
+                        break;
+                    case 3:
+                        estadoFisico="Malo";
+                        break;
+                    }
+                    SimpleDateFormat formateador=new SimpleDateFormat("dd-MM-yyyy");
+                    String fechaMaxDevolucion = formateador.format(prestamo.getFechaDevolucionMax());
 
-                SimpleDateFormat formateador=new SimpleDateFormat("dd-MM-yyyy");
-                String fechaMaxDevolucion = formateador.format(prestamo.getFechaDevolucionMax());
-
-                dtoEjemplaresPrestados dtoEjemplar=new dtoEjemplaresPrestados(ejemplar.getId(),titulo,autores,estadoFisico,fechaMaxDevolucion);
-                System.out.println("agregando a la lista final:"+dtoEjemplar.getTitulo());
-                listaDtoEjemplaresPrestados.add(dtoEjemplar);
+                    dtoEjemplaresPrestados dtoEjemplar=new dtoEjemplaresPrestados(ejemplar.getId(),titulo,autores,estadoFisico,fechaMaxDevolucion);
+                    System.out.println("agregando a la lista final:"+dtoEjemplar.getTitulo());
+                    listaDtoEjemplaresPrestados.add(dtoEjemplar);                    
+                }
             }
         }
         

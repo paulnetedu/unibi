@@ -200,16 +200,33 @@ public class BeanBusquedaEjemplar implements Serializable {
         if (idUsuario == 0){
             BeanNotificacionData.show(2, "Debe ingresar sus datos de usuario.");
         }else{
-            if(seleccionPrestamo() == 0){
-                BeanNotificacionData.show(2, "Debe seleccionar como mínimo un ejemplar.");
-            }else if(seleccionPrestamo() > 2){
-                    BeanNotificacionData.show(2, "No puede seleccionar más de dos ejemplares.");
+            if(estado == "Amonestado"){
+                BeanNotificacionData.show(2, "No procede: Usuario amonestado.");
+            }else if(canPrestamoActivos == 0){
+                if(seleccionPrestamo() == 0){
+                    BeanNotificacionData.show(2, "Debe seleccionar como mínimo un ejemplar.");
+                }else if(seleccionPrestamo() > 2){
+                        BeanNotificacionData.show(2, "No puede seleccionar más de dos ejemplares.");
+                    }
+                    else{
+                    seleccionadoParaPrestamo();
+                    bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
+                    BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
                 }
-                else{
-                seleccionadoParaPrestamo();
-                bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
-                BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
-            }    
+            }else if(canPrestamoActivos < 2){
+                if(seleccionPrestamo() == 0){
+                    BeanNotificacionData.show(2, "Debe seleccionar como mínimo un ejemplar.");
+                }else if(seleccionPrestamo() > 1){
+                        BeanNotificacionData.show(2, "No puede seleccionar más de un ejemplar.");
+                    }
+                    else{
+                    seleccionadoParaPrestamo();
+                    bo.guardarSolitudPrestamo(getListaEjemplaresPrestar(),idUsuario);
+                    BeanNotificacionData.show(2, "La solicitud se guardo con éxito.");
+                }                  
+            }else{
+                BeanNotificacionData.show(2, "No procede: Posee prestamos activos.");
+            }
         }
     }
     
@@ -250,8 +267,16 @@ public class BeanBusquedaEjemplar implements Serializable {
     protected String apellidosNombres;
     protected String estado;
     protected Boolean tienePrestamosActivos;
+    protected int canPrestamoActivos;
     protected int idUsuario;
+    
+    public void setCanPrestamoActivos(int canPrestamoActivos) {
+        this.canPrestamoActivos = canPrestamoActivos;
+    }
 
+    public int getCanPrestamoActivos() {
+        return canPrestamoActivos;
+    }
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
@@ -267,6 +292,7 @@ public class BeanBusquedaEjemplar implements Serializable {
         this.idUsuario = usuario.getId();
         this.apellidosNombres = usuario.getApellidosNombres();
         this.estado = usuario.getEstado();
+        this.canPrestamoActivos = usuario.getCantPrestamosActivos();
         this.tienePrestamosActivos = usuario.getTienePrestamosActivos();
         System.out.println("tiene prestamos activos: " + String.valueOf(this.tienePrestamosActivos));
     }
