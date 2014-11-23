@@ -273,12 +273,14 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
         
         if (usuario!=null){
             Boolean tienePrestamosActivos=false;
-            if (getEstadoPrestamosActivos()!=""){tienePrestamosActivos=true;}
+            if (getEstadoPrestamosActivos()!=""){
+                tienePrestamosActivos=true;
+                }
             dtoUsuario user = new dtoUsuario (nroDocumento, getApellidosNombresUsuario(),"",getEstadoUsuario(),tienePrestamosActivos);
             user.setId(usuario.getId());
             return user;     
         }else{
-            return new dtoUsuario(nroDocumento,null,null,"Sin registrarse",false);
+            return new dtoUsuario(nroDocumento,null,null,"Sin registrarse - realizar registro.",false);
         }
     }
         
@@ -302,25 +304,33 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
     }
     private String getEstadoUsuario(){
         String estado;
-        estado=getEstadoAmonestado();
-        if (estado==""){estado=getEstadoPrestamosActivos();}
-        if (estado==""){estado="Registrado";}
+        estado = getEstadoAmonestado();
+        if (estado == ""){
+            estado=getEstadoPrestamosActivos();
+            }
+        if (estado==""){
+            estado="Registrado.";
+            }
         return estado;
     }
     private String getEstadoAmonestado() {
         String estado="";
         if (usuario!=null){
             TblSanciones sancionMasLarga=null;
-            List<TblSanciones> sanciones=usuario.getTblSancionesList();
-            
+            List<TblSanciones> sanciones = usuario.getTblSancionesList();
             //revisar las sanciones
-            for (TblSanciones sancion:sanciones){
-                if (sancionMasLarga==null){sancionMasLarga=sancion;}
-                if (sancionMasLarga.getFechaFin().before(sancion.getFechaFin())){sancionMasLarga=sancion;}
+            for (TblSanciones sancion : sanciones){
+                if (sancionMasLarga==null){
+                    sancionMasLarga = sancion;
+                    }
+                if (sancionMasLarga.getFechaFin().before(sancion.getFechaFin())){
+                    sancionMasLarga = sancion;
+                    }
             }
-            
             //elaborar mensaje de amonestacion
-            if (sancionMasLarga!=null){return "Esta amonestado hasta "+getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+"/n motivo:"+sancionMasLarga.getMotivo();}
+            if (sancionMasLarga != null){
+                return "Esta amonestado hasta "+getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+"/n motivo:"+sancionMasLarga.getMotivo();
+                }
         }
         
         return estado;
@@ -328,16 +338,15 @@ public class BoBusquedaEjemplarImpl extends Bo implements BoBusquedaEjemplar {
     private String getEstadoPrestamosActivos(){
         String estado="";
         int nroEjemplares=0;
-        
         if (usuario!=null){
             List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
             for (TblPrestamos prestamo:prestamos){
-                nroEjemplares+=prestamo.getTblPrestamosDetalleList().size();        
+                nroEjemplares += prestamo.getTblPrestamosDetalleList().size();        
             }
-        }
-        
-        if (nroEjemplares>0){return "Tiene ("+String.valueOf(nroEjemplares)+") ejemplares prestados a la fecha.";}
-        
+        }  
+        if (nroEjemplares>0){
+            return "Tiene ("+String.valueOf(nroEjemplares)+") ejemplares prestados a la fecha.";
+            }
         return estado;
     }
 

@@ -15,7 +15,6 @@
             <h:form id="formulario">
                 <h2 style="text-align:center;">SOLICITUD DE PRESTAMO</h2>
                 <br/>
-                
                 <h:panelGrid columns="3">
                     <h:outputText value="Documento de Identidad:" styleClass="unicampo"/>
                     <h:inputText id="txtNroDocumentoUsuario" valueChangeListener="#{beanBusquedaEjemplar.NroDocumentoValueChanged}"  onkeypress="validarNumero(value)" title="Mínimo 8 caracteres"   maxlength="12"  value="#{beanBusquedaEjemplar.nroDocumento}">
@@ -23,7 +22,7 @@
                     </h:inputText>
                     <h:message for="txtNroDocumentoUsuario"/>
                     <h:outputText value="Apellidos y Nombres:" styleClass="unicampo"/>
-                    <h:inputText id="txtApellidosNombresUsuario" value="#{beanBusquedaEjemplar.nombresApellidos}" style="min-width:250pt;"/>
+                    <h:inputText id="txtApellidosNombresUsuario" value="#{beanBusquedaEjemplar.nombresApellidos}" disabled="true" style="min-width:250pt;"/>
                     <h:message for="txtApellidosNombresUsuario"/>
                 </h:panelGrid>
                 <h:outputText value="Estado: " styleClass="unicampo"/>
