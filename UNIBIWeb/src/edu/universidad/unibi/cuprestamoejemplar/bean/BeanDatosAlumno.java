@@ -41,9 +41,9 @@ public class BeanDatosAlumno implements Serializable {
     private String numeroDocumento;
     private String nombres;
     private boolean presactivos;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
+    private String apellidos;
     private String estado;
+    private int canPrestamoActivos;
     private String nroMaxLibros;
     private String nroLibrosPrestados;
     private List<DtoLector> lstDtoLector;
@@ -99,30 +99,43 @@ public class BeanDatosAlumno implements Serializable {
     //-------------------------------------------------------------
     public void buscarUsuarioPorDocumento(){
         dtoUsuario usuario =bo.getUsuarioDto(numeroDocumento);
-        nombres=usuario.getApellidosNombres();
-        if (usuario.getEstado()=="Sin Registrarse"){
-            presactivos=false;
-            apellidoPaterno="";
-            apellidoMaterno="";
-            estado=usuario.getEstado();
-            }
-        else{
-            presactivos=true;
-            this.id = usuario.getId();
-            this.apellidoPaterno=usuario.getEstado();
-            this.apellidoMaterno=usuario.getApellidos();
-            }
+        this.id = usuario.getId();
+        this.nombres = usuario.getApellidosNombres();
+        this.apellidos = usuario.getApellidos();
+        this.estado = usuario.getEstado();
+        this.canPrestamoActivos = usuario.getCantPrestamosActivos();
+        this.presactivos = usuario.getTienePrestamosActivos();
     }
-    
-    public boolean verEstado(){
+
+    public void setCanPrestamoActivos(int canPrestamoActivos) {
+        this.canPrestamoActivos = canPrestamoActivos;
+    }
+
+    public int getCanPrestamoActivos() {
+        return canPrestamoActivos;
+    }
+
+    public boolean usuarioRegistrado(){
         if (this.estado == "Sin Registrarse" ){
-            return false;
+            return true;
         }else{
-            return true;    
+            return false;    
         }  
     }
 //-------------------------------------
 
+    public void guardarUsuario(){
+        if(nombres == ""){
+            BeanNotificacionData.show(2, "Ingresar nombres");
+        }else if(apellidos == ""){
+            BeanNotificacionData.show(2, "Ingresar apellidos");
+        }else{
+            bo.registrarUsuario(nombres, apellidos, numeroDocumento, 0);
+            BeanNotificacionData.show(2, "Se registro nuevo usuario");
+            buscarUsuarioPorDocumento();
+        }  
+    }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -194,20 +207,12 @@ public class BeanDatosAlumno implements Serializable {
         return nombres;
     }
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
+    public String getApellidos() {
+        return apellidos;
     }
 
     public void setEstado(String estado) {

@@ -27,6 +27,8 @@ import edu.universidad.unibi.util.bean.BeanNotificacionData;
 
 import edu.universidad.unibi.util.bean.BeanParametroData;
 
+import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -39,6 +41,11 @@ import javax.swing.JOptionPane;
 
 public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
 
+    private String getStringFromDate(Date fecha,String formato){
+        SimpleDateFormat formateador = new SimpleDateFormat(formato); 
+        return formateador.format(fecha);
+    }
+    
     public List<DtoPrestamo> consultarPrestamoporCodigoPrestamo(int codigo){
             List<DtoPrestamo> lstDto = new ArrayList<DtoPrestamo>();
             TblPrestamos prestamo = em.find(TblPrestamos.class, codigo);
@@ -143,7 +150,7 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
     
     }
     //------------------------------------------aqui
-          protected TblUsuarios usuario; //usuario para la vista listaPrestamos y PrestamosRealizados
+        protected TblUsuarios usuario; //usuario para la vista listaPrestamos y PrestamosRealizados
         
         public  dtoUsuario getUsuarioDto(String nroDocumento){
             usuario= getUsuarioTbl(nroDocumento);
@@ -155,6 +162,7 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
                     }
                 dtoUsuario user = new dtoUsuario(nroDocumento, ApellidosNombresUsuario(),ApellidosUsuario(),getEstadoUsuario(),tienePrestamosActivos);
                 user.setId(usuario.getId());
+                user.setCantPrestamosActivos(getCantPrestamosActivos());
                 return user;
             }else{
                 return new dtoUsuario(nroDocumento,null,null,"Sin Registrarse",false);
@@ -186,11 +194,33 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
                //return usuario.getNombres();
                  return usuario.getApellidoPaterno()+" "+usuario.getApellidoMaterno();      
         }
+        
+    private int getCantPrestamosActivos(){
+        int nroEjemplares=0;
+            if (usuario!=null){
+                List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
+                List<TblPrestamosDetalle> detallesPrestamo = new ArrayList<TblPrestamosDetalle>();
+                for (TblPrestamos prestamo : prestamos){
+                    detallesPrestamo = prestamo.getTblPrestamosDetalleList();
+                    for(TblPrestamosDetalle prestamoDetalles : detallesPrestamo){
+                        if(prestamoDetalles.getEstado() == 0){
+                            nroEjemplares ++;        
+                        }
+                    }
+                }
+            }  
+        return nroEjemplares;
+    }
+        
         private String getEstadoUsuario(){
             String estado;
             estado=getEstadoAmonestado();
-           if (estado==""){estado=getEstadoPrestamosActivos();}
-            if (estado==""){estado="Apto";}
+            if (estado==""){
+                estado=getEstadoPrestamosActivos();
+                }
+            if (estado==""){
+                estado="Apto";
+                }
           
             return estado;
         }
@@ -199,35 +229,58 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
             if (usuario!=null){
                 TblSanciones sancionMasLarga=null;
                 List<TblSanciones> sanciones=usuario.getTblSancionesList();
-                
                 //revisar las sanciones
                 for (TblSanciones sancion:sanciones){
-                    if (sancionMasLarga==null){sancionMasLarga=sancion;}
-                    if (sancionMasLarga.getFechaFin().before(sancion.getFechaFin())){sancionMasLarga=sancion;}
+                    if (sancionMasLarga==null){
+                        sancionMasLarga=sancion;
+                        }
+                    if (sancionMasLarga.getFechaFin().before(sancion.getFechaFin())){
+                        sancionMasLarga=sancion;
+                        }
                 }
-                
-                //elaborar mensaje de amonestacion
-               // if (sancionMasLarga!=null){return "Esta sancionado hasta "+ getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+", Motivo:"+sancionMasLarga.getMotivo();}
-               if (sancionMasLarga!=null){return "Sancionado";}
+                //elaborar mensaje de amonestación.
+               if (sancionMasLarga!=null){
+                   //return "Esta sancionado hasta "+ getStringFromDate(sancionMasLarga.getFechaFin(),"dd/MM/yyyy")+", Motivo:"+sancionMasLarga.getMotivo();
+                   return "Sancionado";
+                }
             }
-            
             return estado;
         }
         private String getEstadoPrestamosActivos(){
             String estado="";
             int nroEjemplares=0;
-            
             if (usuario!=null){
                 List<TblPrestamos> prestamos = usuario.getTblPrestamosList();
-                for (TblPrestamos prestamo:prestamos){
-                    nroEjemplares+=prestamo.getTblPrestamosDetalleList().size();        
+                List<TblPrestamosDetalle> detallesPrestamo = new ArrayList<TblPrestamosDetalle>();
+                for (TblPrestamos prestamo : prestamos){
+                    detallesPrestamo = prestamo.getTblPrestamosDetalleList();
+                    for(TblPrestamosDetalle prestamoDetalles : detallesPrestamo){
+                        if(prestamoDetalles.getEstado() == 0){
+                            nroEjemplares ++;        
+                        }
+                    }
                 }
-            }
-            
-            if (nroEjemplares>0){return "Tiene ("+String.valueOf(nroEjemplares)+") ejemplares prestados a la fecha.";}
-            
+            }  
+            if (nroEjemplares>0){
+                return "Tiene ("+String.valueOf(nroEjemplares)+") ejemplares prestados a la fecha.";
+                }
             return estado;
         }
+        
+        public void registrarUsuario(String nombres, String apellidos, String documento, Integer tipoDocumento){
+            TblUsuarios usuario = new TblUsuarios();
+            usuario.setNombres(nombres);
+            usuario.setApellidoPaterno(apellidos);
+            usuario.setTipoDocumento(Integer.valueOf(tipoDocumento));
+            usuario.setNumeroDocumento(documento);
+            usuario.setApellidoMaterno("");
+            usuario.setEmail("");
+            em.getTransaction().begin();
+            em.persist(usuario);
+            em.getTransaction().commit();
+        }
+        
+        
         //------------------------------------------------
    public void guardarDevolucion(int iddetalle, Date fechaDev, int idBibliotecario, int estadoFisico, int dias) {
         //JOptionPane.showMessageDialog(null, iddetalle+ fechaDev.toString() + idBibliotecario + estadoFisico + dias); 

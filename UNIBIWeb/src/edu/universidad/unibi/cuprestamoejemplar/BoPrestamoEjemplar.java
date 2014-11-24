@@ -18,6 +18,7 @@ public interface BoPrestamoEjemplar {
     
     public List<DtoPrestamo> consultarPrestamoporCodigoPrestamo (int codigo);
     public dtoUsuario getUsuarioDto(String nroDocumento);
+    public void registrarUsuario(String nombres, String apellidos, String documento, Integer tipoDocumento);
     public List<DtoPrestamo> consultarPrestamoporCodigoEjemplar(String titulo);
     
     public void guardarDevolucion(int iddetalle, Date fechaDev, int idBibliotecario, int estadoFisico, int dias);
