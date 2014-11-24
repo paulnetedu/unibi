@@ -50,8 +50,9 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
             List<DtoPrestamo> lstDto = new ArrayList<DtoPrestamo>();
             TblPrestamos prestamo = em.find(TblPrestamos.class, codigo);
             int volumen=0;
-              List<TblPrestamosDetalle> lstPrestamoDet = prestamo.getTblPrestamosDetalleList();   
-              for (TblPrestamosDetalle pd : lstPrestamoDet) {
+        List<TblPrestamosDetalle> lstPrestamoDet;
+        lstPrestamoDet = prestamo.getTblPrestamosDetalleList();
+        for (TblPrestamosDetalle pd : lstPrestamoDet) {
                  
                       DtoPrestamo dto = new DtoPrestamo();
                       TblEjemplares ejemplar = pd.getEjemplarId();
