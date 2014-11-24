@@ -44,8 +44,8 @@ public class BeanDatosAlumno implements Serializable {
     private String apellidos;
     private String estado;
     private int canPrestamoActivos;
-    private String nroMaxLibros;
-    private String nroLibrosPrestados;
+    private int nroMaxLibros;
+    private int nroLibrosSeleccionadas;
     private List<DtoLector> lstDtoLector;
     private List<DtoSancion> lstDtoSancion;
     private String fecha;
@@ -67,14 +67,14 @@ public class BeanDatosAlumno implements Serializable {
         beanPrestamo=(BeanPrestamoEjemplar) JsfUtil.obtenerObjetoSesion("beanPrestamoEjemplar");
         idEjemplares = beanPrestamo.getLstDtoEjemplar();
         fechaDevolucion=new Date();
-        nroMaxLibros=parametro.getMaxPrestamosDia()+"";
+        nroMaxLibros=parametro.getMaxPrestamosDia();
         
     }
     
     public void numerodelibrosPrestados()
     {
        int lib=idEjemplares.size();
-           nroLibrosPrestados=lib+"";
+           nroLibrosSeleccionadas=lib;
        }
     @PreDestroy
     public void destroy() {
@@ -84,8 +84,31 @@ public class BeanDatosAlumno implements Serializable {
 
     public void guardarPrestamo()
     {
-        bo.guardarPrestamo(idEjemplares, id, id);
-        BeanNotificacionData.show(2, "Los Datos se Guardaron con Exito");
+        if (id == 0){
+            BeanNotificacionData.show(2, "Debe ingresar sus datos de usuario.");
+        }else{
+            if(estado == "Sancionado"){
+                BeanNotificacionData.show(2, "No procede: Usuario sancionado.");
+            }else if(canPrestamoActivos == 0){
+                    if(nroLibrosSeleccionadas > 2){
+                        BeanNotificacionData.show(2, "No puede seleccionar más de dos ejemplares.");
+                    }
+                    else{
+                    bo.guardarPrestamo(idEjemplares, id, id);
+                    BeanNotificacionData.show(2, "Los Datos se Guardaron con Éxito");
+                }
+            }else if(canPrestamoActivos < 2){
+                if(nroLibrosSeleccionadas > 1){
+                        BeanNotificacionData.show(2, "No puede seleccionar más de un ejemplar.");
+                    }
+                    else{
+                    bo.guardarPrestamo(idEjemplares, id, id);
+                    BeanNotificacionData.show(2, "Los Datos se Guardaron con Éxito");
+                }                  
+            }else{
+                BeanNotificacionData.show(2, "No procede: Posee prestamos activos.");
+            }
+        }
     }
     public void validar(Date fechaFin)
     {
@@ -223,20 +246,20 @@ public class BeanDatosAlumno implements Serializable {
         return estado;
     }
 
-    public void setNroMaxLibros(String nroMaxLibros) {
+    public void setNroMaxLibros(int nroMaxLibros) {
         this.nroMaxLibros = nroMaxLibros;
     }
 
-    public String getNroMaxLibros() {
+    public int getNroMaxLibros() {
         return nroMaxLibros;
     }
 
-    public void setNroLibrosPrestados(String nroLibrosPrestados) {
-        this.nroLibrosPrestados = nroLibrosPrestados;
+    public void setnroLibrosSeleccionadas(int nroLibrosSeleccionadas) {
+        this.nroLibrosSeleccionadas = nroLibrosSeleccionadas;
     }
 
-    public String getNroLibrosPrestados() {
-        return nroLibrosPrestados;
+    public int getnroLibrosSeleccionadas() {
+        return nroLibrosSeleccionadas;
     }
     
 }

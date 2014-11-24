@@ -55,7 +55,7 @@
             <br/>
             <h:panelGrid id="pgCampos2" columns="4" style="text-align:center;">
                 <h:outputText value="N° Libros Prestados" styleClass="unicampo"/>
-                <h:inputText id="nroLibro" value="#{beanDatosUsuario.nroLibrosPrestados}" disabled="true" size="2" style="background-color:Scrollbar;"/>
+                <h:inputText id="nroLibro" value="#{beanDatosUsuario.canPrestamoActivos}" disabled="true" size="2" style="background-color:Scrollbar;"/>
                 <h:outputText value="N° Maximo de Libros" styleClass="unicampo"/>
                 <h:inputText id="maximoLibro" value="#{beanDatosUsuario.nroMaxLibros}" disabled="true" size="2" style="background-color:Scrollbar;"/>            
             </h:panelGrid>

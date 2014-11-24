@@ -195,8 +195,7 @@ public class BeanBusquedaEjemplar implements Serializable {
         }
     }
     
-    public void guardarSolicitudPrestamo(){
-        
+    public void guardarSolicitudPrestamo(){ 
         if (idUsuario == 0){
             BeanNotificacionData.show(2, "Debe ingresar sus datos de usuario.");
         }else{
