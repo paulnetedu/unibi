@@ -117,8 +117,8 @@
             </h:dataTable>
              <h:panelGrid columns="2" rendered="#{not empty beanDevolucionEjemplar.lstDtoResultado}">
                            
-                <h:commandButton value="Sancionar" styleClass="unicampo">
-                   
+                <h:commandButton value="Sancionar" action="#{beanDevolucionEjemplar.sancionar}" styleClass="unicampo">
+                   <f:ajax render="panRespuesta"/>
                 </h:commandButton>
             </h:panelGrid>
             </h:panelGrid>

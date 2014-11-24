@@ -124,10 +124,13 @@ public class BeanDevolucionEjemplar implements Serializable {
              }
          }
          lstDtoDevolucion.add(dto);
-        BeanNotificacionData.show(1, "Ejemplar devuelto satisfactoriamente");
+         BeanNotificacionData.show(2, "Ejemplar devuelto satisfactoriamente");
         //buscarPrestamo();
     }
-        
+        public void sancionar(){
+            BeanNotificacionData.show(2, "Si desea sancionar al lector vaya a ACCIONES- SANCIÓN");
+            
+        }
 
         public void setBo(BoPrestamoEjemplar bo) {
         this.bo = bo;

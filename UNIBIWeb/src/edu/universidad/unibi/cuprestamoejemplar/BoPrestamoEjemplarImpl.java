@@ -120,35 +120,36 @@ public class BoPrestamoEjemplarImpl extends Bo implements BoPrestamoEjemplar {
     public List<DtoPrestamo> consultarPrestamoporCodigoEjemplar(String codigo){
         List<DtoPrestamo> lstDto = new ArrayList<DtoPrestamo>();
         Query query = em.createNamedQuery("TblPrestamosDetalle.consultarPorEjemplarPrestado");
-        query.setParameter("ejemplarId","%" +codigo+"%");
+        query.setParameter("ejemplarId","% " +codigo+"%");
         query.setParameter("estado", 0); // mostrar los que estan pendientes
         List<TblPrestamosDetalle> lstEntidad = query.getResultList();
         for (TblPrestamosDetalle detalle : lstEntidad) {
-            DtoPrestamo dto = new DtoPrestamo();
             int volumen=0;
-            TblEjemplares ejemplar = detalle.getEjemplarId();
-            TblPublicaciones publicacion = ejemplar.getPublicacionId();
-            TblLibros vol = (TblLibros) ejemplar.getPublicacionId();
-            volumen=vol.getVolumen(); 
             TblPrestamos prestamo = detalle.getPrestamoId();
-           
-            dto.setVolumenLibro(Integer.toString(volumen));
-            dto.setId(prestamo.getId());
-            dto.setIdejemplar(ejemplar.getId());
-            dto.setTitulo(publicacion.getTitulo());
-            dto.setFechaDevolucion(prestamo.getFechaDevolucionMax());
-            dto.setEstadoFisico(ejemplar.getEstadoFisico());
-            dto.setEstadoPrestamo(prestamo.getEstado());
-            dto.setIdDetalle(detalle.getId());
-         //   dto.setEstado_detalle_prestamo(detalle.getEstado());
-           // dto.setEstadofisico_devolucion(detalle.getEstadoFisico());
-          
-
-            lstDto.add(dto);
+            //Buscar más ejemplares por el codigo prestamo.
+            List<TblPrestamosDetalle> pDetalle = prestamo.getTblPrestamosDetalleList();
+            for (TblPrestamosDetalle nDetalle : pDetalle) {
+                if(nDetalle.getEstado()==0){
+                    DtoPrestamo dto = new DtoPrestamo();
+                    TblEjemplares ejemplar = nDetalle.getEjemplarId();
+                    TblPublicaciones publicacion = ejemplar.getPublicacionId();
+                    TblLibros vol = (TblLibros) ejemplar.getPublicacionId();
+                    volumen=vol.getVolumen(); 
+                    dto.setVolumenLibro(Integer.toString(volumen));
+                    dto.setId(prestamo.getId());
+                    dto.setIdejemplar(ejemplar.getId());
+                    dto.setTitulo(publicacion.getTitulo());
+                    dto.setFechaDevolucion(prestamo.getFechaDevolucionMax());
+                    dto.setEstadoFisico(ejemplar.getEstadoFisico());
+                    dto.setEstadoPrestamo(prestamo.getEstado());
+                    dto.setIdDetalle(nDetalle.getId());
+                    //dto.setEstado_detalle_prestamo(detalle.getEstado());
+                    //dto.setEstadofisico_devolucion(detalle.getEstadoFisico());
+                    lstDto.add(dto);
+                }
+            } 
         }
-        return lstDto;
-
-    
+        return lstDto; 
     }
     //------------------------------------------aqui
         protected TblUsuarios usuario; //usuario para la vista listaPrestamos y PrestamosRealizados
