@@ -8,6 +8,7 @@ import edu.universidad.unibi.curegistrocatalogo.dto.DtoAutor;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoCatalogo;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoCiudad;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoPais;
+import edu.universidad.unibi.curegistrocatalogo.dto.DtoPublicacion;
 import edu.universidad.unibi.curegistrocatalogo.dto.DtoResultado;
 import edu.universidad.unibi.util.Bo;
 import edu.universidad.unibi.util.bean.BeanNotificacionData;
@@ -628,17 +629,18 @@ public class BeanNuevaPublicacion implements Serializable {
     }
 
         public void validar1(FacesContext context, UIComponent component, Object value) 
-                    throws ValidatorException {
+            throws ValidatorException {
                 
                 String valor = (String)value;       
-                Pattern mask =  Pattern.compile("[0-9]{1,8}");
+                Pattern mask =  Pattern.compile("[0-9]{1,20}");
     
                  Matcher matcher = mask.matcher( valor);
     
                  if(!matcher.matches()){
     
-                    throw new ValidatorException(new FacesMessage("error solo numero y como maximo 8"));         
-                 }                
+                    throw new ValidatorException(new FacesMessage("error solo numero y como maximo 20"));         
+                 }
+                
             }
  
     public List<SelectItem> getlistinstitucion() {
@@ -654,9 +656,7 @@ public class BeanNuevaPublicacion implements Serializable {
             }
             return lstSi;
         }
-
-
-      
+   
 }
 
 
