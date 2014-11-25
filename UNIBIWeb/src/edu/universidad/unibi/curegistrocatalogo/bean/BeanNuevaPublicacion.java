@@ -457,10 +457,13 @@ public class BeanNuevaPublicacion implements Serializable {
         String pagina="";
         if(tipo==0){
             pagina="irNuevoLibro";
+            LimpiarCampos();
         }else if(tipo==1){
             pagina="irNuevaRevista";
+            LimpiarCampos();
         }else if(tipo==2){
             pagina="irNuevaTesis";
+            LimpiarCampos();
         }
         return pagina;
     }
@@ -495,6 +498,36 @@ public class BeanNuevaPublicacion implements Serializable {
     
         BeanNotificacionData.show(1, "Registro actualizado");
     }
+    
+    public void LimpiarCampos(){
+            
+            if(tipo==0 || tipo==1 || tipo==2){
+            id="";
+            titulo="";
+            fechaPublicacion.toString();
+            numeroPaginas=0;
+            valorfisico=0.0;
+            valordigital=0.0;
+            tipo=0;
+            id_pais=0;
+            id_ciudad=1;   
+            }
+            
+            if(tipo==0){
+            isbn="";
+            volumen=0;
+            tomo=0;
+            edicion=0;
+            editorial_id=0;
+            }else if(tipo==1){
+            volumen=0;
+            numero=0;
+            }else if(tipo==2){
+            institucion_id=0;
+            titulo_optado=0;
+            }
+            
+        }
     
     public void validar(FacesContext context, UIComponent component, Object value) 
             throws ValidatorException {
