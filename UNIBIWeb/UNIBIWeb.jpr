@@ -226,13 +226,37 @@
    <hash n="oracle.jdevimpl.config.JProjectLibraries">
       <list n="exportedReferences">
          <hash>
-            <url n="id" protocol="file" path="/C:/Users/ronal/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/unibi.library"/>
+            <value n="id" v="JSF 2.1"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="JRF Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="JSTL 1.2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <url n="id" path="../../../../Documents and Settings/mami/Datos de programa/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
       <list n="libraryReferences">
          <hash>
-            <url n="id" protocol="file" path="/C:/Users/ronal/AppData/Roaming/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/unibi.library"/>
+            <value n="id" v="JSF 2.1"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="JRF Runtime"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <value n="id" v="JSTL 1.2"/>
+            <value n="isJDK" v="false"/>
+         </hash>
+         <hash>
+            <url n="id" path="../../../../Documents and Settings/mami/Datos de programa/JDeveloper/system12.1.3.0.41.140521.1008/o.jdeveloper/UNIBI.library"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
