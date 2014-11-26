@@ -23,7 +23,10 @@
         <h:body>
             <h:form id="prestamoEjemplar">
             <h:panelGrid>
-            <h:outputText value="DEVOLVER EJEMPLAR" styleClass="unititle3"/>
+            
+            <f:facet name="header">
+            <h:outputText value="DEVOLVER EJEMPLAR" styleClass="unicampo"/>
+            </f:facet> 
             <br/>
             
             <h:panelGrid columns="2">
@@ -74,7 +77,12 @@
                     <h:outputText value="#{DtoPrestamo.titulo}">
                     </h:outputText>
                 </h:column>
-                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VOLUMEN"/>
+                    </f:facet>
+                    <h:outputText value="#{DtoPrestamo.volumenLibro}" />
+                </h:column>   
                 <h:column>
                     <f:facet name="header">
                         <h:outputText value="FECHA DE DEVOLUCION"/>
