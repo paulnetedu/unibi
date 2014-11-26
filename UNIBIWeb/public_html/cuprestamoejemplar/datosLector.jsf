@@ -75,6 +75,12 @@
                     </f:facet>
                     <h:outputText value="#{dtoEjemplar.titulo}"/>
                 </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="VOLUMEN"/>
+                    </f:facet>
+                    <h:outputText value="#{dtoEjemplar.volumenLibro}"/>
+                </h:column>           
                             <h:column>
                     <f:facet name="header">
                         <h:outputText value="FECHA DEVOLUCION"/>
