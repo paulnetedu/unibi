@@ -1,5 +1,5 @@
 package edu.universidad.unibi.cuprestamoejemplar;
-
+import edu.universidad.unibi.cuprestamoejemplar.dto.DtoUsuariox;
 import edu.universidad.dominio.unibi.TblAutores;
 import edu.universidad.dominio.unibi.TblCatalogosItems;
 import edu.universidad.dominio.unibi.TblCiudades;
@@ -519,4 +519,55 @@ public void guardarPrestamo(List<DtoEjemplar> idEjemplares, int lectorId, int bi
         }
         return lstDto;
     }
+    public DtoUsuariox getUsuario(String nroDocumento){
+            System.out.print("entro a nuloooooooooooooooooooooooooooooooooooooooooooooooooo1"+nroDocumento); 
+            TblUsuarios  usuario= getUsuarioTbl1(nroDocumento);
+            System.out.print("entro a nuloooooooooooooooooooooooooooooooooooooooooooooooooo2"+usuario.getApellidoMaterno()); 
+            System.out.print("entro a nulooooooooooooooooooooooooooooooooooooooooooooooooo3"+usuario.getId()); 
+            System.out.print("entro a nulooooooooooooooooooooooooooooooooooooooooooooooooo4"+usuario.getApellidoPaterno()); 
+            DtoUsuariox b=new DtoUsuariox(usuario.getNumeroDocumento(),usuario.getNombres(),usuario.getApellidoPaterno(),usuario.getApellidoMaterno()); 
+               
+               
+                return b;    
+        }   
+
+    private TblUsuarios getUsuarioTbl1(String dni) {
+            Query query = em.createNamedQuery("TblUsuarios.consultarPorNumeroDocumento");
+            query.setParameter("numeroDocumento",dni);
+            @SuppressWarnings("unchecked")
+            List<TblUsuarios> busqueda = query.getResultList();
+            //EXCEPTION: edu.universidad.dominio.unibi.TblUsuarios cannot be cast to edu.universidad.dominio.unibi.TblUsuarios
+            //Evento: al realizar run por segunda vez a la pagina.
+            //Solucion; cerrar UNIBI e IntegratedWebLogicServer y volver a iniciar
+            if (busqueda.get(0)!=null){
+                TblUsuarios usuario= busqueda.get(0);
+                System.out.println("se encontro al usuario="+usuario.getNumeroDocumento());
+                return usuario;
+            }else{
+                return null;
+            }
+        }
+
+
+     public void guardarSancionall(String dni, int motivo,Date fechai ,Date fechaf ){
+                         
+            System.out.printf("resultadxxxxxxxxxxxxxxxxx"+dni);
+            System.out.printf("resultadxxxxxxxxxxxxxxxxx"+motivo);
+            System.out.printf("resultadxxxxxxxxxxxxxxxxx"+fechai);
+            System.out.printf("resultadxxxxxxxxxxxxxxxxx"+fechaf);
+            EntityTransaction tx = em.getTransaction();
+            tx.begin();
+            TblSanciones dtosan =  new TblSanciones();        
+            System.out.print("llllllususariooo"+getUsuarioTbl1(dni));
+            
+            TblUsuarios usuario = em.find(TblUsuarios.class,getUsuarioTbl1(dni).getId() );   
+            System.out.print("llllllususariooo"+usuario.getNumeroDocumento());
+            dtosan.setMotivo(motivo);
+            dtosan.setUsuarioId(usuario);
+            dtosan.setFechaInicio(fechai);
+            dtosan.setFechaFin(fechaf);
+            em.persist(dtosan);
+            tx.commit();
+            
+        }
 }

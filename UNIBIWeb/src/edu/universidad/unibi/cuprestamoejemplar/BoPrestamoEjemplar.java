@@ -1,5 +1,5 @@
 package edu.universidad.unibi.cuprestamoejemplar;
-
+import edu.universidad.unibi.cuprestamoejemplar.dto.DtoUsuariox;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoDevolucion;
 import edu.universidad.unibi.cuprestamoejemplar.dto.DtoEjemplar;
 import edu.universidad.unibi.cubusquedaejemplar.dto.dtoUsuario;
@@ -20,7 +20,8 @@ public interface BoPrestamoEjemplar {
     public dtoUsuario getUsuarioDto(String nroDocumento);
     public void registrarUsuario(String nombres, String apellidos, String documento, Integer tipoDocumento);
     public List<DtoPrestamo> consultarPrestamoporCodigoEjemplar(String titulo);
-    
+    public DtoUsuariox getUsuario(String nroDocumento);
+    public void guardarSancionall(String dni, int motivo,Date fechai ,Date fechaf );
     public void guardarDevolucion(int iddetalle, Date fechaDev, int idBibliotecario, int estadoFisico, int dias);
     
     public void actualizarDetalle(int iddetalle);

@@ -56,7 +56,7 @@
                     <ul>
                         <li><a href="javascript:renderPage('faces/cuprestamoejemplar/prestamoEjemplar.jsf')">Préstamo</a></li>
                         <li><a href="javascript:renderPage('faces/cuprestamoejemplar/devolverEjemplar.jsf')">Devolución Préstamo</a></li>
-                        <li><a href="#">Sanción</a></li>
+                        <li><a href="javascript:renderPage('faces/cuprestamoejemplar/registrarSancion.jsf')">Sancion</a></li>
                         
                     </ul>
                     
