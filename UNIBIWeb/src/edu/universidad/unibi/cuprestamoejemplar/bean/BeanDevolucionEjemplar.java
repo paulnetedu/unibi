@@ -120,6 +120,7 @@ public class BeanDevolucionEjemplar implements Serializable {
                     bo.actualizarEjemplar(ejemplarId, 0, estadoFisicoDev);
                 // JOptionPane.showMessageDialog(null, idPrestamo);
                     bo.actualizarPrestamo(idPrestamo, 1);
+                    lstDtoResultado.remove(o);
                     break;
              }
          }

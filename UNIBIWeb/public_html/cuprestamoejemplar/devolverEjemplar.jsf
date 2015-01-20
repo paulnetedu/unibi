@@ -116,7 +116,7 @@
                     <h:outputText value="DEVOLVER"/>
                     </f:facet>
                      <h:commandButton id="devolverEjemplar" value="Devolver" action="#{beanDevolucionEjemplar.devolverEjemplar(DtoPrestamo.idejemplar, DtoPrestamo.estadoDevolucionTa)}" styleClass="unicampo">
-                      <!-- <f:ajax render=":panResultados"/> -->
+                       <f:ajax render=":prestamoEjemplar:panResultados"/> 
                     </h:commandButton>
                     
                       </h:column>
