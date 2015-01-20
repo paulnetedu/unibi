@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='windows-1252'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <h:head>
+            <title>registrarsancion</title>
+            
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-1.10.2.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/jquery/jquery-ui-1.10.4.custom.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/noty/packaged/jquery.noty.packaged.min.js"></script>
+        <script type="text/javascript" src="#{request.contextPath}/faces/js/util.js"></script>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="#{request.contextPath}/faces/css/estilos.css" type="text/css" media="screen"/>
+        <script>
+            crearDatePicker('datosLector', 'fechainicial');
+            crearDatePicker('datosLector', 'fechafinal');
+            
+        </script>
+        </h:head>
+        <h:body>
+            <h:form id="datosLector" >
+        <h:panelGrid >                                
+            <h:panelGrid  id="datoslector1" columns="5" style="text-align:center;">
+             <h:outputText value="Nro (DNI)" styleClass="unicampo"/>
+                <h:inputText id="nroDocumento" value="#{BeanRSancion.numeroDocumento}" styleClass="unicampo"  required="true" requiredMessage="Valor requerido" validatorMessage="DNI incorrecto"
+                             style="line-height:normal; text-height:auto;">
+                    <f:validateLength maximum="8" minimum="8"/>
+                    <f:validateRegex pattern="[0-9]+"/>
+                </h:inputText>
+                <h:message id="msgnroDocumento" for="nroDocumento"   style="color:Red;"/>
+                <h:commandButton id="buscar" action="#{BeanRSancion.buscarUsuarioPorDocumento}" disabled="false" value="Buscar" styleClass="unicampo">
+                   <f:ajax execute="datosLector" render="pgCampos datoslector1" />
+                </h:commandButton>                
+            <h:panelGrid id="panMensaje">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo == 2}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+            </h:panelGrid>
+            <h:panelGrid id="panMensaje1">
+                <h:panelGrid rendered="#{beanNotificacionData.tipo == 3}">
+                    <script>
+                        mostrarNotificacion('#{beanNotificacionData.mensaje}');
+                    </script>
+                </h:panelGrid>
+            </h:panelGrid>
+            </h:panelGrid>
+            
+           
+             <h:panelGrid id="pgCampos" columns="2" style="text-align:center;">                
+                <h:outputText value="DNI Lector:" styleClass="unicampo" style="font-size:small;"/>
+                <h:inputText value="#{BeanRSancion.numeroDocumento}" styleClass="unicampo"   disabled="true" style="font-size:small;"/>
+                
+                <h:outputText value="Nombres:" styleClass="unicampo" style="font-size:small;"/>
+                <h:inputText value="#{BeanRSancion.nombres}"   disabled="true" styleClass="unicampo" style="font-size:small;"/>
+                
+                <h:outputText value="Apellidos:" styleClass="unicampo" style="font-size:small;"/>
+                <h:inputText value="#{BeanRSancion.apellidos}" styleClass="unicampo"   disabled="true" style="font-size:small;"/>                                                                     
+                 </h:panelGrid>
+                 <h:panelGrid columns="2">
+                 <h:outputText value="Fecha inicial:" styleClass="unicampo"/>
+                <h:inputText id="fechainicial" value="#{BeanRSancion.fechainicial}" requiredMessage="ingrese fecha" 
+                    converterMessage="Formato dd-MM-yy"  >
+                    <f:convertDateTime pattern="dd-MM-yy"/>                
+                </h:inputText>                                              
+                <h:outputText value="Fecha final:" styleClass="unicampo"/>
+                 <h:inputText id="fechafinal" value="#{BeanRSancion.fechafinal}" requiredMessage="ingrese fecha" 
+                    converterMessage="Formato dd-MM-yy"  >
+                    <f:convertDateTime pattern="dd-MM-yy"/>                
+                </h:inputText>                         
+                <h:outputText value="Motivo:" styleClass="unicampo"/>                 
+                <h:selectOneMenu id="motivo" value="#{BeanRSancion.motivo}" >                   
+                    <f:selectItem id="item1" itemLabel="Atraso en Devolucion" itemValue="0" />
+                    <f:selectItem id="item2" itemLabel="Devolucion en Mal Estado" itemValue="1" />
+                    <f:selectItem id="item3" itemLabel="Indisciplina" itemValue="2" />                 
+                </h:selectOneMenu> 
+            </h:panelGrid>
+            <h:commandButton id="guardarSancion" action="#{BeanRSancion.guardarSancion}" disabled="false" value="Guardar" styleClass="unicampo">
+                   <f:ajax execute="datosLector" render="datosLector" />
+            </h:commandButton>
+            
+            </h:panelGrid>
+            </h:form>
+        </h:body>
+    </html>
+</f:view>
